@@ -138,7 +138,8 @@
         .hero-deco-3 { top: 28%; right: 14%; width: 5px; height: 5px; background: var(--accent); border-radius: 50%; opacity: .25; animation: float-c 8s ease-in-out infinite, glow-p 3s ease-in-out infinite; }
         .hero-deco-4 { bottom: 35%; left: 18%; width: 4px; height: 4px; background: rgba(255,255,255,.25); border-radius: 50%; animation: float-b 10s ease-in-out infinite reverse, glow-p 4s ease-in-out infinite 1s; }
 
-        .hero-social { position: absolute; left: clamp(.75rem,2.5vw,2.5rem); top: 50%; transform: translateY(-50%); z-index: 20; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+        .hero-social { position: absolute; left: clamp(.75rem,2.5vw,2.5rem); top: 50%; transform: translateY(-50%); z-index: 20; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; opacity: 0; animation: fadeIn .8s ease 1.8s forwards; }
+        @keyframes fadeIn { to { opacity: 1; } }
         .hero-social .s-lbl { font-family: var(--font-m); font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--text3); writing-mode: vertical-lr; transform: rotate(180deg); margin-bottom: .4rem; }
         .hero-social .s-line { width: 1px; height: 40px; background: var(--text3); }
         .hero-social a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(255,255,255,.08); border-radius: 8px; color: var(--text2); transition: all .3s var(--ease); }
@@ -331,6 +332,7 @@
 
         /* ===================== STATEMENT ===================== */
         .testimonial { padding: clamp(4.5rem,9vh,7rem) 0; background: var(--bg2); text-align: center; position: relative; overflow: hidden; }
+        .testimonial-bg { position: absolute; inset: 0; background: url('images/testimonial-backdrop.webp') center/cover no-repeat; opacity: .03; pointer-events: none; z-index: 0; }
         .testimonial-glow { position: absolute; top: 50%; width: 250px; height: 250px; border-radius: 50%; filter: blur(80px); pointer-events: none; opacity: 0; transition: opacity 1.2s ease; }
         .testimonial-glow--l { left: -40px; transform: translateY(-50%); background: rgba(0,229,200,.12); }
         .testimonial-glow--r { right: -40px; transform: translateY(-50%); background: rgba(0,229,200,.1); }
@@ -879,7 +881,7 @@
         </div>
     </div></div></section>
 
-    <section class="testimonial reveal"><div class="container">
+    <section class="testimonial reveal"><div class="testimonial-bg"></div><div class="container">
         <div class="testimonial-glow testimonial-glow--l"></div>
         <div class="testimonial-glow testimonial-glow--r"></div>
         <div class="testimonial-inner reveal-scale">
@@ -1217,8 +1219,10 @@
         const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
         document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>obs.observe(el));
 
-        const cObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const el=x.target,t=+el.dataset.target,sfx=el.dataset.suffix||'';if(el.dataset.display){el.textContent=el.dataset.display;cObs.unobserve(el);return;}let c=0;const dur=t===100?30:60;const s=Math.max(1,Math.floor(t/dur)),i=setInterval(()=>{c+=s;if(c>=t){c=t;clearInterval(i);}let d=c.toLocaleString('de-DE');if(t===100)d=c+'%';else if(t===48)d=c+'h';else if(sfx)d=d+sfx;el.textContent=d;},25);cObs.unobserve(el);}});},{threshold:.5});
-        document.querySelectorAll('.stat-number[data-target]').forEach(el=>cObs.observe(el));
+        function countUp(el,duration){const t=+el.dataset.target,sfx=el.dataset.suffix||'';if(el.dataset.display){el.textContent=el.dataset.display;return;}let c=0;const steps=Math.ceil(duration/20),s=Math.max(1,Math.ceil(t/steps)),iv=setInterval(()=>{c+=s;if(c>=t){c=t;clearInterval(iv);}let d=c.toLocaleString('de-DE');if(t===100)d=c+'%';else if(t===48)d=c+'h';else if(sfx)d=d+sfx;el.textContent=d;},20);}
+        const stats=document.querySelectorAll('.stat-number[data-target]');
+        const cObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){countUp(stats[0],800);countUp(stats[1],1200);countUp(stats[2],1600);cObs.disconnect();}});},{threshold:.5});
+        stats.forEach(el=>cObs.observe(el));
 
         let cur=1;
         function sel(c){c.parentElement.querySelectorAll('.option-card,.size-option').forEach(s=>s.classList.remove('selected'));c.classList.add('selected');}

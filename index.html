@@ -72,6 +72,7 @@
         @keyframes navExpand { 0% { opacity: 0; transform: scaleX(.3); } 100% { opacity: 1; transform: scaleX(1); } }
         @keyframes navContentIn { 0% { opacity: 0; } 100% { opacity: 1; } }
         @keyframes blurUp { 0% { opacity: 0; filter: blur(12px); transform: translateY(20px); } 100% { opacity: 1; filter: blur(0); transform: translateY(0); } }
+        @keyframes tapeIn { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
         @keyframes glowIn { 0% { text-shadow: 0 0 0 rgba(0,229,200,0), 0 0 0 rgba(0,229,200,0); color: var(--text); } 100% { text-shadow: 0 0 40px rgba(0,229,200,.4), 0 0 80px rgba(0,229,200,.15); color: var(--accent); } }
         @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(0,229,200,0.4); } 50% { box-shadow: 0 0 0 8px rgba(0,229,200,0); } }
         @keyframes mq { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -113,14 +114,10 @@
         .hero-bg-slide {
             position: absolute; inset: 0;
             background-size: cover; background-position: center;
-            opacity: 0; transition: opacity 1.8s ease-in-out, transform 6s ease-in-out;
-            transform: scale(1.02);
+            opacity: 0; transform: scale(1);
         }
-        .hero-bg-slide.active { opacity: .5; transform: scale(1.08) translate(var(--tx, 0), var(--ty, 0)); }
-        .hero-bg-slide:nth-child(1) { --tx: 0.5%; --ty: -0.3%; }
-        .hero-bg-slide:nth-child(2) { --tx: -0.4%; --ty: 0.5%; }
-        .hero-bg-slide:nth-child(3) { --tx: 0.3%; --ty: 0.4%; }
-        .hero-bg-slide:nth-child(4) { --tx: -0.5%; --ty: -0.4%; }
+        .hero-bg-slide.active { opacity: .5; animation: heroZoom 20s ease-out forwards; }
+        @keyframes heroZoom { 0% { opacity: 0; transform: scale(1); } 8% { opacity: .5; } 100% { opacity: .5; transform: scale(1.15); } }
         .hero-bg::after {
             content: ''; position: absolute; inset: 0;
             background:
@@ -159,7 +156,7 @@
             background: rgba(0,229,200,.08); border: 1px solid rgba(0,229,200,.18);
             font-family: var(--font-m); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
             color: var(--accent); margin-bottom: 2.25rem; text-align: center;
-            opacity: 0; animation: fadeUp .8s var(--ease) .15s forwards;
+            opacity: 0; filter: blur(12px); transform: translateY(20px); animation: blurUp 1.4s cubic-bezier(.25,.1,.25,1) .15s forwards;
         }
         .hero-tagline .tagline-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; opacity: .6; }
         .hero-h1 { font-family: var(--font-h); font-size: clamp(2.2rem,7vw,7.5rem); font-weight: 900; line-height: 1; letter-spacing: -.04em; text-transform: uppercase; margin-bottom: 1.75rem; opacity: 0; filter: blur(12px); transform: translateY(20px); animation: blurUp 1.4s cubic-bezier(.25,.1,.25,1) .3s forwards; }
@@ -193,11 +190,12 @@
             position: absolute; bottom: 20px; left: -5%; right: -5%; width: 110%;
             height: 140px; z-index: 15; pointer-events: none;
             display: flex; align-items: center; justify-content: center;
+            opacity: 0; transform: translateY(15px); animation: tapeIn 1.2s cubic-bezier(.25,.1,.25,1) 1.4s forwards;
         }
         .tape-band {
             position: absolute; left: -10%; right: -10%; width: 120%; height: 54px;
             display: flex; align-items: center; white-space: nowrap;
-            background: rgba(255,255,255,.06); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            background: rgba(10,10,18,.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border-top: 1px solid rgba(255,255,255,.08); border-bottom: 1px solid rgba(255,255,255,.08);
             box-shadow: 0 4px 30px rgba(0,0,0,.2);
             pointer-events: auto;
@@ -315,7 +313,8 @@
         .about-cta-link:hover { color: var(--accent); }
         .about-cta-link:hover svg { transform: translateX(4px); }
         .about-sig { margin-top: 2rem; display: flex; align-items: center; gap: .85rem; }
-        .sig-av { width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #0070dd); display: flex; align-items: center; justify-content: center; font-family: var(--font-h); font-weight: 700; font-size: .78rem; color: var(--bg); }
+        @keyframes glowPulse { 0%,100% { box-shadow: 0 0 6px rgba(0,229,200,.2), 0 0 12px rgba(0,229,200,.05); border-color: rgba(0,229,200,.25); } 50% { box-shadow: 0 0 12px rgba(0,229,200,.45), 0 0 25px rgba(0,229,200,.15); border-color: rgba(0,229,200,.5); } }
+        .sig-av { width: 90px; height: 90px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-family: var(--font-h); font-weight: 700; font-size: .78rem; color: var(--bg); border: 2px solid rgba(0,229,200,.3); animation: glowPulse 3s ease-in-out infinite; }
         .sig-name { font-family: var(--font-h); font-weight: 600; font-size: 1.15rem; }
         .sig-role { font-size: .88rem; color: var(--text2); }
         .about-signature { width: 180px; height: auto; margin-top: .5rem; opacity: .7; filter: brightness(2); }
@@ -342,7 +341,8 @@
         .testimonial-quote::after { content: '\201C'; display: inline; font-style: normal; font-weight: 800; color: var(--accent); margin-left: .1em; }
         .testimonial-author { display: flex; align-items: center; justify-content: center; gap: 1rem; }
         .testimonial-avatar { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,.06); border: 2px solid rgba(0,229,200,.2); object-fit: cover; flex-shrink: 0; }
-        .testimonial-avatar-ph { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,.06); border: 2px solid rgba(0,229,200,.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .testimonial-stars { font-size: 1.3rem; color: var(--accent); letter-spacing: .15em; margin-bottom: 1.5rem; }
+        .testimonial-avatar-ph { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,.06); border: 2px solid rgba(0,229,200,.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; animation: glowPulse 3s ease-in-out infinite; }
         .testimonial-avatar-ph svg { width: 22px; height: 22px; color: var(--text3); }
         .testimonial-info { text-align: left; }
         .testimonial-name { font-family: var(--font-h); font-size: .88rem; font-weight: 700; color: var(--text); letter-spacing: -.01em; }
@@ -358,13 +358,13 @@
         .gallery-item:hover { transform: scale(1.02); }
         .gallery-item.large { grid-row: span 2; }
         .gallery-ph { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--font-m); font-size: .5rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); transition: background .5s var(--ease); }
+        img.gallery-img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; z-index: 1; }
         .g1 { background: linear-gradient(135deg, #120a28 0%, #251560 50%, #0a0a15 100%); }
         .g2 { background: linear-gradient(135deg, #0a1525 0%, #1a3555 50%, #0a0a15 100%); }
         .g3 { background: linear-gradient(135deg, #15150a 0%, #353518 50%, #0a0a15 100%); }
         .g4 { background: linear-gradient(135deg, #0a1818 0%, #183838 50%, #0a0a15 100%); }
         .g5 { background: linear-gradient(135deg, #180a18 0%, #381838 50%, #0a0a15 100%); }
-        .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,5,9,.92) 0%, rgba(5,5,9,.3) 40%, transparent 55%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.4rem; opacity: 0; transition: opacity .4s var(--ease); cursor: pointer; }
-        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-overlay { position: absolute; inset: 0; z-index: 2; background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,.85) 28%, rgba(0,0,0,.5) 48%, transparent 68%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.4rem; opacity: 1; cursor: pointer; }
         .gallery-overlay h4 { font-family: var(--font-h); font-size: .95rem; font-weight: 700; text-transform: uppercase; }
         .gallery-overlay p { font-size: .75rem; color: var(--text2); margin-top: .12rem; }
         .gallery-overlay .gallery-more { font-family: var(--font-m); font-size: .58rem; letter-spacing: .08em; color: var(--accent); margin-top: .5rem; display: inline-flex; align-items: center; gap: .35rem; }
@@ -386,14 +386,14 @@
         }
         .project-modal-overlay.open .project-modal { transform: translateY(0) scale(1); }
         .project-modal-close {
-            position: absolute; top: 1.25rem; right: 1.25rem; width: 36px; height: 36px;
-            border: 1px solid rgba(255,255,255,.08); border-radius: 8px; background: rgba(255,255,255,.03);
+            position: absolute; top: 1.25rem; right: 1.25rem; z-index: 10; width: 36px; height: 36px;
+            border: 1px solid rgba(0,229,200,.3); border-radius: 8px; background: rgba(0,0,0,.5);
             display: flex; align-items: center; justify-content: center; cursor: pointer;
-            color: var(--text2); transition: all .3s var(--ease); font-size: 1.1rem;
+            color: var(--accent); transition: all .3s var(--ease); font-size: 1.1rem;
         }
         .project-modal-close:hover { border-color: var(--accent); color: var(--accent); }
         .project-modal-image {
-            width: 100%; aspect-ratio: 16/9; border-radius: 12px; margin-bottom: 1.5rem; overflow: hidden;
+            width: 100%; aspect-ratio: 16/9; border-radius: 12px; margin-bottom: 1.5rem; overflow: hidden; position: relative;
         }
         .project-modal-image .gallery-ph { border-radius: 12px; }
         .project-modal h3 { font-family: var(--font-h); font-size: 1.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: -.02em; margin-bottom: .35rem; }
@@ -402,7 +402,7 @@
         .project-modal .pm-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
         .project-modal .pm-tag {
             font-family: var(--font-m); font-size: .55rem; letter-spacing: .08em; text-transform: uppercase;
-            padding: .3rem .7rem; border: 1px solid rgba(0,229,200,.12); border-radius: 5px; color: var(--text3);
+            padding: .3rem .7rem; border: 1px solid rgba(0,229,200,.2); border-radius: 5px; color: rgba(240,240,245,.7);
         }
 
         /* ===================== INQUIRY — REDESIGNED ===================== */
@@ -606,11 +606,11 @@
 
         /* ===================== RESPONSIVE ===================== */
         @media (max-width: 1024px) {
-            .hero { padding-top: 140px; padding-bottom: 50px; align-items: flex-start; }
+            .hero { padding-top: 140px; padding-bottom: 200px; align-items: flex-start; min-height: auto; }
             .hero-h1 { font-size: clamp(2.4rem,8vw,5rem); margin-bottom: 1.25rem; }
             .hero-tagline { margin-bottom: 1.75rem; }
             .hero-reviews { margin-top: 1.25rem; }
-            .tape-section { height: 180px; bottom: 120px; }
+            .tape-section { height: 180px; bottom: 10px; }
             .tape-band { height: 46px; }
             .tape-band-1 { transform: rotate(-4.5deg); }
             .tape-band-2 { transform: rotate(4.5deg); }
@@ -630,14 +630,14 @@
             .nav-cta-desktop { display: none; }
             .nav-toggle { display: flex; }
             .hero-social { display: none; }
-            .hero { padding-top: 120px; padding-bottom: 30px; align-items: flex-start; }
+            .hero { padding-top: 120px; padding-bottom: 180px; align-items: flex-start; min-height: auto; }
             .hero-h1 { font-size: clamp(1.8rem,8vw,2.8rem); margin-bottom: 1rem; }
             .h1-line { white-space: normal; }
             .hero-badge { margin-bottom: .75rem; }
             .hero-sub { margin-bottom: 1rem; font-size: .85rem; }
             .hero-tagline { margin-bottom: 1.5rem; font-size: .58rem; }
             .hero-reviews { margin-top: 1rem; }
-            .tape-section { height: 160px; bottom: 100px; }
+            .tape-section { height: 160px; bottom: 10px; }
             .tape-band { height: 40px; }
             .tape-band-1 { transform: rotate(-5.5deg); }
             .tape-band-2 { transform: rotate(5.5deg); }
@@ -734,9 +734,6 @@
     <section class="hero" id="hero">
         <div class="hero-bg">
             <div class="hero-bg-slide active" style="background-image:url('images/ATF1.webp')"></div>
-            <div class="hero-bg-slide" style="background-image:url('images/ATF2.webp')"></div>
-            <div class="hero-bg-slide" style="background-image:url('images/ATF3.webp')"></div>
-            <div class="hero-bg-slide" style="background-image:url('images/ATF4.webp')"></div>
         </div>
         <div class="hero-orb hero-orb-1"></div><div class="hero-orb hero-orb-2"></div><div class="hero-orb hero-orb-3"></div>
 <div class="hero-deco hero-deco-3"></div><div class="hero-deco hero-deco-4"></div>
@@ -887,6 +884,7 @@
         <div class="testimonial-glow testimonial-glow--r"></div>
         <div class="testimonial-inner reveal-scale">
             <p class="testimonial-quote">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna eu turpis tincidunt fermentum. Nulla facilisi sed do eiusmod tempor incididunt.</p>
+            <div class="testimonial-stars">★★★★★</div>
             <div class="testimonial-author">
                 <div class="testimonial-avatar-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
                 <div class="testimonial-info">
@@ -898,13 +896,13 @@
     </div></section>
 
     <section class="projects" id="projects"><div class="container">
-        <div class="projects-header reveal"><span class="section-label">Referenzen</span><h2 class="projects-title">Highlights aus den letzten <span class="italic-accent">Jahren.</span></h2><p class="projects-sub">Jedes Event ist anders, aber eines hatten alle gemeinsam: Am Ende des Abends hat einfach alles gestimmt. Hier sind ein paar Beispiele.</p></div>
+        <div class="projects-header reveal"><span class="section-label">Referenzen</span><h2 class="projects-title"><span style="color:var(--accent)">Highlights</span> aus den letzten <span class="italic-accent">Jahren.</span></h2><p class="projects-sub">Jedes Event ist anders, aber eines hatten alle gemeinsam: Am Ende des Abends hat einfach alles gestimmt. Hier sind ein paar Beispiele.</p></div>
         <div class="gallery-grid">
-            <div class="gallery-item large reveal-scale d1" onclick="openProject(0)"><div class="gallery-ph g1">Foto: Sound of Movies Show</div><div class="gallery-overlay"><h4>Sound of Movies</h4><p>Musical-Show, 200+ Akteure, Filharmonie Filderstadt</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
-            <div class="gallery-item reveal d2" onclick="openProject(1)"><div class="gallery-ph g2">Foto: Lichterfest Böbingen</div><div class="gallery-overlay"><h4>Lichterfest Böbingen</h4><p>Open-Air mit mehreren Live-Bands</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
-            <div class="gallery-item reveal d3" onclick="openProject(2)"><div class="gallery-ph g3">Foto: Firmenkonferenz</div><div class="gallery-overlay"><h4>Firmenkonferenz</h4><p>Konferenztechnik und Beschallung</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
-            <div class="gallery-item reveal d2" onclick="openProject(3)"><div class="gallery-ph g4">Foto: Hochzeit</div><div class="gallery-overlay"><h4>Hochzeit im Schloss</h4><p>DJ, Licht und Ton für 150 Gäste</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
-            <div class="gallery-item reveal d3" onclick="openProject(4)"><div class="gallery-ph g5">Foto: Fasnets-Show</div><div class="gallery-overlay"><h4>Filder-Fasnets-Show</h4><p>Komplette Bühnenproduktion</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
+            <div class="gallery-item large reveal-scale d1" onclick="openProject(0)"><div class="gallery-ph g1"></div><img class="gallery-img" src="images/referenzen/soundofmovies.webp" alt="Sound of Movies" loading="lazy"><div class="gallery-overlay"><h4>Sound of Movies</h4><p>Musical-Großproduktion, 300+ Akteure, Filharmonie Filderstadt</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
+            <div class="gallery-item reveal d2" onclick="openProject(1)"><div class="gallery-ph g2"></div><img class="gallery-img" src="images/referenzen/lichterfest-boebingen.webp" alt="Lichterfest Böbingen" loading="lazy"><div class="gallery-overlay"><h4>Lichterfest Böbingen</h4><p>Open-Air mit Live-Bands, zwei Abende</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
+            <div class="gallery-item reveal d3" onclick="openProject(2)"><div class="gallery-ph g3"></div><img class="gallery-img" src="images/referenzen/bluesbrothers.webp" alt="Blues Brothers Musical" loading="lazy"><div class="gallery-overlay"><h4>Blues Brothers Musical</h4><p>Musical, Wolf-Ferrari-Haus Ottobrunn</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
+            <div class="gallery-item reveal d2" onclick="openProject(3)"><div class="gallery-ph g4"></div><img class="gallery-img" src="images/referenzen/hochzeit.webp" alt="Hochzeit in Pfersbach" loading="lazy"><div class="gallery-overlay"><h4>Hochzeit in Pfersbach</h4><p>Ambiente, DJ und Partylicht im Dorfhaus</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
+            <div class="gallery-item reveal d3" onclick="openProject(4)"><div class="gallery-ph g5"></div><img class="gallery-img" src="images/referenzen/parkfullofsound.webp" alt="Park Full of Sound" loading="lazy"><div class="gallery-overlay"><h4>Park Full of Sound</h4><p>Mehrbühnen-Festival, Recording, Böbingen</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
         </div>
     </div></section>
 
@@ -1201,7 +1199,7 @@
     <div class="project-modal-overlay" id="projectModal" onclick="if(event.target===this)closeProject()">
         <div class="project-modal">
             <button class="project-modal-close" onclick="closeProject()">✕</button>
-            <div class="project-modal-image"><div class="gallery-ph" id="pmImage"></div></div>
+            <div class="project-modal-image"><div class="gallery-ph" id="pmImage"></div><img class="gallery-img" id="pmImg" src="" alt="" style="border-radius:12px"></div>
             <h3 id="pmTitle"></h3>
             <div class="pm-meta" id="pmMeta"></div>
             <div class="pm-desc" id="pmDesc"></div>
@@ -1219,7 +1217,7 @@
         const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
         document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>obs.observe(el));
 
-        const cObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const el=x.target,t=+el.dataset.target,sfx=el.dataset.suffix||'';if(el.dataset.display){el.textContent=el.dataset.display;cObs.unobserve(el);return;}let c=0;const s=Math.max(1,Math.floor(t/60)),i=setInterval(()=>{c+=s;if(c>=t){c=t;clearInterval(i);}let d=c.toLocaleString('de-DE');if(t===100)d=c+'%';else if(t===48)d=c+'h';else if(sfx)d=d+sfx;el.textContent=d;},25);cObs.unobserve(el);}});},{threshold:.5});
+        const cObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const el=x.target,t=+el.dataset.target,sfx=el.dataset.suffix||'';if(el.dataset.display){el.textContent=el.dataset.display;cObs.unobserve(el);return;}let c=0;const dur=t===100?30:60;const s=Math.max(1,Math.floor(t/dur)),i=setInterval(()=>{c+=s;if(c>=t){c=t;clearInterval(i);}let d=c.toLocaleString('de-DE');if(t===100)d=c+'%';else if(t===48)d=c+'h';else if(sfx)d=d+sfx;el.textContent=d;},25);cObs.unobserve(el);}});},{threshold:.5});
         document.querySelectorAll('.stat-number[data-target]').forEach(el=>cObs.observe(el));
 
         let cur=1;
@@ -1236,36 +1234,36 @@
                 title: 'Sound of Movies',
                 meta: 'Oktober 2024 · Filharmonie Filderstadt',
                 desc: '100 Jahre Filmmusikgeschichte, inszeniert vom MGV Neuhausen in drei ausverkauften Shows. Über 200 Sängerinnen und Sänger, 120 Tänzerinnen und Tänzer auf einer Bühne. Wir haben die komplette Licht- und Tontechnik für diese Großproduktion geliefert und live betreut. Das Lichtdesign umfasste über 40 Moving Heads, LED-Bars und atmosphärische Effektbeleuchtung, synchronisiert zur Musik. Die Beschallung wurde eigens für die Akustik der Filharmonie berechnet und mit einem mehrkanaligen Setup umgesetzt.',
-                tags: ['Lichttechnik', 'Tontechnik', 'Musical', 'Großproduktion', '200+ Akteure', 'MA Lighting'],
-                bg: 'g1'
+                tags: ['Lichttechnik', 'Tontechnik', 'Musical', 'Großproduktion', '300+ Akteure', 'MA Lighting'],
+                bg: 'g1', img: 'images/referenzen/soundofmovies.webp'
             },
             {
-                title: 'Lichterfest Böbingen 2024',
+                title: 'Lichterfest Böbingen',
                 meta: 'Mai 2024 · Böbingen an der Rems',
-                desc: 'Das jährliche Lichterfest in Böbingen mit mehreren Live-Bands auf einer Open-Air-Bühne. Mit dabei: PlanD, Golden Island, Ziachn Power und die Mountain Crew. Wir waren verantwortlich für die komplette Bühnenbeleuchtung, die Beschallung des Außengeländes und das DJ-Setup zwischen den Live-Acts. Der Sound musste sowohl für die akustischen Sets als auch für die lauten Rock-Acts perfekt sitzen.',
-                tags: ['Open-Air', 'Live-Bands', 'Lichttechnik', 'Tontechnik', 'DJ-Setup', 'Böbingen'],
-                bg: 'g2'
+                desc: 'Zwei Abende Open-Air mit Live-Bands wie PlanD, Golden Island, Ziachn Power und der Mountain Crew. Wir waren für die komplette Bühnen-Beschallung und Beleuchtungstechnik verantwortlich. Von der Tageslichtstimmung am frühen Abend bis zur vollen Lichtshow nach Einbruch der Dunkelheit haben wir den gesamten technischen Ablauf betreut.',
+                tags: ['Lichttechnik', 'Tontechnik', 'Open-Air', 'Festival', 'Live-Bands', 'Böbingen'],
+                bg: 'g2', img: 'images/referenzen/lichterfest-boebingen.webp'
             },
             {
-                title: 'Firmenkonferenz',
-                meta: '2024 · Raum Stuttgart',
-                desc: 'Professionelle Konferenztechnik für eine mehrtägige Firmenveranstaltung. Drahtlose Mikrofonsysteme für Podiumsdiskussionen, Präsentationstechnik mit Beamer-Setup, dezente Ambientebeleuchtung für den Konferenzraum und ein separates Soundsystem für den Networking-Bereich. Alles sauber verkabelt und von uns live betreut.',
-                tags: ['Konferenztechnik', 'Präsentation', 'Mikrofonsystem', 'Sennheiser', 'Shure'],
-                bg: 'g3'
+                title: 'Blues Brothers Musical',
+                meta: 'Dezember 2022 · Wolf-Ferrari-Haus Ottobrunn',
+                desc: 'Neuproduktion des Blues Brothers Musical unter der Regie von Gerhard Weber und der musikalischen Leitung von Philipp Lang. Als Technik-Crew haben wir das Wolf-Ferrari-Haus in Ottobrunn in die perfekte Kulisse verwandelt. Komplette Licht- und Tontechnik für eine Musical-Produktion, bei der jede Szene, jeder Lichtwechsel und jeder Ton sitzen musste.',
+                tags: ['Lichttechnik', 'Tontechnik', 'Musical', 'Bühnenproduktion', 'Konzertdirektion Lang'],
+                bg: 'g3', img: 'images/referenzen/bluesbrothers.webp'
             },
             {
-                title: 'Hochzeit im Schloss',
-                meta: '2024 · Schloss bei Stuttgart',
-                desc: 'Eine elegante Hochzeit mit 150 Gästen in historischem Ambiente. Wir haben das komplette Paket geliefert: DJ-Service für Trauung und Feier, stimmungsvolle Beleuchtung mit Warmweiß und Uplighting für die Schlossmauern, drahtlose Mikrofone für die Reden und ein Party-Sound-Setup, das bis in die frühen Morgenstunden lief. Dazu Künstlervermittlung für die Live-Band am Abend.',
-                tags: ['Hochzeit', 'DJ-Service', 'Lichttechnik', 'Künstlervermittlung', '150 Gäste'],
-                bg: 'g4'
+                title: 'Hochzeit in Pfersbach',
+                meta: 'Juli 2022 · Dorfhaus Pfersbach',
+                desc: 'Eine Hochzeit im Dorfhaus Pfersbach, bei der wir die komplette Ambientebeleuchtung, die Tonanlage und das Partylicht für den Abend mit DJ geliefert haben. Von der stimmungsvollen Beleuchtung während der Feier bis zum vollen Partylicht auf der Tanzfläche. Ein Projekt, das zeigt: Auch bei kleineren Events machen die Details den Unterschied.',
+                tags: ['Ambientebeleuchtung', 'DJ', 'Hochzeit', 'Tontechnik', 'Privatfeier'],
+                bg: 'g4', img: 'images/referenzen/hochzeit.webp'
             },
             {
-                title: 'Filder-Fasnets-Show 2024',
-                meta: 'Februar 2024 · Neuhausen auf den Fildern',
-                desc: 'Die MGV Neuhausen Filder-Fasnets-Show mit der mitreißenden Partyband SevenUp-dieBand sowie Nici Nightingale. Eine energiegeladene Show, die volle Bühnentechnik verlangt hat. Komplettes Lichtdesign mit Showeffekten, Moving Heads und Stroboskopen, dazu ein Soundsystem für eine Halle mit über 800 Zuschauern. Von der Technikprobe bis zum letzten Vorhang komplett von uns betreut.',
-                tags: ['Komplettproduktion', 'Bühnenshow', 'Live-Band', 'Showlicht', '800+ Zuschauer', 'HK Audio'],
-                bg: 'g5'
+                title: 'Park Full of Sound',
+                meta: 'Juli 2023 · Böbingen an der Rems',
+                desc: 'Das Festival in der zweiten Auflage, präsentiert von Icotek und der Gemeinde Böbingen. Mehrere Bühnen, über ein Dutzend Bands und Acts an einem Tag bis spät in die Nacht. Wir haben die Tontechnik für die Hauptbühne und zwei Nebenbühnen geliefert, inklusive professionellem Recording über Dante und Waves. Wenn mehrere Bühnen gleichzeitig laufen, muss die Koordination stimmen, und genau das ist unsere Stärke.',
+                tags: ['Tontechnik', 'Festival', 'Open-Air', 'Mehrbühne', 'Allen & Heath', 'Recording'],
+                bg: 'g5', img: 'images/referenzen/parkfullofsound.webp'
             }
         ];
 
@@ -1273,6 +1271,8 @@
             const p = projects[i], m = document.getElementById('projectModal');
             document.getElementById('pmImage').className = 'gallery-ph ' + p.bg;
             document.getElementById('pmImage').textContent = '';
+            document.getElementById('pmImg').src = p.img;
+            document.getElementById('pmImg').alt = p.title;
             document.getElementById('pmTitle').textContent = p.title;
             document.getElementById('pmMeta').textContent = p.meta;
             document.getElementById('pmDesc').textContent = p.desc;
@@ -1346,16 +1346,6 @@
             form.querySelector('.pkg-if-ok').classList.add('show');
         }
 
-        /* Hero background slideshow */
-        (function(){
-            var slides=document.querySelectorAll('.hero-bg-slide');
-            var idx=0;
-            setInterval(function(){
-                slides[idx].classList.remove('active');
-                idx=(idx+1)%slides.length;
-                slides[idx].classList.add('active');
-            },5000);
-        })();
 
     </script>
     <script src="https://unpkg.com/lenis@1/dist/lenis.min.js"></script>

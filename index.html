@@ -332,9 +332,12 @@
 
         /* ===================== STATEMENT ===================== */
         .testimonial { padding: clamp(4.5rem,9vh,7rem) 0; background: var(--bg2); text-align: center; position: relative; overflow: hidden; }
-        .testimonial::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(0,229,200,.025) 0%, transparent 65%); }
+        .testimonial-glow { position: absolute; top: 50%; width: 250px; height: 250px; border-radius: 50%; filter: blur(80px); pointer-events: none; opacity: 0; transition: opacity 1.2s ease; }
+        .testimonial-glow--l { left: -40px; transform: translateY(-50%); background: rgba(0,229,200,.12); }
+        .testimonial-glow--r { right: -40px; transform: translateY(-50%); background: rgba(0,229,200,.1); }
+        .testimonial.visible .testimonial-glow { opacity: 1; }
         .testimonial-inner { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; }
-        .testimonial-quote { font-family: var(--font-a); font-size: clamp(1rem,1.8vw,1.25rem); font-weight: 400; font-style: italic; line-height: 1.75; letter-spacing: .005em; color: rgba(240,240,245,.75); margin-bottom: 2rem; position: relative; padding: 0 1rem; }
+        .testimonial-quote { font-family: var(--font-a); font-size: clamp(1rem,1.8vw,1.25rem); font-weight: 400; font-style: italic; line-height: 1.75; letter-spacing: .005em; color: var(--text); margin-bottom: 2rem; position: relative; padding: 0 1rem; }
         .testimonial-quote::before { content: '\201E'; display: inline; font-style: normal; font-weight: 800; color: var(--accent); margin-right: .15em; }
         .testimonial-quote::after { content: '\201C'; display: inline; font-style: normal; font-weight: 800; color: var(--accent); margin-left: .1em; }
         .testimonial-author { display: flex; align-items: center; justify-content: center; gap: 1rem; }
@@ -563,20 +566,6 @@
         .soc-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,229,200,.03); transform: translateY(-2px); }
         .soc-btn svg { width: 14px; height: 14px; }
 
-        /* ===================== FINAL CTA ===================== */
-        @keyframes pulse-ring { 0% { transform: translate(-50%,-50%) scale(.8); opacity: .15; } 50% { transform: translate(-50%,-50%) scale(1.2); opacity: 0; } 100% { transform: translate(-50%,-50%) scale(.8); opacity: .15; } }
-        @keyframes float-text { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-        .final-cta { padding: clamp(5rem,10vh,8rem) 0; background: var(--bg2); text-align: center; position: relative; overflow: hidden; }
-        .final-cta::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(0,229,200,.04) 0%, transparent 60%); animation: pulse-ring 5s ease-in-out infinite; }
-        .final-cta::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 350px; height: 350px; border-radius: 50%; border: 1px solid rgba(0,229,200,.04); animation: pulse-ring 5s ease-in-out infinite 1.5s; }
-        .final-cta-deco { position: absolute; pointer-events: none; }
-        .final-cta-deco-1 { top: 20%; left: 10%; width: 4px; height: 4px; background: var(--accent); border-radius: 50%; opacity: .3; animation: float-a 6s ease-in-out infinite, glow-p 3s ease-in-out infinite; }
-        .final-cta-deco-2 { bottom: 25%; right: 12%; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; opacity: .2; animation: float-b 8s ease-in-out infinite, glow-p 4s ease-in-out infinite 1s; }
-        .final-cta-deco-3 { top: 35%; right: 18%; width: 60px; height: 60px; border: 1px solid rgba(0,229,200,.04); border-radius: 50%; animation: float-c 10s ease-in-out infinite; }
-        .final-cta-deco-4 { bottom: 30%; left: 15%; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,.03); border-radius: 50%; animation: float-a 12s ease-in-out infinite reverse; }
-        .final-cta-content { position: relative; z-index: 1; }
-        .final-cta-headline { font-family: var(--font-h); font-size: clamp(2.5rem,5vw,4.5rem); font-weight: 900; line-height: 1.02; letter-spacing: -.035em; text-transform: uppercase; margin-bottom: 1rem; animation: float-text 4s ease-in-out infinite; }
-        .final-cta-sub { font-size: 1rem; color: var(--text2); margin-bottom: 2.5rem; max-width: 470px; margin-left: auto; margin-right: auto; }
 
         /* ===================== PARTNER MARQUEE ===================== */
         .partners { padding: 2.5rem 0; background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; }
@@ -617,7 +606,7 @@
 
         /* ===================== RESPONSIVE ===================== */
         @media (max-width: 1024px) {
-            .hero { padding-top: 140px; padding-bottom: 80px; align-items: flex-start; }
+            .hero { padding-top: 140px; padding-bottom: 50px; align-items: flex-start; }
             .hero-h1 { font-size: clamp(2.4rem,8vw,5rem); margin-bottom: 1.25rem; }
             .hero-tagline { margin-bottom: 1.75rem; }
             .hero-reviews { margin-top: 1.25rem; }
@@ -641,7 +630,7 @@
             .nav-cta-desktop { display: none; }
             .nav-toggle { display: flex; }
             .hero-social { display: none; }
-            .hero { padding-top: 120px; padding-bottom: 60px; align-items: flex-start; }
+            .hero { padding-top: 120px; padding-bottom: 30px; align-items: flex-start; }
             .hero-h1 { font-size: clamp(1.8rem,8vw,2.8rem); margin-bottom: 1rem; }
             .h1-line { white-space: normal; }
             .hero-badge { margin-bottom: .75rem; }
@@ -893,7 +882,9 @@
         </div>
     </div></div></section>
 
-    <section class="testimonial"><div class="container">
+    <section class="testimonial reveal"><div class="container">
+        <div class="testimonial-glow testimonial-glow--l"></div>
+        <div class="testimonial-glow testimonial-glow--r"></div>
         <div class="testimonial-inner reveal-scale">
             <p class="testimonial-quote">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna eu turpis tincidunt fermentum. Nulla facilisi sed do eiusmod tempor incididunt.</p>
             <div class="testimonial-author">
@@ -1162,16 +1153,6 @@
         <div class="contact-map reveal-right d2"><span class="map-ph">Google Maps Embed: Böbingen an der Rems</span></div>
     </div></div></section>
 
-    <section class="final-cta"><div class="container">
-        <div class="final-cta-deco final-cta-deco-1"></div>
-        <div class="final-cta-deco final-cta-deco-2"></div>
-        <div class="final-cta-deco final-cta-deco-3"></div>
-        <div class="final-cta-deco final-cta-deco-4"></div>
-        <div class="final-cta-content reveal-scale">
-        <h2 class="final-cta-headline">Dein nächstes Event <span class="accent">wartet.</span></h2>
-        <p class="final-cta-sub">Erzähl uns, was du vorhast. Wir antworten innerhalb von 24 Stunden mit einem unverbindlichen Angebot.</p>
-        <a href="#inquiry" class="btn-p">Jetzt kostenlos anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
-    </div></div></section>
 
     <footer class="footer"><div class="container">
         <div class="footer-grid">

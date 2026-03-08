@@ -295,10 +295,10 @@
         /* ===================== STATS ===================== */
         .stats { padding: clamp(4.5rem,9vh,7rem) 0; background: var(--bg2); position: relative; overflow: hidden; }
         .stats::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 50% 80% at 50% 50%, rgba(0,229,200,.018) 0%, transparent 70%); }
-        .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; position: relative; z-index: 1; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; position: relative; z-index: 1; }
         .stat-item { text-align: center; position: relative; }
         .stat-item:not(:last-child)::after { content: ''; position: absolute; right: -1rem; top: 50%; transform: translateY(-50%); width: 1px; height: 50%; background: var(--border); }
-        .stat-number { font-family: var(--font-h); font-size: clamp(3.5rem,6vw,5.5rem); font-weight: 900; line-height: 1; letter-spacing: -.04em; color: rgba(240,240,245,.05); }
+        .stat-number { font-family: var(--font-h); font-size: clamp(3.5rem,6vw,5.5rem); font-weight: 900; line-height: 1; letter-spacing: -.04em; color: rgba(240,240,245,.15); }
         .stat-label { font-family: var(--font-h); font-size: clamp(.58rem,.8vw,.72rem); font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-top: -.3em; }
 
         /* ===================== ABOUT ===================== */
@@ -617,7 +617,7 @@
             .tape-band-2 { transform: rotate(4.5deg); }
             .services { padding-top: 1.5rem; }
             .stats-grid { grid-template-columns: repeat(2,1fr); gap: 2.5rem; }
-            .stat-item:nth-child(2)::after { display: none; }
+            .stat-item:nth-child(2)::after, .stat-item:nth-child(4)::after { display: none; }
             .about-grid { grid-template-columns: 1fr; gap: 3rem; }
             .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
             .gallery-item.large { grid-row: span 1; grid-column: span 2; aspect-ratio: 16/9; }
@@ -860,6 +860,7 @@
         <div class="stat-item reveal"><div class="stat-number" data-target="2000">0</div><div class="stat-label">Max. Gästekapazität</div></div>
         <div class="stat-item reveal d1"><div class="stat-number" data-target="100">0</div><div class="stat-label">Persönlich betreut</div></div>
         <div class="stat-item reveal d2"><div class="stat-number" data-target="48">0</div><div class="stat-label">Antwortzeit</div></div>
+        <div class="stat-item reveal d3"><div class="stat-number" data-target="30" data-suffix="+">0</div><div class="stat-label">Projekte betreut</div></div>
     </div></div></section>
 
     <section class="about" id="about"><div class="container"><div class="about-grid">
@@ -1215,7 +1216,7 @@
         const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
         document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>obs.observe(el));
 
-        const cObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const el=x.target,t=+el.dataset.target;if(el.dataset.display){el.textContent=el.dataset.display;cObs.unobserve(el);return;}let c=0;const s=Math.max(1,Math.floor(t/60)),i=setInterval(()=>{c+=s;if(c>=t){c=t;clearInterval(i);}let d=c.toLocaleString('de-DE');if(t===100)d=c+'%';else if(t===48)d=c+'h';el.textContent=d;},25);cObs.unobserve(el);}});},{threshold:.5});
+        const cObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const el=x.target,t=+el.dataset.target,sfx=el.dataset.suffix||'';if(el.dataset.display){el.textContent=el.dataset.display;cObs.unobserve(el);return;}let c=0;const s=Math.max(1,Math.floor(t/60)),i=setInterval(()=>{c+=s;if(c>=t){c=t;clearInterval(i);}let d=c.toLocaleString('de-DE');if(t===100)d=c+'%';else if(t===48)d=c+'h';else if(sfx)d=d+sfx;el.textContent=d;},25);cObs.unobserve(el);}});},{threshold:.5});
         document.querySelectorAll('.stat-number[data-target]').forEach(el=>cObs.observe(el));
 
         let cur=1;

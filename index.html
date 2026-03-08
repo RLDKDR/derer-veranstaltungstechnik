@@ -615,7 +615,7 @@
             .tape-band { height: 46px; }
             .tape-band-1 { transform: rotate(-4.5deg); }
             .tape-band-2 { transform: rotate(4.5deg); }
-            .services { padding-top: clamp(2rem,4vh,3.5rem); }
+            .services { padding-top: 1.5rem; }
             .stats-grid { grid-template-columns: repeat(2,1fr); gap: 2.5rem; }
             .stat-item:nth-child(2)::after { display: none; }
             .about-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -625,8 +625,8 @@
         }
         @media (max-width: 768px) {
             .nav { top: .5rem; width: calc(100% - 1rem); }
-            .nav-links { display: flex; position: absolute; top: calc(100% + .5rem); left: 0; right: 0; background: rgba(5,5,9,.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); flex-direction: column; padding: 1.5rem; gap: 1.2rem; border-radius: 12px; border: 1px solid var(--border); opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity .2s var(--ease), visibility .2s var(--ease), transform .2s var(--ease); }
-            .nav-links.open { opacity: 1; visibility: visible; transform: translateY(0); }
+            .nav-links { display: flex; position: absolute; top: calc(100% + .5rem); left: 0; right: 0; background: rgba(5,5,9,.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); flex-direction: column; padding: 1.5rem; gap: 1.2rem; border-radius: 12px; border: 1px solid var(--border); opacity: 0; pointer-events: none; transition: opacity .2s ease; }
+            .nav-links.open { opacity: 1; pointer-events: auto; }
             .nav-cta-desktop { display: none; }
             .nav-toggle { display: flex; }
             .hero-social { display: none; }
@@ -642,7 +642,7 @@
             .tape-band-1 { transform: rotate(-5.5deg); }
             .tape-band-2 { transform: rotate(5.5deg); }
             .tape-item { font-size: .7rem; gap: 1rem; padding-right: 1rem; }
-            .services { padding-top: clamp(1.5rem,3vh,2.5rem); }
+            .services { padding-top: 1rem; }
             .hero-actions { flex-direction: column; align-items: stretch; }
             .btn-p,.btn-o { justify-content: center; }
             .stats-grid { grid-template-columns: repeat(2,1fr); }

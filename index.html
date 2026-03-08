@@ -116,7 +116,7 @@
             opacity: 0; transition: opacity 1.8s ease-in-out, transform 6s ease-in-out;
             transform: scale(1.02);
         }
-        .hero-bg-slide.active { opacity: .85; transform: scale(1.08) translate(var(--tx, 0), var(--ty, 0)); }
+        .hero-bg-slide.active { opacity: .5; transform: scale(1.08) translate(var(--tx, 0), var(--ty, 0)); }
         .hero-bg-slide:nth-child(1) { --tx: 0.5%; --ty: -0.3%; }
         .hero-bg-slide:nth-child(2) { --tx: -0.4%; --ty: 0.5%; }
         .hero-bg-slide:nth-child(3) { --tx: 0.3%; --ty: 0.4%; }
@@ -144,9 +144,9 @@
         .hero-social { position: absolute; left: clamp(.75rem,2.5vw,2.5rem); top: 50%; transform: translateY(-50%); z-index: 20; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
         .hero-social .s-lbl { font-family: var(--font-m); font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--text3); writing-mode: vertical-lr; transform: rotate(180deg); margin-bottom: .4rem; }
         .hero-social .s-line { width: 1px; height: 40px; background: var(--text3); }
-        .hero-social a { display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border: 1px solid rgba(255,255,255,.08); border-radius: 9px; color: var(--text2); transition: all .3s var(--ease); }
+        .hero-social a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid rgba(255,255,255,.08); border-radius: 8px; color: var(--text2); transition: all .3s var(--ease); }
         .hero-social a:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,229,200,.05); transform: scale(1.1); }
-        .hero-social a svg { width: 17px; height: 17px; }
+        .hero-social a svg { width: 14px; height: 14px; }
 
         .hero-content { position: relative; z-index: 10; max-width: 1200px; padding: 0 clamp(1rem,4vw,2rem); }
         .hero-text-wrap { position: relative; }
@@ -155,7 +155,7 @@
         .hero-badge .pulse { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
         .hero-h1 { font-family: var(--font-h); font-size: clamp(2.2rem,7vw,7.5rem); font-weight: 900; line-height: 1; letter-spacing: -.04em; text-transform: uppercase; margin-bottom: 1.25rem; opacity: 0; filter: blur(12px); transform: translateY(20px); animation: blurUp 1.4s cubic-bezier(.25,.1,.25,1) .3s forwards; }
 
-        .h1-line { display: block; white-space: nowrap; padding: 0; margin: 0; }
+        .h1-line { display: block; white-space: nowrap; padding: 0; margin: 0; text-align: center; }
         .hero-h1 .accent { color: var(--text); text-shadow: none; animation: glowIn 1.2s cubic-bezier(.25,.1,.25,1) 2s forwards; }
         .hero-sub { font-family: var(--font-b); font-size: clamp(.88rem,1.4vw,1.22rem); font-weight: 400; line-height: 1.7; color: var(--text2); max-width: 620px; margin: 0 auto 1.75rem; opacity: 0; filter: blur(12px); transform: translateY(20px); animation: blurUp 1.4s cubic-bezier(.25,.1,.25,1) .6s forwards; }
         .hero-actions { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; opacity: 0; filter: blur(12px); transform: translateY(20px); animation: blurUp 1.4s cubic-bezier(.25,.1,.25,1) .9s forwards; }
@@ -598,6 +598,12 @@
 
         /* ===================== RESPONSIVE ===================== */
         @media (max-width: 1024px) {
+            .hero { padding-top: 160px; padding-bottom: 200px; }
+            .hero-h1 { font-size: clamp(2.4rem,8vw,5rem); }
+            .tape-section { height: 160px; bottom: 10px; }
+            .tape-band { height: 50px; }
+            .tape-band-1 { transform: rotate(-3deg); }
+            .tape-band-2 { transform: rotate(3deg); }
             .stats-grid { grid-template-columns: repeat(2,1fr); gap: 2.5rem; }
             .stat-item:nth-child(2)::after { display: none; }
             .about-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -612,8 +618,16 @@
             .nav-cta-desktop { display: none; }
             .nav-toggle { display: flex; }
             .hero-social { display: none; }
+            .hero { padding-top: 120px; padding-bottom: 180px; }
             .hero-h1 { font-size: clamp(1.8rem,8vw,2.8rem); }
             .h1-line { white-space: normal; }
+            .hero-badge { margin-bottom: 1.25rem; }
+            .hero-sub { margin-bottom: 1.25rem; }
+            .tape-section { height: 130px; bottom: 15px; }
+            .tape-band { height: 44px; }
+            .tape-band-1 { transform: rotate(-4deg); }
+            .tape-band-2 { transform: rotate(4deg); }
+            .tape-item { font-size: .75rem; gap: 1.2rem; padding-right: 1.2rem; }
             .hero-actions { flex-direction: column; align-items: stretch; }
             .btn-p,.btn-o { justify-content: center; }
             .stats-grid { grid-template-columns: repeat(2,1fr); }
@@ -720,7 +734,7 @@
         <div class="hero-content">
             <!-- <div class="hero-badge"><span class="pulse"></span> Veranstaltungstechnik aus Böbingen</div> -->
             <div class="hero-text-wrap">
-                <h1 class="hero-h1"><span class="h1-line">Events, die unter</span><span class="h1-line"><span class="accent">die Haut</span> gehen.</span></h1>
+                <h1 class="hero-h1"><span class="h1-line">Events, die unter</span><span class="h1-line"><span class="accent">die Haut</span> gehen</span></h1>
                 <p class="hero-sub">Wir betreuen Events jeder Größe persönlich und mit einem Ziel: Dass deine Gäste nicht nur einen schönen Abend haben, sondern einen, den sie so schnell nicht vergessen.</p>
             </div>
             <div class="hero-actions">

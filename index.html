@@ -153,6 +153,13 @@
         .hero-text-wrap::before { content: ''; position: absolute; inset: -15% -10%; background: rgba(0,0,0,.85); pointer-events: none; z-index: -1; filter: blur(40px); border-radius: 50%; }
         .hero-badge { display: inline-flex; align-items: center; gap: .55rem; padding: .55rem 1.1rem; background: rgba(0,229,200,.14); border: 1px solid rgba(0,229,200,.22); border-radius: 10px; font-family: var(--font-m); font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 2.25rem; opacity: 0; animation: fadeUp .8s var(--ease) .2s forwards; }
         .hero-badge .pulse { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+        .hero-tagline {
+            font-family: var(--font-m); font-size: .63rem; letter-spacing: .15em; text-transform: uppercase;
+            color: var(--text2); margin-bottom: 1.5rem; text-align: center;
+            opacity: 0; animation: fadeUp .8s var(--ease) .15s forwards;
+        }
+        .hero-tagline::before { content: '[ '; }
+        .hero-tagline::after { content: ' ]'; }
         .hero-h1 { font-family: var(--font-h); font-size: clamp(2.2rem,7vw,7.5rem); font-weight: 900; line-height: 1; letter-spacing: -.04em; text-transform: uppercase; margin-bottom: 1.25rem; opacity: 0; filter: blur(12px); transform: translateY(20px); animation: blurUp 1.4s cubic-bezier(.25,.1,.25,1) .3s forwards; }
 
         .h1-line { display: block; white-space: nowrap; padding: 0; margin: 0; text-align: center; }
@@ -605,6 +612,8 @@
             .tape-band { height: 46px; }
             .tape-band-1 { transform: rotate(-4.5deg); }
             .tape-band-2 { transform: rotate(4.5deg); }
+            .hero-tagline { margin-bottom: 1rem; }
+            .services { padding-top: clamp(3rem,6vh,5rem); }
             .stats-grid { grid-template-columns: repeat(2,1fr); gap: 2.5rem; }
             .stat-item:nth-child(2)::after { display: none; }
             .about-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -630,6 +639,8 @@
             .tape-band-1 { transform: rotate(-5.5deg); }
             .tape-band-2 { transform: rotate(5.5deg); }
             .tape-item { font-size: .7rem; gap: 1rem; padding-right: 1rem; }
+            .hero-tagline { margin-bottom: .75rem; font-size: .58rem; }
+            .services { padding-top: clamp(2rem,4vh,3.5rem); }
             .hero-actions { flex-direction: column; align-items: stretch; }
             .btn-p,.btn-o { justify-content: center; }
             .stats-grid { grid-template-columns: repeat(2,1fr); }
@@ -734,7 +745,7 @@
             <a href="https://de.linkedin.com/company/derer-veranstaltungstechnik" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
         </div>
         <div class="hero-content">
-            <!-- <div class="hero-badge"><span class="pulse"></span> Veranstaltungstechnik aus Böbingen</div> -->
+            <div class="hero-tagline">Veranstaltungstechnik aus Böbingen</div>
             <div class="hero-text-wrap">
                 <h1 class="hero-h1"><span class="h1-line">Events, die unter</span><span class="h1-line"><span class="accent">die Haut</span> gehen</span></h1>
                 <p class="hero-sub">Wir betreuen Events jeder Größe persönlich und mit einem Ziel: Dass deine Gäste nicht nur einen schönen Abend haben, sondern einen, den sie so schnell nicht vergessen.</p>

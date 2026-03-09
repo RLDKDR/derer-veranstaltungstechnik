@@ -75,7 +75,7 @@
         @keyframes tapeIn { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
         @keyframes glowIn { 0% { text-shadow: 0 0 0 rgba(0,229,200,0), 0 0 0 rgba(0,229,200,0); color: var(--text); } 100% { text-shadow: 0 0 40px rgba(0,229,200,.4), 0 0 80px rgba(0,229,200,.15); color: var(--accent); } }
         @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(0,229,200,0.4); } 50% { box-shadow: 0 0 0 8px rgba(0,229,200,0); } }
-        @keyframes mq { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes mq { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(-50%,0,0); } }
         @keyframes orb-float { 0%,100% { transform: translate(0,0) scale(1); } 25% { transform: translate(30px,-20px) scale(1.05); } 50% { transform: translate(-10px,-35px) scale(0.95); } 75% { transform: translate(-25px,10px) scale(1.02); } }
 
         /* ===================== NAV ===================== */
@@ -573,7 +573,7 @@
         .partners { padding: 2.5rem 0; background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; }
         .partners-label { text-align: center; margin-bottom: 1.25rem; }
         .partners-label span { font-family: var(--font-m); font-size: .8rem; letter-spacing: .15em; text-transform: uppercase; color: var(--text3); }
-        .partner-track { display: flex; align-items: center; animation: mq 25s linear infinite; white-space: nowrap; }
+        .partner-track { display: flex; align-items: center; animation: mq 30s linear infinite; white-space: nowrap; will-change: transform; }
         .partner-item {
             display: flex; align-items: center; padding: 0 2.5rem; flex-shrink: 0; opacity: .35;
             transition: opacity .4s var(--ease);
@@ -1025,34 +1025,20 @@
     <div class="partners">
         <div class="partners-label"><span>Wir arbeiten mit</span></div>
         <div class="partner-track">
-            <div class="partner-item"><img src="images/partners/12.webp" alt="Allen & Heath" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/9.webp" alt="MA Lighting" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/11.webp" alt="Sennheiser" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/8.webp" alt="Shure" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/7.webp" alt="HK Audio" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/10.webp" alt="FBT" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/6.webp" alt="Soundcraft" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/12.webp" alt="Allen & Heath" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/9.webp" alt="MA Lighting" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/11.webp" alt="Sennheiser" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/8.webp" alt="Shure" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/7.webp" alt="HK Audio" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/10.webp" alt="FBT" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/6.webp" alt="Soundcraft" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/12.webp" alt="Allen & Heath" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/9.webp" alt="MA Lighting" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/11.webp" alt="Sennheiser" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/8.webp" alt="Shure" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/7.webp" alt="HK Audio" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/10.webp" alt="FBT" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/6.webp" alt="Soundcraft" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/12.webp" alt="Allen & Heath" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/9.webp" alt="MA Lighting" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/11.webp" alt="Sennheiser" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/8.webp" alt="Shure" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/7.webp" alt="HK Audio" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/10.webp" alt="FBT" loading="lazy"></div>
-            <div class="partner-item"><img src="images/partners/6.webp" alt="Soundcraft" loading="lazy"></div>
+            <div class="partner-item"><img src="images/partners/12.webp" alt="Allen & Heath"></div>
+            <div class="partner-item"><img src="images/partners/9.webp" alt="MA Lighting"></div>
+            <div class="partner-item"><img src="images/partners/11.webp" alt="Sennheiser"></div>
+            <div class="partner-item"><img src="images/partners/8.webp" alt="Shure"></div>
+            <div class="partner-item"><img src="images/partners/7.webp" alt="HK Audio"></div>
+            <div class="partner-item"><img src="images/partners/10.webp" alt="FBT"></div>
+            <div class="partner-item"><img src="images/partners/6.webp" alt="Soundcraft"></div>
+            <div class="partner-item"><img src="images/partners/12.webp" alt="Allen & Heath"></div>
+            <div class="partner-item"><img src="images/partners/9.webp" alt="MA Lighting"></div>
+            <div class="partner-item"><img src="images/partners/11.webp" alt="Sennheiser"></div>
+            <div class="partner-item"><img src="images/partners/8.webp" alt="Shure"></div>
+            <div class="partner-item"><img src="images/partners/7.webp" alt="HK Audio"></div>
+            <div class="partner-item"><img src="images/partners/10.webp" alt="FBT"></div>
+            <div class="partner-item"><img src="images/partners/6.webp" alt="Soundcraft"></div>
         </div>
     </div>
 

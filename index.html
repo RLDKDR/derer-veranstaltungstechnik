@@ -53,13 +53,13 @@
         }
 
         /* Animations */
-        .reveal { opacity: 0; transform: translateY(45px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1.2s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
-        .reveal-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
+        .reveal-left { opacity: 0; transform: translateX(-35px); transition: opacity 1.2s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1); }
         .reveal-left.visible { opacity: 1; transform: translateX(0); }
-        .reveal-right { opacity: 0; transform: translateX(50px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
+        .reveal-right { opacity: 0; transform: translateX(35px); transition: opacity 1.2s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1); }
         .reveal-right.visible { opacity: 1; transform: translateX(0); }
-        .reveal-scale { opacity: 0; transform: scale(0.92); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); }
+        .reveal-scale { opacity: 0; transform: scale(0.95); transition: opacity 1.2s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1); }
         .reveal-scale.visible { opacity: 1; transform: scale(1); }
         .d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; } .d4 { transition-delay: .4s; } .d5 { transition-delay: .5s; }
 
@@ -332,7 +332,7 @@
 
         /* ===================== STATEMENT ===================== */
         .testimonial { padding: clamp(4.5rem,9vh,7rem) 0; background: var(--bg2); text-align: center; position: relative; overflow: hidden; }
-        .testimonial-bg { position: absolute; inset: 0; background: url('images/testimonial-backdrop.webp') center/cover no-repeat; opacity: .03; pointer-events: none; z-index: 0; }
+        .testimonial-bg { position: absolute; inset: 0; background: url('images/testimonial-backdrop.webp') center/cover no-repeat; opacity: .015; pointer-events: none; z-index: 0; }
         .testimonial-glow { position: absolute; top: 50%; width: 250px; height: 250px; border-radius: 50%; filter: blur(80px); pointer-events: none; opacity: 0; transition: opacity 1.2s ease; }
         .testimonial-glow--l { left: -40px; transform: translateY(-50%); background: rgba(0,229,200,.12); }
         .testimonial-glow--r { right: -40px; transform: translateY(-50%); background: rgba(0,229,200,.1); }
@@ -592,7 +592,7 @@
         .partners { padding: 2.5rem 0; background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; }
         .partners-label { text-align: center; margin-bottom: 1.25rem; }
         .partners-label span { font-family: var(--font-m); font-size: .8rem; letter-spacing: .15em; text-transform: uppercase; color: var(--text3); }
-        .partner-track { display: flex; align-items: center; animation: mq 30s linear infinite; white-space: nowrap; will-change: transform; }
+        .partner-track { display: flex; align-items: center; animation: mq 16s linear infinite; white-space: nowrap; will-change: transform; }
         .partner-item {
             display: flex; align-items: center; padding: 0 2.5rem; flex-shrink: 0; opacity: .35;
             transition: opacity .4s var(--ease);
@@ -881,7 +881,7 @@
         <div class="hero-content">
             <div class="hero-tagline"><span class="tagline-dot"></span> Veranstaltungstechnik aus Böbingen</div>
             <div class="hero-text-wrap">
-                <h1 class="hero-h1"><span class="h1-line">Für Events die unter</span><span class="h1-line"><span class="accent">die Haut</span> gehen</span></h1>
+                <h1 class="hero-h1"><span class="h1-line">Für Events, die unter</span><span class="h1-line"><span class="accent">die Haut</span> gehen.</span></h1>
                 <p class="hero-sub">Von der Technik über den DJ bis zur kompletten Eventproduktion. Wir betreuen alles persönlich und mit dem Anspruch, dass deine Gäste den Abend nicht so schnell vergessen.</p>
             </div>
             <div class="hero-actions">

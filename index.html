@@ -432,19 +432,28 @@
             background-size: 60px 60px;
         }
 
-        .inquiry-wrapper { max-width: 760px; margin: 0 auto; position: relative; z-index: 2; }
+        /* Two-column asymmetric layout */
+        .inquiry-wrapper { max-width: 1340px; margin: 0 auto; position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
 
-        .inquiry-header { text-align: center; margin-bottom: 3rem; }
-        .inquiry-title { font-family: var(--font-h); font-size: clamp(2.5rem,4.5vw,4rem); font-weight: 900; line-height: 1.02; letter-spacing: -.035em; text-transform: uppercase; margin-bottom: 1rem; }
-        .inquiry-sub { font-size: .95rem; color: var(--text2); line-height: 1.7; }
+        .inquiry-left { position: sticky; top: 120px; }
+        .inquiry-header { text-align: left; margin-bottom: 0; }
+        .inquiry-label-line { display: flex; align-items: center; gap: .75rem; margin-bottom: .75rem; }
+        .inquiry-label-line::before { content: ''; width: 28px; height: 1px; background: var(--accent); flex-shrink: 0; }
+        .inquiry-label-line .section-label { margin-bottom: 0; }
+        .inquiry-title { font-family: var(--font-h); font-size: clamp(42px, 5vw, 64px); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; text-transform: uppercase; margin-bottom: 1.25rem; }
+        .inquiry-sub { font-size: .95rem; color: var(--text2); line-height: 1.7; max-width: 420px; }
+        .inquiry-trust { display: flex; gap: 2.5rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+        .inquiry-trust-item { }
+        .inquiry-trust-num { font-family: var(--font-h); font-size: 1.5rem; font-weight: 800; color: var(--text); letter-spacing: -.02em; }
+        .inquiry-trust-label { font-family: var(--font-m); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); margin-top: .2rem; }
 
         /* Glassmorphism form container */
         .form-container {
             background: linear-gradient(160deg, rgba(255,255,255,.04) 0%, rgba(12,12,20,.55) 40%, rgba(255,255,255,.02) 100%);
             backdrop-filter: blur(28px) saturate(1.2); -webkit-backdrop-filter: blur(28px) saturate(1.2);
             border: 1px solid rgba(255,255,255,.08);
-            border-radius: 22px;
-            padding: clamp(2rem,4vw,3rem);
+            border-radius: 20px;
+            padding: 48px;
             position: relative;
             overflow: hidden;
             box-shadow:
@@ -455,7 +464,7 @@
         }
         /* Animated border glow — rotating conic sweep */
         .form-container::before {
-            content: ''; position: absolute; inset: -1px; border-radius: 22px; z-index: -1;
+            content: ''; position: absolute; inset: -1px; border-radius: 20px; z-index: -1;
             background: conic-gradient(from var(--border-angle,0deg), transparent 40%, rgba(0,229,200,.35) 50%, transparent 60%);
             animation: border-rotate 5s linear infinite;
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -479,79 +488,96 @@
         }
         .form-glow-bottom { display: none; }
 
-        .form-progress { display: flex; align-items: center; justify-content: center; margin-bottom: 2.5rem; position: relative; z-index: 1; }
-        .progress-dot { width: 34px; height: 34px; border-radius: 50%; border: 2px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; font-family: var(--font-m); font-size: .68rem; color: var(--text3); transition: all .4s var(--ease); background: rgba(12,12,20,.8); position: relative; z-index: 2; }
-        .progress-dot.active { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 20px rgba(0,229,200,.2); }
-        .progress-dot.completed { background: var(--accent); border-color: var(--accent); color: var(--bg); }
-        .progress-line { width: 60px; height: 2px; background: rgba(255,255,255,.06); transition: background .4s var(--ease); }
-        .progress-line.active { background: var(--accent); box-shadow: 0 0 8px rgba(0,229,200,.2); }
+        /* Step indicator — text + progress bar */
+        .form-progress { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem; position: relative; z-index: 1; }
+        .step-indicator-text { font-family: var(--font-m); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text3); }
+        .step-indicator-text span { color: var(--accent); }
+        .step-bar { width: 120px; height: 2px; background: rgba(255,255,255,.06); border-radius: 2px; overflow: hidden; }
+        .step-bar-fill { height: 100%; width: 25%; background: var(--accent); border-radius: 2px; transition: width .35s cubic-bezier(0.22,1,0.36,1); box-shadow: 0 0 8px rgba(0,229,200,.2); }
+        /* Hide old dot/line styles if any remain */
+        .progress-dot, .progress-line { display: none; }
 
-        .form-step { display: none; animation: fadeUp .5s var(--ease) forwards; position: relative; z-index: 1; }
+        .form-step { display: none; animation: fadeUp .5s cubic-bezier(0.22,1,0.36,1) forwards; position: relative; z-index: 1; }
         .form-step.active { display: block; }
-        .step-question { font-family: var(--font-h); font-size: 1.3rem; font-weight: 700; text-align: center; margin-bottom: 1.75rem; }
+        .step-question { font-family: var(--font-h); font-size: 1.2rem; font-weight: 700; text-align: left; margin-bottom: 1.5rem; }
 
-        .option-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: .75rem; }
+        /* Option cards — vertical list with horizontal rows */
+        .option-grid { display: flex; flex-direction: column; gap: 12px; }
         .option-card {
-            padding: 1.5rem 1.25rem; background: rgba(255,255,255,.015);
+            padding: 1rem 1.25rem; background: rgba(255,255,255,.015);
             border: 1px solid rgba(255,255,255,.06); border-radius: 14px;
-            cursor: pointer; transition: all .4s var(--ease); text-align: center;
+            cursor: pointer; transition: all .3s cubic-bezier(0.22,1,0.36,1); text-align: left;
             position: relative; overflow: hidden;
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            display: flex; align-items: center; gap: 16px;
         }
-        /* Subtle inner glow on hover */
         .option-card::before {
             content: ''; position: absolute; inset: 0;
-            background: radial-gradient(circle at 50% 30%, rgba(0,229,200,.08) 0%, transparent 60%);
-            opacity: 0; transition: opacity .4s var(--ease);
+            background: radial-gradient(circle at 20% 50%, rgba(0,229,200,.06) 0%, transparent 60%);
+            opacity: 0; transition: opacity .3s cubic-bezier(0.22,1,0.36,1);
         }
-        /* Animated border shimmer */
         .option-card::after {
             content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 1px;
             background: linear-gradient(90deg, transparent, rgba(0,229,200,.3), transparent);
             transition: left 0s; opacity: 0;
         }
-        .option-card:hover { border-color: rgba(0,229,200,.2); transform: translateY(-3px); }
+        .option-card:hover { border-color: rgba(0,229,200,.2); transform: translateX(4px); }
         .option-card:hover::before { opacity: 1; }
-        .option-card:hover::after { left: 150%; opacity: 1; transition: left .8s var(--ease); }
+        .option-card:hover::after { left: 150%; opacity: 1; transition: left .8s cubic-bezier(0.22,1,0.36,1); }
         .option-card.selected {
             border-color: var(--accent); background: rgba(0,229,200,.04);
             box-shadow: 0 0 30px rgba(0,229,200,.08), inset 0 1px 0 rgba(0,229,200,.12);
-            transform: translateY(-3px);
+            transform: translateX(4px);
         }
         .option-card.selected::before { opacity: 1; }
 
-        /* Liquid glass icon bubble */
+        /* Icon box */
         .option-icon-wrap {
-            width: 52px; height: 52px; margin: 0 auto .75rem;
-            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            width: 44px; height: 44px; margin: 0; flex-shrink: 0;
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
             background: linear-gradient(135deg, rgba(0,180,200,.08) 0%, rgba(0,229,200,.03) 100%);
             border: 1px solid rgba(0,229,200,.1);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 4px 15px rgba(0,229,200,.05), inset 0 1px 0 rgba(255,255,255,.04);
             position: relative; z-index: 1;
-            transition: box-shadow .4s var(--ease), border-color .4s var(--ease);
+            transition: box-shadow .3s cubic-bezier(0.22,1,0.36,1), border-color .3s cubic-bezier(0.22,1,0.36,1);
         }
         .option-card:hover .option-icon-wrap,
         .option-card.selected .option-icon-wrap {
             border-color: rgba(0,229,200,.2);
-            box-shadow: 0 4px 20px rgba(0,229,200,.1), inset 0 1px 0 rgba(255,255,255,.06);
+            box-shadow: 0 4px 20px rgba(0,229,200,.1);
         }
-        .option-card .option-icon { font-size: 1.35rem; display: block; position: relative; z-index: 1; line-height: 1; }
-        .option-card .option-label { font-family: var(--font-h); font-size: .88rem; font-weight: 700; position: relative; z-index: 1; display: block; margin-bottom: .3rem; }
+        .option-icon-wrap svg { width: 20px; height: 20px; color: var(--accent); stroke-width: 1.5; }
+        .option-card .option-icon { display: none; }
+        .option-card .option-text { flex: 1; position: relative; z-index: 1; min-width: 0; }
+        .option-card .option-label { font-family: var(--font-h); font-size: .88rem; font-weight: 700; position: relative; z-index: 1; display: block; margin-bottom: .15rem; }
         .option-card .option-desc { font-size: .7rem; color: var(--text3); position: relative; z-index: 1; display: block; line-height: 1.4; }
 
+        /* Radio circle */
+        .option-radio {
+            width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,.1);
+            display: flex; align-items: center; justify-content: center;
+            transition: all .25s cubic-bezier(0.22,1,0.36,1);
+            position: relative; z-index: 1;
+        }
+        .option-radio::after {
+            content: ''; width: 8px; height: 8px; border-radius: 50%;
+            background: var(--accent); opacity: 0; transform: scale(0);
+            transition: all .25s cubic-bezier(0.22,1,0.36,1);
+        }
+        .option-card.selected .option-radio { border-color: var(--accent); }
+        .option-card.selected .option-radio::after { opacity: 1; transform: scale(1); }
+
         .size-options { display: grid; grid-template-columns: repeat(5,1fr); gap: .75rem; }
-        .size-option { padding: 1.1rem .6rem; background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06); border-radius: 12px; cursor: pointer; text-align: center; transition: all .3s var(--ease); }
+        .size-option { padding: 1.1rem .6rem; background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06); border-radius: 12px; cursor: pointer; text-align: center; transition: all .3s cubic-bezier(0.22,1,0.36,1); }
         .size-option:hover { border-color: rgba(0,229,200,.2); }
         .size-option.selected { border-color: var(--accent); background: rgba(0,229,200,.05); box-shadow: 0 0 20px rgba(0,229,200,.08); }
         .size-option .size-number { font-family: var(--font-h); font-size: 1.4rem; font-weight: 900; color: var(--accent); }
         .size-option .size-label { font-size: .55rem; color: var(--text3); text-transform: uppercase; letter-spacing: .1em; font-family: var(--font-m); }
 
         .equipment-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: .75rem; }
-        .equipment-option { padding: .95rem 1.1rem; background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06); border-radius: 12px; cursor: pointer; transition: all .3s var(--ease); display: flex; align-items: center; gap: .75rem; }
+        .equipment-option { padding: .95rem 1.1rem; background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06); border-radius: 12px; cursor: pointer; transition: all .3s cubic-bezier(0.22,1,0.36,1); display: flex; align-items: center; gap: .75rem; }
         .equipment-option:hover { border-color: rgba(0,229,200,.2); }
         .equipment-option.selected { border-color: var(--accent); background: rgba(0,229,200,.05); }
-        .eq-check { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.1); border-radius: 4px; display: flex; align-items: center; justify-content: center; transition: all .3s var(--ease); flex-shrink: 0; }
+        .eq-check { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.1); border-radius: 4px; display: flex; align-items: center; justify-content: center; transition: all .25s cubic-bezier(0.22,1,0.36,1); flex-shrink: 0; }
         .equipment-option.selected .eq-check { background: var(--accent); border-color: var(--accent); }
         .eq-check svg { width: 10px; height: 10px; color: var(--bg); opacity: 0; transition: opacity .2s; }
         .equipment-option.selected .eq-check svg { opacity: 1; }
@@ -559,15 +585,26 @@
 
         .contact-fields { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
         .contact-fields .full-width { grid-column: span 2; }
-        .form-field input,.form-field textarea { width: 100%; padding: .8rem 1rem; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 10px; color: var(--text); font-family: var(--font-b); font-size: .88rem; transition: border-color .3s var(--ease), box-shadow .3s var(--ease); outline: none; }
+        .form-field input,.form-field textarea { width: 100%; padding: .8rem 1rem; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 10px; color: var(--text); font-family: var(--font-b); font-size: .88rem; transition: border-color .3s cubic-bezier(0.22,1,0.36,1), box-shadow .3s cubic-bezier(0.22,1,0.36,1); outline: none; }
         .form-field input::placeholder,.form-field textarea::placeholder { color: var(--text3); }
         .form-field input:focus,.form-field textarea:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(0,229,200,.08); }
         .form-field textarea { resize: vertical; min-height: 85px; }
 
         .form-nav { display: flex; justify-content: space-between; margin-top: 2rem; position: relative; z-index: 1; }
-        .btn-back { display: inline-flex; align-items: center; gap: .45rem; font-family: var(--font-h); font-size: .78rem; font-weight: 500; color: var(--text2); background: none; border: none; cursor: pointer; transition: color .3s var(--ease); padding: .7rem 0; }
+        .form-nav .btn-next { width: 100%; }
+        .form-nav--split .btn-next { width: auto; margin-left: auto; }
+        .btn-back { display: inline-flex; align-items: center; gap: .45rem; font-family: var(--font-h); font-size: .78rem; font-weight: 500; color: var(--text2); background: none; border: none; cursor: pointer; transition: color .3s cubic-bezier(0.22,1,0.36,1); padding: .7rem 0; }
         .btn-back:hover { color: var(--text); }
-        .form-nav .btn-next { margin-left: auto; }
+
+        /* Responsive: single column on mobile */
+        @media (max-width: 900px) {
+            .inquiry-wrapper { grid-template-columns: 1fr; gap: 3rem; }
+            .inquiry-left { position: static; }
+            .inquiry-header { text-align: left; }
+            .inquiry-sub { max-width: none; }
+            .form-container { padding: clamp(1.5rem, 4vw, 2.5rem); }
+            .size-options { grid-template-columns: repeat(3,1fr); }
+        }
 
         /* ===================== CONTACT ===================== */
         .contact { padding: clamp(6rem,12vh,10rem) 0; background: var(--bg); }
@@ -608,7 +645,16 @@
         }
 
         /* ===================== FOOTER — upgraded ===================== */
-        .footer { padding: clamp(5rem,10vh,8rem) 0 2rem; border-top: 1px solid var(--border); background: var(--bg); }
+        .footer { padding: clamp(5rem,10vh,8rem) 0 2rem; border-top: 1px solid var(--border); background: var(--bg); position: relative; overflow: hidden; }
+        .footer-kabel {
+            position: absolute; right: -3%; top: -2.5rem; width: 100%; height: auto;
+            opacity: 0; transform: translateX(60px);
+            transition: opacity 1.4s cubic-bezier(0.16,1,0.3,1), transform 1.4s cubic-bezier(0.16,1,0.3,1);
+            pointer-events: none; z-index: 0;
+        }
+        .footer-kabel.visible { opacity: .18; transform: translateX(0); animation: kabel-float 6s ease-in-out 1.4s infinite; }
+        @keyframes kabel-float { 0%,100% { transform: translateY(0) translateX(0); } 50% { transform: translateY(-8px) translateX(0); } }
+        @media (max-width: 768px) { .footer-kabel { display: none; } }
         .footer-top { margin-bottom: clamp(3rem,5vh,4rem); }
         .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr .8fr .8fr; gap: clamp(2rem,4vw,4rem); margin-bottom: 2.5rem; }
         .footer-col-title { font-family: var(--font-m); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
@@ -676,7 +722,7 @@
             .gallery-grid { grid-template-columns: 1fr; }
             .gallery-item.large { grid-column: span 1; }
             .gallery-item { aspect-ratio: 16/10; }
-            .option-grid,.equipment-grid { grid-template-columns: 1fr; }
+            .equipment-grid { grid-template-columns: 1fr; }
             .size-options { grid-template-columns: repeat(2,1fr); }
             .contact-fields { grid-template-columns: 1fr; }
             .contact-fields .full-width { grid-column: span 1; }
@@ -1204,23 +1250,48 @@
         <div class="inquiry-orb inquiry-orb-3"></div>
         <div class="inquiry-grid-bg"></div>
         <div class="container"><div class="inquiry-wrapper">
-            <div class="inquiry-header reveal"><span class="section-label" style="text-align:center;">Maßgeschneidert für dich</span><h2 class="inquiry-title">Individuelle <span class="accent">Anfrage.</span></h2><p class="inquiry-sub">Du planst etwas Größeres oder hast eine ganz eigene Vorstellung? Dann lass uns kurz wissen, was du brauchst. Wir melden uns innerhalb von 48 Stunden bei dir.</p></div>
+            <div class="inquiry-left">
+                <div class="inquiry-header reveal">
+                    <div class="inquiry-label-line"><span class="section-label">Maßgeschneidert für dich</span></div>
+                    <h2 class="inquiry-title">Individuelle <span class="accent">Anfrage.</span></h2>
+                    <p class="inquiry-sub">Du planst etwas Größeres oder hast eine ganz eigene Vorstellung? Dann lass uns kurz wissen, was du brauchst. Wir melden uns innerhalb von 48 Stunden bei dir.</p>
+                </div>
+                <div class="inquiry-trust reveal d2">
+                    <div class="inquiry-trust-item"><div class="inquiry-trust-num">250+</div><div class="inquiry-trust-label">Events betreut</div></div>
+                    <div class="inquiry-trust-item"><div class="inquiry-trust-num">&lt; 48h</div><div class="inquiry-trust-label">Antwortzeit</div></div>
+                </div>
+            </div>
+            <div class="inquiry-right">
             <div class="form-container reveal d2">
                 <div class="form-sheen"></div>
                 <div class="form-glow-bottom"></div>
                 <div class="form-progress" id="formProgress">
-                    <div class="progress-dot active" data-step="1">1</div><div class="progress-line" data-line="1"></div>
-                    <div class="progress-dot" data-step="2">2</div><div class="progress-line" data-line="2"></div>
-                    <div class="progress-dot" data-step="3">3</div><div class="progress-line" data-line="3"></div>
-                    <div class="progress-dot" data-step="4">4</div>
+                    <div class="step-indicator-text" id="stepText">Schritt <span>1</span> von 4</div>
+                    <div class="step-bar"><div class="step-bar-fill" id="stepBarFill" style="width:25%"></div></div>
                 </div>
                 <div class="form-step active" id="step1">
                     <h3 class="step-question">Was für ein Event planst du?</h3>
                     <div class="option-grid">
-                        <div class="option-card" onclick="sel(this)"><div class="option-icon-wrap"><span class="option-icon">🏢</span></div><span class="option-label">Firmenfeier</span><span class="option-desc">Betriebsfest, Jubiläum, Weihnachtsfeier</span></div>
-                        <div class="option-card" onclick="sel(this)"><div class="option-icon-wrap"><span class="option-icon">🎉</span></div><span class="option-label">Privatfeier</span><span class="option-desc">Geburtstag, Hochzeit, Familienfeier</span></div>
-                        <div class="option-card" onclick="sel(this)"><div class="option-icon-wrap"><span class="option-icon">🎸</span></div><span class="option-label">Konzert oder Show</span><span class="option-desc">Live-Musik, Theater, Musical</span></div>
-                        <div class="option-card" onclick="sel(this)"><div class="option-icon-wrap"><span class="option-icon">🎙️</span></div><span class="option-label">Konferenz</span><span class="option-desc">Meeting, Vortrag, Tagung</span></div>
+                        <div class="option-card" onclick="sel(this)">
+                            <div class="option-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M9 8h1M9 12h1M9 16h1M14 8h1M14 12h1M14 16h1M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/></svg></div>
+                            <div class="option-text"><span class="option-label">Firmenfeier</span><span class="option-desc">Betriebsfest, Jubiläum, Weihnachtsfeier</span></div>
+                            <div class="option-radio"></div>
+                        </div>
+                        <div class="option-card" onclick="sel(this)">
+                            <div class="option-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+                            <div class="option-text"><span class="option-label">Privatfeier</span><span class="option-desc">Geburtstag, Hochzeit, Familienfeier</span></div>
+                            <div class="option-radio"></div>
+                        </div>
+                        <div class="option-card" onclick="sel(this)">
+                            <div class="option-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+                            <div class="option-text"><span class="option-label">Konzert oder Show</span><span class="option-desc">Live-Musik, Theater, Musical</span></div>
+                            <div class="option-radio"></div>
+                        </div>
+                        <div class="option-card" onclick="sel(this)">
+                            <div class="option-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                            <div class="option-text"><span class="option-label">Konferenz</span><span class="option-desc">Meeting, Vortrag, Tagung</span></div>
+                            <div class="option-radio"></div>
+                        </div>
                     </div>
                     <div class="form-nav"><div></div><button class="btn-p btn-next" onclick="goStep(2)">Weiter <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button></div>
                 </div>
@@ -1233,7 +1304,7 @@
                         <div class="size-option" onclick="sel(this)"><div class="size-number">bis 350</div><div class="size-label">Gäste</div></div>
                         <div class="size-option" onclick="sel(this)"><div class="size-number">500+</div><div class="size-label">Gäste</div></div>
                     </div>
-                    <div class="form-nav"><button class="btn-back" onclick="goStep(1)">← Zurück</button><button class="btn-p btn-next" onclick="goStep(3)">Weiter <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button></div>
+                    <div class="form-nav form-nav--split"><button class="btn-back" onclick="goStep(1)">← Zurück</button><button class="btn-p btn-next" onclick="goStep(3)">Weiter <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button></div>
                 </div>
                 <div class="form-step" id="step3">
                     <h3 class="step-question">Was brauchst du?</h3>
@@ -1245,7 +1316,7 @@
                         <div class="equipment-option" onclick="tog(this)"><div class="eq-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div><span class="eq-label">Komplettpaket</span></div>
                         <div class="equipment-option" onclick="tog(this)"><div class="eq-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div><span class="eq-label">Weiß noch nicht</span></div>
                     </div>
-                    <div class="form-nav"><button class="btn-back" onclick="goStep(2)">← Zurück</button><button class="btn-p btn-next" onclick="goStep(4)">Weiter <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button></div>
+                    <div class="form-nav form-nav--split"><button class="btn-back" onclick="goStep(2)">← Zurück</button><button class="btn-p btn-next" onclick="goStep(4)">Weiter <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button></div>
                 </div>
                 <div class="form-step" id="step4">
                     <h3 class="step-question">Wie erreichen wir dich?</h3>
@@ -1256,13 +1327,14 @@
                         <div class="form-field"><input type="tel" placeholder="Telefonnummer (optional)"></div>
                         <div class="form-field full-width"><textarea placeholder="Erzähl uns kurz, was du vorhast. Wann, wo, wie groß?"></textarea></div>
                     </div>
-                    <div class="form-nav"><button class="btn-back" onclick="goStep(3)">← Zurück</button><button class="btn-p btn-next" onclick="submitForm()">Anfrage absenden <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button></div>
+                    <div class="form-nav form-nav--split"><button class="btn-back" onclick="goStep(3)">← Zurück</button><button class="btn-p btn-next" onclick="submitForm()">Anfrage absenden <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button></div>
                 </div>
                 <div class="form-step" id="stepOk" style="text-align:center;padding:3rem 0;">
                     <div style="font-size:3rem;margin-bottom:1rem;">✅</div>
                     <h3 class="step-question" style="margin-bottom:.75rem;">Anfrage abgeschickt.</h3>
                     <p style="color:var(--text2);font-size:.95rem;line-height:1.6;">Wir melden uns innerhalb von 24 Stunden. Falls es eilig ist: <a href="tel:+4917621810688" style="color:var(--accent);">+49 176 218 10 688</a></p>
                 </div>
+            </div>
             </div>
         </div></div>
     </section>
@@ -1315,7 +1387,9 @@
         </div>
     </section>
 
-    <footer class="footer" id="contact"><div class="container">
+    <footer class="footer" id="contact">
+        <img src="images/footer-kabel.webp" alt="" class="footer-kabel" loading="lazy">
+        <div class="container">
         <div class="footer-top">
             <div class="footer-headline">
                 <span class="section-label reveal">Kontakt</span>
@@ -1381,6 +1455,7 @@
 
         const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
         document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>obs.observe(el));
+        var kabel=document.querySelector('.footer-kabel');if(kabel)obs.observe(kabel);
 
         function countUp(el,duration){const t=+el.dataset.target,sfx=el.dataset.suffix||'';if(el.dataset.display){el.textContent=el.dataset.display;return;}let c=0;const steps=Math.ceil(duration/20),s=Math.max(1,Math.ceil(t/steps)),iv=setInterval(()=>{c+=s;if(c>=t){c=t;clearInterval(iv);}let d=c.toLocaleString('de-DE');if(t===100)d=c+'%';else if(t===48)d=c+'h';else if(sfx)d=d+sfx;el.textContent=d;},20);}
         const stats=document.querySelectorAll('.stat-number[data-target]');
@@ -1390,7 +1465,7 @@
         let cur=1;
         function sel(c){c.parentElement.querySelectorAll('.option-card,.size-option').forEach(s=>s.classList.remove('selected'));c.classList.add('selected');}
         function tog(c){c.classList.toggle('selected');}
-        function goStep(s){document.getElementById(`step${cur}`).classList.remove('active');document.getElementById(`step${s}`).classList.add('active');document.querySelectorAll('.progress-dot').forEach((d,i)=>{const n=i+1;d.classList.remove('active','completed');if(n<s){d.classList.add('completed');d.innerHTML='✓';}else if(n===s){d.classList.add('active');d.innerHTML=n;}else d.innerHTML=n;});document.querySelectorAll('.progress-line').forEach((l,i)=>l.classList.toggle('active',i+1<s));cur=s;}
+        function goStep(s){document.getElementById(`step${cur}`).classList.remove('active');document.getElementById(`step${s}`).classList.add('active');var t=document.getElementById('stepText');if(t)t.innerHTML='Schritt <span>'+s+'</span> von 4';var b=document.getElementById('stepBarFill');if(b)b.style.width=(s*25)+'%';cur=s;}
         function submitForm(){document.getElementById(`step${cur}`).classList.remove('active');document.getElementById('stepOk').classList.add('active');document.getElementById('formProgress').style.display='none';}
 
         document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-80,behavior:'smooth'});});});

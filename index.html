@@ -75,7 +75,7 @@
         @keyframes tapeIn { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
         @keyframes glowIn { 0% { text-shadow: 0 0 0 rgba(0,229,200,0), 0 0 0 rgba(0,229,200,0); color: var(--text); } 100% { text-shadow: 0 0 40px rgba(0,229,200,.4), 0 0 80px rgba(0,229,200,.15); color: var(--accent); } }
         @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(0,229,200,0.4); } 50% { box-shadow: 0 0 0 8px rgba(0,229,200,0); } }
-        @keyframes mq { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(-50%,0,0); } }
+        @keyframes mq { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(-100%,0,0); } }
         @keyframes orb-float { 0%,100% { transform: translate(0,0) scale(1); } 25% { transform: translate(30px,-20px) scale(1.05); } 50% { transform: translate(-10px,-35px) scale(0.95); } 75% { transform: translate(-25px,10px) scale(1.02); } }
 
         /* ===================== NAV ===================== */
@@ -154,7 +154,7 @@
         .hero-tagline {
             display: inline-flex; align-items: center; gap: .55rem;
             padding: .55rem 1.2rem; border-radius: 100px;
-            background: rgba(0,229,200,.08); border: 1px solid rgba(0,229,200,.18);
+            background: rgba(0,229,200,.16); border: 1px solid rgba(0,229,200,.28);
             font-family: var(--font-m); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
             color: var(--accent); margin-bottom: 2.25rem; text-align: center;
             opacity: 0; filter: blur(12px); transform: translateY(20px); animation: blurUp 1.4s cubic-bezier(.25,.1,.25,1) .15s forwards;
@@ -203,8 +203,9 @@
         }
         .tape-band-1 { transform: rotate(-2.5deg); transform-origin: center center; z-index: 2; }
         .tape-band-2 { transform: rotate(2.5deg); transform-origin: center center; z-index: 1; }
-        .tape-track { display: flex; animation: mq 30s linear infinite; }
-        .tape-band-2 .tape-track { animation-direction: reverse; animation-duration: 35s; }
+        .tape-track { display: flex; animation: tape-scroll 40s linear infinite; will-change: transform; }
+        .tape-band-2 .tape-track { animation-direction: reverse; animation-duration: 45s; }
+        @keyframes tape-scroll { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(-50%,0,0); } }
         .tape-item {
             font-family: var(--font-h); font-size: .88rem; font-weight: 900;
             letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7);
@@ -372,7 +373,7 @@
         .gallery-overlay .gallery-more { font-family: var(--font-m); font-size: .58rem; letter-spacing: .08em; color: var(--accent); margin-top: .5rem; display: inline-flex; align-items: center; gap: .35rem; }
         .gallery-overlay .gallery-more svg { width: 11px; height: 11px; }
 
-        /* ===================== PROJECT MODAL ===================== */
+/* ===================== PROJECT MODAL ===================== */
         .project-modal-overlay {
             position: fixed; inset: 0; z-index: 10000; background: rgba(5,5,9,.85);
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
@@ -592,13 +593,19 @@
         .partners { padding: 2.5rem 0; background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; }
         .partners-label { text-align: center; margin-bottom: 1.25rem; }
         .partners-label span { font-family: var(--font-m); font-size: .8rem; letter-spacing: .15em; text-transform: uppercase; color: var(--text3); }
-        .partner-track { display: flex; align-items: center; animation: mq 16s linear infinite; white-space: nowrap; will-change: transform; }
+        .partner-marquee { display: flex; overflow: hidden; }
+        .partner-track { display: flex; align-items: center; flex-shrink: 0; animation: mq 12s linear infinite; will-change: transform; }
         .partner-item {
             display: flex; align-items: center; padding: 0 2.5rem; flex-shrink: 0; opacity: .35;
             transition: opacity .4s var(--ease);
         }
         .partner-item img { height: 65px; width: auto; display: block; }
-        .partner-track:hover .partner-item { opacity: .55; }
+        .partner-marquee:hover .partner-item { opacity: .55; }
+        @media (max-width: 768px) {
+            .partner-track { animation-duration: 8s; }
+            .partner-item { padding: 0 1.5rem; }
+            .partner-item img { height: 45px; }
+        }
 
         /* ===================== FOOTER — upgraded ===================== */
         .footer { padding: clamp(5rem,10vh,8rem) 0 2rem; border-top: 1px solid var(--border); background: var(--bg); }
@@ -881,8 +888,8 @@
         <div class="hero-content">
             <div class="hero-tagline"><span class="tagline-dot"></span> Veranstaltungstechnik aus Böbingen</div>
             <div class="hero-text-wrap">
-                <h1 class="hero-h1"><span class="h1-line">Für Events, die unter</span><span class="h1-line"><span class="accent">die Haut</span> gehen.</span></h1>
-                <p class="hero-sub">Von der Technik über den DJ bis zur kompletten Eventproduktion. Wir betreuen alles persönlich und mit dem Anspruch, dass deine Gäste den Abend nicht so schnell vergessen.</p>
+                <h1 class="hero-h1"><span class="h1-line">Damit dein Event</span><span class="h1-line"><span class="accent">unvergesslich</span> wird.</span></h1>
+                <p class="hero-sub">Von der Technik über den DJ bis zur kompletten Eventproduktion. Wir betreuen alles persönlich und mit dem Anspruch, dass am Ende einfach alles stimmt.</p>
             </div>
             <div class="hero-actions">
                 <a href="#inquiry" class="btn-p">Kostenlos anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
@@ -921,8 +928,8 @@
     <section class="services" id="services"><div class="container">
         <div class="services-header reveal">
             <span class="section-label">Was wir machen</span>
-            <h2 class="services-title"><span class="h1-line">Alles, was dein großer</span><span class="h1-line">Abend <span class="accent">braucht.</span></span></h2>
-            <p class="services-desc">Jedes Event hat seine eigene Energie. Wir haben das Equipment, das Know-how und den Ehrgeiz, diese Energie für deine Gäste spürbar zu machen.</p>
+            <h2 class="services-title"><span class="h1-line">Alles aus einer <span class="accent">Hand.</span></span></h2>
+            <p class="services-desc">Damit du dich um nichts kümmern musst außer um deine Gäste.</p>
         </div>
         <div class="glass-grid">
             <div class="glass-card reveal d1">
@@ -932,7 +939,6 @@
                     </div>
                     <div>
                         <p>Ob deine Rede bei 300 Leuten ankommen soll oder der Bass um Mitternacht den Raum zum Beben bringt. Wir liefern ein Setup, bei dem einfach alles sitzt.</p>
-                        <a href="#inquiry" class="glass-card-link">Anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
                     </div>
                 </div>
                 <div class="glass-card-img"><img src="images/tontechnik.webp" alt="Tontechnik Setup" loading="lazy"></div>
@@ -944,7 +950,6 @@
                     </div>
                     <div>
                         <p>Die meisten Leute können gar nicht sagen, warum sich ein Abend besonders angefühlt hat. Meistens liegt es am Licht. Wir gestalten das so, dass dein Event seine volle Wirkung entfaltet.</p>
-                        <a href="#inquiry" class="glass-card-link">Anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
                     </div>
                 </div>
                 <div class="glass-card-img"><img src="images/lichttechnik-neu.webp" alt="Lichttechnik Show" loading="lazy"></div>
@@ -956,7 +961,6 @@
                     </div>
                     <div>
                         <p>Manchmal reicht ein Lautsprecher und ein Mikro. Bei uns kannst du Einzelgeräte mieten, ohne gleich ein Komplettpaket buchen zu müssen.</p>
-                        <a href="#inquiry" class="glass-card-link">Anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
                     </div>
                 </div>
                 <div class="glass-card-img"><img src="images/eq-verleih.webp" alt="Equipment Verleih" loading="lazy"></div>
@@ -968,7 +972,6 @@
                     </div>
                     <div>
                         <p>Wir sind selbst Musiker und kennen die Szene. Ob DJ oder Live-Band, wir vermitteln dir Künstler, von denen wir persönlich überzeugt sind.</p>
-                        <a href="#inquiry" class="glass-card-link">Anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
                     </div>
                 </div>
                 <div class="glass-card-img"><img src="images/kuenstlerservice.webp" alt="DJ- und Künstlerservice" loading="lazy"></div>
@@ -980,7 +983,6 @@
                     </div>
                     <div>
                         <p>Manche Events brauchen jemanden, der sich um alles kümmert. Planung, Technik, Aufbau, Betreuung vor Ort und Abbau danach. Genau das machen wir, damit du den Abend genauso genießen kannst wie deine Gäste.</p>
-                        <a href="#inquiry" class="glass-card-link">Anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
                     </div>
                 </div>
                 <div class="glass-card-img"><img src="images/fullservice-neu.webp" alt="Full-Service Eventproduktion" loading="lazy"></div>
@@ -1043,21 +1045,25 @@
     <!-- PARTNER MARQUEE -->
     <div class="partners">
         <div class="partners-label"><span>Wir arbeiten mit</span></div>
-        <div class="partner-track">
-            <div class="partner-item"><img src="images/partners/12.webp" alt="Allen & Heath"></div>
-            <div class="partner-item"><img src="images/partners/9.webp" alt="MA Lighting"></div>
-            <div class="partner-item"><img src="images/partners/11.webp" alt="Sennheiser"></div>
-            <div class="partner-item"><img src="images/partners/8.webp" alt="Shure"></div>
-            <div class="partner-item"><img src="images/partners/7.webp" alt="HK Audio"></div>
-            <div class="partner-item"><img src="images/partners/10.webp" alt="FBT"></div>
-            <div class="partner-item"><img src="images/partners/6.webp" alt="Soundcraft"></div>
-            <div class="partner-item"><img src="images/partners/12.webp" alt="Allen & Heath"></div>
-            <div class="partner-item"><img src="images/partners/9.webp" alt="MA Lighting"></div>
-            <div class="partner-item"><img src="images/partners/11.webp" alt="Sennheiser"></div>
-            <div class="partner-item"><img src="images/partners/8.webp" alt="Shure"></div>
-            <div class="partner-item"><img src="images/partners/7.webp" alt="HK Audio"></div>
-            <div class="partner-item"><img src="images/partners/10.webp" alt="FBT"></div>
-            <div class="partner-item"><img src="images/partners/6.webp" alt="Soundcraft"></div>
+        <div class="partner-marquee">
+            <div class="partner-track">
+                <div class="partner-item"><img src="images/partners/12.webp" alt="Allen & Heath"></div>
+                <div class="partner-item"><img src="images/partners/9.webp" alt="MA Lighting"></div>
+                <div class="partner-item"><img src="images/partners/11.webp" alt="Sennheiser"></div>
+                <div class="partner-item"><img src="images/partners/8.webp" alt="Shure"></div>
+                <div class="partner-item"><img src="images/partners/7.webp" alt="HK Audio"></div>
+                <div class="partner-item"><img src="images/partners/10.webp" alt="FBT"></div>
+                <div class="partner-item"><img src="images/partners/6.webp" alt="Soundcraft"></div>
+            </div>
+            <div class="partner-track" aria-hidden="true">
+                <div class="partner-item"><img src="images/partners/12.webp" alt="Allen & Heath"></div>
+                <div class="partner-item"><img src="images/partners/9.webp" alt="MA Lighting"></div>
+                <div class="partner-item"><img src="images/partners/11.webp" alt="Sennheiser"></div>
+                <div class="partner-item"><img src="images/partners/8.webp" alt="Shure"></div>
+                <div class="partner-item"><img src="images/partners/7.webp" alt="HK Audio"></div>
+                <div class="partner-item"><img src="images/partners/10.webp" alt="FBT"></div>
+                <div class="partner-item"><img src="images/partners/6.webp" alt="Soundcraft"></div>
+            </div>
         </div>
     </div>
 
@@ -1069,11 +1075,11 @@
             <p class="packages-sub">Hier findest du fertige Pakete für jeden Anlass. Du sagst uns wann und wo, wir bringen alles mit und zeigen dir wie es funktioniert.</p>
         </div>
         <div class="pkg-tabs reveal d1">
-            <button class="pkg-tab" data-filter="licht">Licht</button>
+            <button class="pkg-tab active" data-filter="licht">Licht</button>
             <button class="pkg-tab" data-filter="sound">Musik und Sound</button>
             <button class="pkg-tab" data-filter="reden">Reden und Vorträge</button>
             <button class="pkg-tab" data-filter="stimmung">Stimmungslicht</button>
-            <button class="pkg-tab active" data-filter="komplett">Rundum-sorglos</button>
+            <button class="pkg-tab" data-filter="komplett">Rundum-sorglos</button>
         </div>
         <div class="pkg-grid reveal d2">
             <!-- LICHT -->
@@ -1459,6 +1465,9 @@
                 });
             });
         });
+        /* Trigger active tab on load */
+        var activeTab=document.querySelector('.pkg-tab.active');
+        if(activeTab) activeTab.click();
 
         /* Package request: inline form on card, scroll for individual */
         function requestPackage(btn){

@@ -52,16 +52,11 @@
             -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* Animations */
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1.2s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1); }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        .reveal-left { opacity: 0; transform: translateX(-35px); transition: opacity 1.2s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1); }
-        .reveal-left.visible { opacity: 1; transform: translateX(0); }
-        .reveal-right { opacity: 0; transform: translateX(35px); transition: opacity 1.2s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1); }
-        .reveal-right.visible { opacity: 1; transform: translateX(0); }
-        .reveal-scale { opacity: 0; transform: scale(0.95); transition: opacity 1.2s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1); }
-        .reveal-scale.visible { opacity: 1; transform: scale(1); }
+        /* Animations — unified blur-up reveal */
+        .reveal { opacity: 0; transform: translate3d(0,30px,0); filter: blur(8px); will-change: transform, opacity, filter; transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.9s cubic-bezier(0.16,1,0.3,1); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+        .reveal.visible { opacity: 1; transform: translate3d(0,0,0); filter: blur(0px); }
         .d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; } .d4 { transition-delay: .4s; } .d5 { transition-delay: .5s; }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
 
         @keyframes float-a { 0%,100% { transform: translate(0,0) rotate(0deg); } 33% { transform: translate(10px,-15px) rotate(1deg); } 66% { transform: translate(-5px,-8px) rotate(-1deg); } }
         @keyframes float-b { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-12px,-20px); } }
@@ -900,15 +895,15 @@
         .tg-card:nth-child(4):hover { box-shadow: 0 18px 50px rgba(0,0,0,.3), 0 0 16px rgba(0,229,200,.045), 0 0 40px rgba(0,229,200,.022), 0 0 70px rgba(0,229,200,.01), inset 0 1px 0 rgba(255,255,255,.06), inset 0 30px 60px -30px rgba(0,229,200,.035); }
         .tg-card:nth-child(4)::before { background: linear-gradient(90deg, transparent 20%, rgba(255,255,255,.1) 45%, rgba(255,255,255,.05) 65%, transparent 90%); }
         .tg-card:nth-child(4) .tg-sheen { top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(350deg, rgba(255,255,255,.018) 0%, transparent 35%); }
-        /* Floating animation — staggered per card */
+        /* Floating animation — only after reveal completes */
         @keyframes tg-float {
-            0%, 100% { transform: translateY(0) translateZ(0); }
-            50% { transform: translateY(-6px) translateZ(0); }
+            0%, 100% { transform: translate3d(0,0,0); }
+            50% { transform: translate3d(0,-6px,0); }
         }
-        .tg-card:nth-child(1) { animation: tg-float 6s ease-in-out infinite; }
-        .tg-card:nth-child(2) { animation: tg-float 7s ease-in-out infinite 1.5s; }
-        .tg-card:nth-child(3) { animation: tg-float 6.5s ease-in-out infinite 3s; }
-        .tg-card:nth-child(4) { animation: tg-float 7.5s ease-in-out infinite 0.8s; }
+        .tg-card.visible.float-ready:nth-child(1) { animation: tg-float 6s ease-in-out infinite; }
+        .tg-card.visible.float-ready:nth-child(2) { animation: tg-float 7s ease-in-out infinite 1.5s; }
+        .tg-card.visible.float-ready:nth-child(3) { animation: tg-float 6.5s ease-in-out infinite 3s; }
+        .tg-card.visible.float-ready:nth-child(4) { animation: tg-float 7.5s ease-in-out infinite 0.8s; }
         .tg-card:hover { animation-play-state: paused; }
         /* Stars with staggered glow sweep */
         .tg-stars { font-size: 1.15rem; letter-spacing: .15em; margin-bottom: 1.25rem; position: relative; z-index: 1; display: flex; gap: .1em; }
@@ -1105,7 +1100,7 @@
                 <div class="about-sig reveal d5"><div class="sig-av"><img src="images/danielderer.webp" alt="Daniel Derer" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div><div><div class="sig-name">Daniel Derer</div><div class="sig-role">Gründer und Technischer Leiter</div><img src="images/signatur-neu.webp" alt="Signatur Daniel Derer" class="about-signature"></div></div>
             </div>
         </div>
-        <div class="about-right reveal-right d2">
+        <div class="about-right reveal d2">
             <div class="about-img about-img-1"><img src="images/ueberuns1.webp" alt="Derer Veranstaltungstechnik Team" loading="lazy"></div>
             <div class="about-img about-img-2"><img src="images/ueberuns2.webp" alt="Event-Setup" loading="lazy"></div>
             <div class="about-img about-img-3"><img src="images/ueberuns3.webp" alt="Backstage" loading="lazy"></div>
@@ -1116,7 +1111,7 @@
     <section class="testimonial reveal"><div class="testimonial-bg"></div><div class="container">
         <div class="testimonial-glow testimonial-glow--l"></div>
         <div class="testimonial-glow testimonial-glow--r"></div>
-        <div class="testimonial-inner reveal-scale">
+        <div class="testimonial-inner reveal">
             <p class="testimonial-quote">Daniel überzeugt durch hohe Fachkompetenz und hat für jede Veranstaltung das passende Equipment. Selbst in stressigen Situationen behält er einen kühlen Kopf und findet immer eine Lösung. Für uns ist er mittlerweile unser fester Tontechniker, der jede Veranstaltung zum Highlight macht.</p>
             <div class="testimonial-stars">★★★★★</div>
             <div class="testimonial-author">
@@ -1132,11 +1127,11 @@
     <section class="projects" id="projects"><div class="container">
         <div class="projects-header reveal"><span class="section-label">Referenzen</span><h2 class="projects-title"><span style="color:var(--accent)">Highlights</span> aus den letzten Jahren.</h2><p class="projects-sub">Jedes Event ist anders, aber eines hatten alle gemeinsam: Am Ende des Abends hat einfach alles gestimmt. Hier sind ein paar Beispiele.</p></div>
         <div class="gallery-grid">
-            <div class="gallery-item large reveal-scale d1" onclick="openProject(0)"><div class="gallery-ph g1"></div><img class="gallery-img" src="images/referenzen/soundofmovies.webp" alt="Sound of Movies" loading="lazy"><div class="gallery-overlay"><h4>Sound of Movies</h4><p>Musical-Großproduktion, 300+ Akteure, Filharmonie Filderstadt</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
-            <div class="gallery-item reveal d2" onclick="openProject(1)"><div class="gallery-ph g2"></div><img class="gallery-img" src="images/referenzen/lichterfest-boebingen.webp" alt="Lichterfest Böbingen" loading="lazy"><div class="gallery-overlay"><h4>Lichterfest Böbingen</h4><p>Open-Air mit Live-Bands, zwei Abende</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
-            <div class="gallery-item reveal d3" onclick="openProject(2)"><div class="gallery-ph g3"></div><img class="gallery-img" src="images/referenzen/bluesbrothers.webp" alt="Blues Brothers Musical" loading="lazy"><div class="gallery-overlay"><h4>Blues Brothers Musical</h4><p>Musical, Wolf-Ferrari-Haus Ottobrunn</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
-            <div class="gallery-item reveal d2" onclick="openProject(3)"><div class="gallery-ph g4"></div><img class="gallery-img" src="images/referenzen/hochzeit.webp" alt="Hochzeit in Pfersbach" loading="lazy"><div class="gallery-overlay"><h4>Hochzeit in Pfersbach</h4><p>Ambiente, DJ und Partylicht im Dorfhaus</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
-            <div class="gallery-item reveal d3" onclick="openProject(4)"><div class="gallery-ph g5"></div><img class="gallery-img" src="images/referenzen/parkfullofsound.webp" alt="Park Full of Sound" loading="lazy"><div class="gallery-overlay"><h4>Park Full of Sound</h4><p>Mehrbühnen-Festival, Recording, Böbingen</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
+            <div class="gallery-item large reveal" onclick="openProject(0)"><div class="gallery-ph g1"></div><img class="gallery-img" src="images/referenzen/soundofmovies.webp" alt="Sound of Movies" loading="lazy"><div class="gallery-overlay"><h4>Sound of Movies</h4><p>Musical-Großproduktion, 300+ Akteure, Filharmonie Filderstadt</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
+            <div class="gallery-item reveal" onclick="openProject(1)"><div class="gallery-ph g2"></div><img class="gallery-img" src="images/referenzen/lichterfest-boebingen.webp" alt="Lichterfest Böbingen" loading="lazy"><div class="gallery-overlay"><h4>Lichterfest Böbingen</h4><p>Open-Air mit Live-Bands, zwei Abende</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
+            <div class="gallery-item reveal" onclick="openProject(2)"><div class="gallery-ph g3"></div><img class="gallery-img" src="images/referenzen/bluesbrothers.webp" alt="Blues Brothers Musical" loading="lazy"><div class="gallery-overlay"><h4>Blues Brothers Musical</h4><p>Musical, Wolf-Ferrari-Haus Ottobrunn</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
+            <div class="gallery-item reveal" onclick="openProject(3)"><div class="gallery-ph g4"></div><img class="gallery-img" src="images/referenzen/hochzeit.webp" alt="Hochzeit in Pfersbach" loading="lazy"><div class="gallery-overlay"><h4>Hochzeit in Pfersbach</h4><p>Ambiente, DJ und Partylicht im Dorfhaus</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
+            <div class="gallery-item reveal" onclick="openProject(4)"><div class="gallery-ph g5"></div><img class="gallery-img" src="images/referenzen/parkfullofsound.webp" alt="Park Full of Sound" loading="lazy"><div class="gallery-overlay"><h4>Park Full of Sound</h4><p>Mehrbühnen-Festival, Recording, Böbingen</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
         </div>
     </div></section>
 
@@ -1404,7 +1399,7 @@
                 <p class="testimonials-grid-sub">Die schönste Bestätigung kommt immer nach dem Event.</p>
             </div>
             <div class="tg-grid">
-                <div class="tg-card reveal-scale d1">
+                <div class="tg-card reveal">
                     <div class="tg-sheen"></div>
                     <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
                     <p class="tg-text">„Zuverlässig und professionell. Anlieferung, Aufbau und Abholung verliefen stets reibungslos. Durch die professionelle Vorbereitung war für uns als Veranstalter kein zusätzlicher Aufwand nötig. Uneingeschränkt empfehlenswert."</p>
@@ -1413,7 +1408,7 @@
                         <div><div class="tg-name">Felix Lakner</div><div class="tg-role">1. Vorstand Concordia Durlangen</div></div>
                     </div>
                 </div>
-                <div class="tg-card reveal-scale d2">
+                <div class="tg-card reveal">
                     <div class="tg-sheen"></div>
                     <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
                     <p class="tg-text">„Die Zusammenarbeit war immer auf Augenhöhe, kompetent, ehrlich und flexibel. Die Technik hat unsere Veranstaltungen deutlich aufgewertet und von unseren Gästen kam ausschließlich positives Feedback."</p>
@@ -1422,7 +1417,7 @@
                         <div><div class="tg-name">Kai Weber</div><div class="tg-role">Fachschaft Sport PH Schwäbisch Gmünd</div></div>
                     </div>
                 </div>
-                <div class="tg-card reveal-scale d3">
+                <div class="tg-card reveal">
                     <div class="tg-sheen"></div>
                     <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
                     <p class="tg-text">„Mit Dani haben wir jemanden, der für jedes Format und jede Größe das passende Equipment liefert und bedient. Nicht nur preislich fair, sondern auch absolut zuverlässig. Uneingeschränkte Empfehlung."</p>
@@ -1431,7 +1426,7 @@
                         <div><div class="tg-name">Domenic Böttinger</div><div class="tg-role">Ehem. Präsident Studierendenparlament PH Schwäbisch Gmünd</div></div>
                     </div>
                 </div>
-                <div class="tg-card reveal-scale d4">
+                <div class="tg-card reveal">
                     <div class="tg-sheen"></div>
                     <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
                     <p class="tg-text">„Alles unkompliziert und problemlos. Die Techniker wissen, worauf es ankommt. Sound im Frontbereich und auf der Bühne war top. Das brachte mich dazu, bei jedem großen Gig wieder zu buchen."</p>
@@ -1510,8 +1505,55 @@
         nt.addEventListener('click',()=>{nt.classList.toggle('active');nl.classList.toggle('open');});
         nl.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>{nt.classList.remove('active');nl.classList.remove('open');}));
 
-        const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
-        document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>obs.observe(el));
+        /* Reveal observer — group stagger for gallery & testimonial cards */
+        function revealEl(el){
+            el.classList.add('visible');
+            el.addEventListener('transitionend',function h(e){
+                if(e.target!==el)return;
+                el.style.willChange='auto';
+                if(el.classList.contains('tg-card'))el.classList.add('float-ready');
+                el.removeEventListener('transitionend',h);
+            });
+        }
+        /* Group observer: when container enters view, stagger-reveal children */
+        var groupContainers=[
+            {sel:'.gallery-grid',children:'.gallery-item.reveal',delay:100},
+            {sel:'.tg-grid',children:'.tg-card.reveal',delay:100}
+        ];
+        var groupDone=new Set();
+        var groupObs=new IntersectionObserver(function(entries){
+            entries.forEach(function(x){
+                if(x.isIntersecting&&!groupDone.has(x.target)){
+                    groupDone.add(x.target);
+                    groupObs.unobserve(x.target);
+                    var cfg=x.target._revealCfg;
+                    var kids=x.target.querySelectorAll(cfg.children);
+                    kids.forEach(function(kid,i){
+                        kid.style.transitionDelay=i*cfg.delay+'ms';
+                        requestAnimationFrame(function(){requestAnimationFrame(function(){revealEl(kid);});});
+                    });
+                }
+            });
+        },{threshold:.15});
+        groupContainers.forEach(function(g){
+            var el=document.querySelector(g.sel);
+            if(el){el._revealCfg=g;groupObs.observe(el);}
+        });
+        /* Mark group children so the normal observer skips them */
+        var groupChildren=new Set();
+        groupContainers.forEach(function(g){
+            var parent=document.querySelector(g.sel);
+            if(parent)parent.querySelectorAll(g.children).forEach(function(c){groupChildren.add(c);});
+        });
+        /* Normal observer for everything else */
+        var obs=new IntersectionObserver(function(entries){
+            entries.forEach(function(x){
+                if(x.isIntersecting){revealEl(x.target);obs.unobserve(x.target);}
+            });
+        },{threshold:.15});
+        document.querySelectorAll('.reveal').forEach(function(el){
+            if(!groupChildren.has(el))obs.observe(el);
+        });
         var kabel=document.querySelector('.footer-kabel');if(kabel)obs.observe(kabel);
 
         function countUp(el,duration){const t=+el.dataset.target,sfx=el.dataset.suffix||'';if(el.dataset.display){el.textContent=el.dataset.display;return;}let c=0;const steps=Math.ceil(duration/20),s=Math.max(1,Math.ceil(t/steps)),iv=setInterval(()=>{c+=s;if(c>=t){c=t;clearInterval(iv);}let d=c.toLocaleString('de-DE');if(t===100)d=c+'%';else if(t===48)d=c+'h';else if(sfx)d=d+sfx;el.textContent=d;},20);}

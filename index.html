@@ -624,8 +624,15 @@
             .inquiry-left { position: static; }
             .inquiry-header { text-align: left; }
             .inquiry-sub { max-width: none; }
-            .form-container { padding: clamp(1.5rem, 4vw, 2.5rem); }
+            .form-container { padding: clamp(1.5rem, 4vw, 2.5rem); max-width: 100%; overflow: hidden; }
             .size-options { grid-template-columns: repeat(3,1fr); }
+            .form-nav { gap: .75rem; }
+            .form-nav .btn-next { font-size: .75rem; padding: .85rem 1.2rem; white-space: nowrap; min-width: 0; }
+            .form-timeline { flex-wrap: nowrap; gap: 0; justify-content: center; }
+            .ft-step { flex-shrink: 1; min-width: 0; }
+            .ft-dot { width: 24px; height: 24px; font-size: .6rem; }
+            .ft-label { white-space: nowrap; text-align: center; font-size: .45rem; letter-spacing: .03em; }
+            .ft-line { min-width: 12px; margin: 0 .2rem; margin-bottom: 1.5rem; }
         }
 
         /* ===================== CONTACT ===================== */
@@ -694,6 +701,7 @@
 
         @media (max-width: 768px) {
             .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .social-row { flex-wrap: wrap; }
         }
 
         /* ===================== RESPONSIVE ===================== */
@@ -722,6 +730,7 @@
             .nav-cta-desktop { display: none; }
             .nav-toggle { display: flex; }
             .hero-social { display: none; }
+            .hero-glow-blue { top: -200px; left: auto; right: -200px; width: 500px; height: 500px; }
             .hero { padding-top: 120px; padding-bottom: 180px; align-items: flex-start; min-height: auto; }
             .hero-h1 { font-size: clamp(1.8rem,8vw,2.8rem); margin-bottom: 1rem; }
             .h1-line { white-space: normal; }
@@ -734,7 +743,7 @@
             .tape-band-1 { transform: rotate(-5.5deg); }
             .tape-band-2 { transform: rotate(5.5deg); }
             .tape-item { font-size: .7rem; gap: 1rem; padding-right: 1rem; }
-            .services { padding-top: 1rem; }
+            .services { padding-top: 4rem; }
             .hero-actions { flex-direction: column; align-items: stretch; }
             .btn-p,.btn-o { justify-content: center; }
             .stats-grid { grid-template-columns: repeat(3,1fr); gap: 1rem; }

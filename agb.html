@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGB | Derer Veranstaltungstechnik</title>
+    <meta name="description" content="Allgemeine Geschäftsbedingungen der Derer Veranstaltungstechnik – Miet-, Dienstleistungs- und Kaufbedingungen.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500;600;700;800;900&family=DM+Sans:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050509; --bg2: #070710; --bg3: #0a0a14;
+            --accent: #00e5c8; --accent-glow: rgba(0,229,200,0.12);
+            --text: #f0f0f5; --text2: rgba(240,240,245,0.48); --text3: rgba(240,240,245,0.25);
+            --border: rgba(240,240,245,0.06);
+            --font-h: 'Epilogue', sans-serif; --font-b: 'DM Sans', sans-serif;
+            --font-a: 'Playfair Display', serif; --font-m: 'Space Mono', monospace;
+            --ease: cubic-bezier(0.4,0,0.2,1);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+        body { font-family: var(--font-b); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+        body::after {
+            content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.018;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 256px;
+        }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        .legal-nav { padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
+        .legal-nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .legal-logo { font-family: var(--font-h); font-weight: 800; font-size: 1rem; letter-spacing: -.02em; text-transform: uppercase; }
+        .legal-logo span { color: var(--accent); }
+        .legal-back { font-family: var(--font-m); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text2); transition: color .3s var(--ease); display: flex; align-items: center; gap: .5rem; }
+        .legal-back:hover { color: var(--accent); }
+        .legal-back svg { width: 14px; height: 14px; }
+
+        .container { max-width: 820px; margin: 0 auto; padding: 0 clamp(1.25rem,4vw,3rem); }
+        .section-label { font-family: var(--font-m); font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text2); display: block; margin-bottom: .75rem; }
+        .section-label::before { content: '[ '; } .section-label::after { content: ' ]'; }
+
+        .legal-hero { padding: clamp(4rem,8vh,7rem) 0 clamp(2rem,4vh,3rem); }
+        .legal-hero h1 { font-family: var(--font-h); font-size: clamp(2rem,4vw,3.2rem); font-weight: 800; line-height: 1.08; letter-spacing: -.03em; text-transform: uppercase; }
+        .legal-hero h1 .accent { color: var(--accent); }
+
+        .legal-content { padding-bottom: clamp(4rem,8vh,6rem); flex: 1; }
+        .legal-content h2 { font-family: var(--font-h); font-size: 1.15rem; font-weight: 700; margin: 3rem 0 1rem; text-transform: uppercase; letter-spacing: -.01em; color: var(--accent); }
+        .legal-content h2:first-child { margin-top: 0; }
+        .legal-content h3 { font-family: var(--font-h); font-size: .95rem; font-weight: 700; margin: 2rem 0 .75rem; }
+        .legal-content p { color: var(--text2); font-size: .88rem; line-height: 1.75; margin-bottom: 1rem; }
+        .legal-content strong { color: var(--text); font-weight: 500; }
+        .legal-content a.inline-link { color: var(--accent); transition: opacity .3s var(--ease); }
+        .legal-content a.inline-link:hover { opacity: .7; }
+        .legal-content ol { color: var(--text2); font-size: .88rem; line-height: 1.75; margin: .5rem 0 1rem 1.25rem; }
+        .legal-content ol li { margin-bottom: .35rem; }
+        .legal-content .section-divider { width: 40px; height: 2px; background: var(--accent); opacity: .3; margin: 3rem 0; }
+
+        .legal-footer { border-top: 1px solid var(--border); padding: 1.5rem 0; margin-top: auto; }
+        .legal-footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .legal-footer-copy { font-size: .68rem; color: var(--text3); }
+        .legal-footer-links { display: flex; gap: 1.5rem; }
+        .legal-footer-links a { font-size: .68rem; color: var(--text3); transition: color .3s var(--ease); }
+        .legal-footer-links a:hover { color: var(--text); }
+        .legal-footer-links a.active { color: var(--accent); }
+
+        @media (max-width: 600px) {
+            .legal-footer .container { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="legal-nav">
+        <div class="container">
+            <a href="index.html" class="legal-logo">Derer <span>VT</span></a>
+            <a href="index.html" class="legal-back">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+                Zurück zur Startseite
+            </a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="legal-hero">
+            <span class="section-label">Rechtliches</span>
+            <h1>Allgemeine Geschäfts&shy;bedingungen<span class="accent">.</span></h1>
+        </div>
+
+        <div class="legal-content">
+
+            <!-- I. ALLGEMEIN -->
+            <h2>I &mdash; Allgemein</h2>
+
+            <h3>§ 1 Allgemeines</h3>
+            <p>Die Allgemeinen Geschäftsbedingungen der Derer Veranstaltungstechnik sind Bestandteil eines jeden Geschäftsvorgangs mit unseren Kunden. Andere Bedingungen sind ohne unseren ausdrücklichen schriftlichen Widerspruch unverbindlich. Abweichungen von diesen Bedingungen bedürfen der schriftlichen Bestätigung. Höhere Gewalt und ähnliche unvorhersehbare Ereignisse entbinden beide Vertragsparteien von den Vertragsverpflichtungen, ohne dass hieraus Schadensersatzansprüche entstehen.</p>
+
+            <h3>§ 2 Vertrag</h3>
+            <p>Alle Verträge werden mit Zusendung einer schriftlichen Auftragsbestätigung, spätestens mit Ausführung bzw. Zusendung der Lieferung bzw. der Leistungen, rechtsgültig. Angebote sind freibleibend. Berichtigungen von Druckfehlern und technisch bedingte Abweichungen bleiben vorbehalten. Die Nichterfüllung von Mitwirkungspflichten oder die Nichtbeachtung geltender Gesetze und Vorschriften seitens des Kunden entbindet uns von unseren Verpflichtungen.</p>
+
+            <h3>§ 3 Preise</h3>
+            <p>Alle Preise verstehen sich in Euro zzgl. der gesetzlichen Mehrwertsteuer, ab Lager Böbingen. Transport- und Spesenkosten gehen zu Lasten des Kunden. Der Mindestbestellwert beträgt 50,00 € (netto).</p>
+
+            <h3>§ 4 Zahlungsbedingungen</h3>
+            <p>Rechnungen sind sofort netto und ohne Abzug von Skonti fällig. Bei Zahlungsverzug des Kunden ist die Derer Veranstaltungstechnik berechtigt, vom ersten Tag des Verzuges an Zinsen in Höhe von 3 % über dem gültigen Basiszinssatz zu berechnen. Sämtliche durch den Verzug entstehende Kosten (Mahnkosten, Inkassokosten, Anwaltskosten etc.) trägt der Kunde in vollem Umfang.</p>
+
+            <h3>§ 5 Teilnichtigkeit / Erfüllungsort / Gerichtsstand</h3>
+            <p>Sollte eine Bestimmung dieser AGB unwirksam sein, bleiben die übrigen Bestimmungen davon unberührt. Erfüllungsort ist Böbingen an der Rems. Gerichtsstand ist, soweit gesetzlich zulässig, Schwäbisch Gmünd. Es gilt deutsches Recht.</p>
+
+            <div class="section-divider"></div>
+
+            <!-- II. MIETBEDINGUNGEN -->
+            <h2>II &mdash; Mietbedingungen</h2>
+
+            <h3>§ 1 Verspätete Rückgabe</h3>
+            <p>Wird die vereinbarte Mietzeit überschritten, wird für jeden angefangenen Verzugstag eine zusätzliche Tagespauschale berechnet. Zusätzliche entstehende Kosten, die durch die Überschreitung der Mietzeit entstehen (z.B. Arbeitszeit, Ausfall, Ersatzbeschaffung u.ä.), trägt in vollem Umfang der Mieter.</p>
+
+            <h3>§ 2 Transport der Mietsache</h3>
+            <p>Der Transport bzw. die Anlieferung der Mietsache erfolgen ausschließlich auf Kosten und Risiko des Mieters.</p>
+
+            <h3>§ 3 Stornierung</h3>
+            <p>Bei Stornierung durch den Auftraggeber wird eine Entschädigung wie folgt fällig:</p>
+            <ol type="a">
+                <li>Im ersten Drittel der Zeitspanne zwischen Vertragsschluss und Veranstaltungsbeginn: <strong>35 %</strong> des Endbetrages</li>
+                <li>Im zweiten Drittel: <strong>60 %</strong> des Endbetrages</li>
+                <li>Danach bis zur Beladung: <strong>90 %</strong> des Endbetrages</li>
+                <li>Nach Beladung / Abfahrt: <strong>100 %</strong> des Endbetrages</li>
+            </ol>
+            <p>Die Geltendmachung eines höheren Schadensersatzes bleibt vorbehalten.</p>
+
+            <h3>§ 4 Kaution</h3>
+            <p>Der Mieter leistet für die gemieteten Geräte eine Sicherheitsleistung in individuell vereinbarter Höhe. Diese wird unverzinst bei einwandfreier Rückgabe mit dem offenen Betrag verrechnet.</p>
+
+            <h3>§ 5 Gefahrübergang</h3>
+            <p>Die Lieferung erfolgt auf Gefahr des Mieters. Im Mietpreis ist keine Versicherung enthalten. Die Gefahr geht mit Absendung bzw. Übergabe auf den Mieter über.</p>
+
+            <h3>§ 6 Instandhaltung / Wartung</h3>
+            <p>Der Mieter ist verpflichtet, den Mietgegenstand sorgfältig zu nutzen, die Herstelleranweisungen zu beachten sowie den vertragsmäßigen Zustand zu erhalten.</p>
+
+            <h3>§ 7 Versicherungspflicht</h3>
+            <p>Der Mieter verpflichtet sich, für die Vertragsdauer die Mietsache zum Neuwert gegen die Risiken des Unterganges, Verlustes und der Beschädigung auf eigene Kosten zu versichern.</p>
+
+            <h3>§ 8 Übergabe / Ausgabe der Mietsache</h3>
+            <p>Die Derer Veranstaltungstechnik kann die Ausgabe verweigern, wenn der Mieter: kein gültiges amtliches Dokument vorlegt, die vereinbarte Kaution oder Vorkasse nicht leistet, kein geeignetes geschlossenes Transportfahrzeug stellt oder sich in einem Insolvenz- oder strafrechtlichen Verfahren befindet.</p>
+
+            <h3>§ 9 Gefahrenübergang / Erfüllungsort</h3>
+            <p>Die Gefahr geht mit Absendung auf den Mieter über. Erfüllungsort ist Böbingen an der Rems.</p>
+
+            <h3>§ 10 Haftung des Vermieters</h3>
+            <p>Die Firma Derer Veranstaltungstechnik haftet nur für vorsätzlich oder grob fahrlässig verursachte Schäden. Die maximale Haftung bei Mängeln entspricht dem Vermietpreis der betroffenen Sache bzw. der vollständigen Anlage bei Totalausfall. Alle weitergehenden Ansprüche sind ausgeschlossen.</p>
+
+            <h3>§ 11 Haftung des Mieters</h3>
+            <p>Der Mieter ist voll verantwortlich für jeden Schaden, der durch Nichtbeachtung der Vorschriften bzw. der Instruktionen des Vermieters entsteht. Er haftet für Verlust, Untergang oder Beschädigung (einschließlich Feuer-, Wasserschäden, Transportschäden und Nutzungsausfallkosten) vom Zeitpunkt der Übergabe bis zur Rückgabe einschließlich etwaiger Zeitüberziehungen. Schäden sind unverzüglich anzuzeigen. Die Haftung erstreckt sich bis zum Neuwert zuzüglich Nutzungsausfallkosten. Die Schadensregulierung erfolgt ausschließlich nach den Bedingungen der Derer Veranstaltungstechnik.</p>
+
+            <div class="section-divider"></div>
+
+            <!-- III. DIENSTLEISTUNG -->
+            <h2>III &mdash; Dienstleistung</h2>
+
+            <h3>§ 1 Personalkosten</h3>
+            <p>Während der Vertragsdauer sorgt der Mieter für die Unterbringung und Verköstigung des Derer-Veranstaltungstechnik-Personals. Andernfalls werden Hotelkosten nach Beleg und Spesen nach den gültigen Höchstsätzen in Rechnung gestellt.</p>
+
+            <h3>§ 2 Stornierung</h3>
+            <p>Es gelten die gleichen Stornierungsbedingungen wie unter Abschnitt II § 3 (Mietbedingungen).</p>
+
+            <h3>§ 3 Gefahrenübergang / Erfüllungsort</h3>
+            <p>Die Gefahr geht mit Absendung auf den Auftraggeber über. Erfüllungsort ist Böbingen an der Rems.</p>
+
+            <h3>§ 4 Haftung des Vermieters</h3>
+            <p>Es gelten die gleichen Haftungsbedingungen wie unter Abschnitt II § 10 (Mietbedingungen). Die Derer Veranstaltungstechnik haftet nur für vorsätzlich oder grob fahrlässig verursachte Schäden.</p>
+
+            <h3>§ 5 Haftung des Mieters</h3>
+            <p>Es gelten die gleichen Haftungsbedingungen wie unter Abschnitt II § 11 (Mietbedingungen). Der Mieter trägt die volle Verantwortung für Nichtbeachtung der Vorschriften und haftet für Verlust und Beschädigung einschließlich Feuer- und Wasserschäden.</p>
+
+            <div class="section-divider"></div>
+
+            <!-- IV. KAUFBEDINGUNGEN -->
+            <h2>IV &mdash; Kaufbedingungen</h2>
+
+            <h3>§ 1 Eigentumsvorbehalt</h3>
+            <p>Die gelieferten Waren bleiben bis zur vollständigen Bezahlung Eigentum der Derer Veranstaltungstechnik. Die Firma kann Abnützungen, Schäden und Wertverluste geltend machen.</p>
+
+            <h3>§ 2 Lieferzeit / Lieferung</h3>
+            <p>Lieferzeiten sind unverbindlich. Bei einer Verzögerung über 8 Wochen hinaus hat der Käufer nach angemessener Nachfristsetzung ein Rücktrittsrecht. Die Derer Veranstaltungstechnik ist zu Teillieferungen berechtigt. Höhere Gewalt entbindet von den Lieferverpflichtungen ohne Schadensersatzansprüche. Die Lieferung erfolgt ab Lager Böbingen, auf Kosten und Gefahr des Kunden. Die Gefahr geht mit Versandaufgabe auf den Käufer über.</p>
+
+            <h3>§ 3 Anzahlung</h3>
+            <p>Die Derer Veranstaltungstechnik behält sich vor, eine individuell vereinbarte Anzahlung zu fordern.</p>
+
+            <h3>§ 4 Gefahrübergang / Erfüllungsort</h3>
+            <p>Die Gefahr geht mit Absendung auf den Käufer über. Erfüllungsort ist Böbingen an der Rems.</p>
+
+            <h3>§ 5 Haftung des Verkäufers</h3>
+            <p>Die Derer Veranstaltungstechnik haftet nur für Vorsatz und grobe Fahrlässigkeit.</p>
+
+            <h3>§ 6 Gewährleistung / Rückgabe</h3>
+            <p>Es gilt die gesetzliche Gewährleistungsfrist. Erkennbare Mängel müssen innerhalb von 2 Tagen nach Warenübergang schriftlich gerügt werden. Im Gewährleistungsfall erfolgt nach Wahl der Derer Veranstaltungstechnik Nachbesserung, Umtausch oder Gutschrift.</p>
+            <p>Von der Gewährleistung ausgeschlossen sind: Gebrauchtartikel, Sonderanfertigungen, Verschleißartikel, Leuchtmittel und Meterware. Rücksendungen erfolgen auf Gefahr des Kunden.</p>
+
+        </div>
+    </main>
+
+    <footer class="legal-footer">
+        <div class="container">
+            <span class="legal-footer-copy">&copy; 2026 Derer Veranstaltungstechnik</span>
+            <div class="legal-footer-links">
+                <a href="impressum.html">Impressum</a>
+                <a href="datenschutz.html">Datenschutz</a>
+                <a href="agb.html" class="active">AGB</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

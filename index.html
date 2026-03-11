@@ -357,7 +357,9 @@
         .projects-title { font-family: var(--font-h); font-size: clamp(2.5rem,4.5vw,4rem); font-weight: 900; line-height: 1.02; letter-spacing: -.035em; text-transform: uppercase; }
         .projects-sub { font-size: .95rem; color: var(--text2); line-height: 1.7; margin-top: 1rem; }
         .gallery-grid { display: grid; grid-template-columns: 1.4fr .8fr .8fr; grid-template-rows: 260px 260px; gap: .7rem; }
-        .gallery-item { border-radius: 10px; overflow: hidden; position: relative; cursor: pointer; transition: transform .5s var(--ease); min-height: 260px; }
+        .gallery-item { border-radius: 10px; overflow: hidden; position: relative; cursor: pointer; min-height: 260px; transition: transform .5s var(--ease); }
+        .gallery-item.reveal { transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .gallery-item.reveal.visible { transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.9s cubic-bezier(0.16,1,0.3,1); }
         .gallery-item:hover { transform: scale(1.02); }
         .gallery-item.large { grid-row: span 2; }
         .gallery-ph { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--font-m); font-size: .5rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); transition: background .5s var(--ease); }
@@ -849,9 +851,11 @@
             padding: 2.25rem 2.25rem 2rem;
             position: relative;
             overflow: hidden;
-            transform: translateZ(0); will-change: transform;
             -webkit-backface-visibility: hidden; backface-visibility: hidden;
             transition: transform .6s var(--ease), border-color .6s var(--ease), box-shadow .6s var(--ease);
+        }
+        .tg-card.reveal { will-change: transform, opacity, filter; transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .tg-card.reveal.visible { transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.9s cubic-bezier(0.16,1,0.3,1), border-color .6s var(--ease), box-shadow .6s var(--ease);
         }
         .tg-card:hover { transform: translateY(-6px) translateZ(0); border-color: rgba(0,229,200,.2); }
         /* Top edge highlight — per card */

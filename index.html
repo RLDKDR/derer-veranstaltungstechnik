@@ -334,11 +334,11 @@
         /* ===================== STATEMENT ===================== */
         .testimonial { padding: clamp(4.5rem,9vh,7rem) 0; background: var(--bg2); text-align: center; position: relative; overflow: hidden; }
         .testimonial-bg { position: absolute; inset: 0; background: url('images/testimonial-backdrop.webp') center/cover no-repeat; opacity: .015; pointer-events: none; z-index: 0; }
-        .testimonial-glow { position: absolute; top: 50%; width: 250px; height: 250px; border-radius: 50%; filter: blur(80px); pointer-events: none; opacity: 0; transition: opacity 1.2s ease; }
-        .testimonial-glow--l { left: -40px; transform: translateY(-50%); background: rgba(0,229,200,.12); }
-        .testimonial-glow--r { right: -40px; transform: translateY(-50%); background: rgba(0,229,200,.1); }
+        .testimonial-glow { position: absolute; top: 50%; width: 1px; height: 1px; border-radius: 50%; pointer-events: none; opacity: 0; transition: opacity 1.2s ease; }
+        .testimonial-glow--l { left: 60px; transform: translateY(-50%); box-shadow: 0 0 120px 80px rgba(0,229,200,.06), 0 0 200px 140px rgba(0,229,200,.025); }
+        .testimonial-glow--r { right: 60px; transform: translateY(-50%); box-shadow: 0 0 120px 80px rgba(0,229,200,.05), 0 0 200px 140px rgba(0,229,200,.02); }
         .testimonial.visible .testimonial-glow { opacity: 1; }
-        .testimonial-inner { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; }
+        .testimonial-inner { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; }
         .testimonial-quote { font-family: var(--font-a); font-size: clamp(1rem,1.8vw,1.25rem); font-weight: 400; font-style: italic; line-height: 1.75; letter-spacing: .005em; color: var(--text); margin-bottom: 2rem; position: relative; padding: 0 1rem; }
         .testimonial-quote::before { content: '\201E'; display: inline; font-style: normal; font-weight: 800; color: var(--accent); margin-right: .15em; }
         .testimonial-quote::after { content: '\201C'; display: inline; font-style: normal; font-weight: 800; color: var(--accent); margin-left: .1em; }
@@ -414,7 +414,7 @@
         .inquiry-bg {
             position: absolute; inset: 0; z-index: 0;
             background: url('images/individuelle-anfrage.webp') center center / cover no-repeat;
-            opacity: .13;
+            opacity: .07;
         }
         .inquiry-bg::after {
             content: ''; position: absolute; inset: 0;
@@ -426,26 +426,19 @@
         .inquiry-orb-2 { width: 400px; height: 400px; background: rgba(0,80,200,.04); bottom: -15%; left: -8%; animation: orb-float 18s ease-in-out infinite reverse; }
         .inquiry-orb-3 { width: 250px; height: 250px; background: rgba(0,229,200,.035); top: 35%; left: 25%; animation: orb-float 12s ease-in-out infinite 3s; }
 
-        /* Decorative grid lines */
-        .inquiry-grid-bg { position: absolute; inset: 0; z-index: 0; opacity: .03;
-            background-image: linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
-            background-size: 60px 60px;
-        }
+        .inquiry-grid-bg { display: none; }
 
         /* Two-column asymmetric layout */
-        .inquiry-wrapper { max-width: 1340px; margin: 0 auto; position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+        .inquiry-wrapper { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
 
         .inquiry-left { position: sticky; top: 120px; }
         .inquiry-header { text-align: left; margin-bottom: 0; }
         .inquiry-label-line { display: flex; align-items: center; gap: .75rem; margin-bottom: .75rem; }
-        .inquiry-label-line::before { content: ''; width: 28px; height: 1px; background: var(--accent); flex-shrink: 0; }
+        .inquiry-label-line::before { display: none; }
         .inquiry-label-line .section-label { margin-bottom: 0; }
-        .inquiry-title { font-family: var(--font-h); font-size: clamp(42px, 5vw, 64px); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; text-transform: uppercase; margin-bottom: 1.25rem; }
-        .inquiry-sub { font-size: .95rem; color: var(--text2); line-height: 1.7; max-width: 420px; }
-        .inquiry-trust { display: flex; gap: 2.5rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
-        .inquiry-trust-item { }
-        .inquiry-trust-num { font-family: var(--font-h); font-size: 1.5rem; font-weight: 800; color: var(--text); letter-spacing: -.02em; }
-        .inquiry-trust-label { font-family: var(--font-m); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); margin-top: .2rem; }
+        .inquiry-title { font-family: var(--font-h); font-size: clamp(48px, 5.5vw, 72px); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .inquiry-sub { font-size: 1rem; color: var(--text2); line-height: 1.75; max-width: 460px; }
+        .inquiry-trust { display: none; }
 
         /* Glassmorphism form container */
         .form-container {
@@ -465,8 +458,8 @@
         /* Animated border glow — rotating conic sweep */
         .form-container::before {
             content: ''; position: absolute; inset: -1px; border-radius: 20px; z-index: -1;
-            background: conic-gradient(from var(--border-angle,0deg), transparent 40%, rgba(0,229,200,.35) 50%, transparent 60%);
-            animation: border-rotate 5s linear infinite;
+            background: conic-gradient(from var(--border-angle,0deg), transparent 35%, rgba(0,229,200,.18) 50%, transparent 65%);
+            animation: border-rotate 6s linear infinite;
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor; mask-composite: exclude;
             padding: 1px;
@@ -631,16 +624,16 @@
         .partners-label { text-align: center; margin-bottom: 1.25rem; }
         .partners-label span { font-family: var(--font-m); font-size: .8rem; letter-spacing: .15em; text-transform: uppercase; color: var(--text3); }
         .partner-marquee { display: flex; overflow: hidden; }
-        .partner-track { display: flex; align-items: center; flex-shrink: 0; animation: mq 12s linear infinite; will-change: transform; }
+        .partner-track { display: flex; align-items: center; flex-shrink: 0; animation: mq 18s linear infinite; will-change: transform; }
         .partner-item {
-            display: flex; align-items: center; padding: 0 2.5rem; flex-shrink: 0; opacity: .35;
+            display: flex; align-items: center; padding: 0 1.75rem; flex-shrink: 0; opacity: .35;
             transition: opacity .4s var(--ease);
         }
         .partner-item img { height: 65px; width: auto; display: block; }
         .partner-marquee:hover .partner-item { opacity: .55; }
         @media (max-width: 768px) {
-            .partner-track { animation-duration: 8s; }
-            .partner-item { padding: 0 1.5rem; }
+            .partner-track { animation-duration: 12s; }
+            .partner-item { padding: 0 1rem; }
             .partner-item img { height: 45px; }
         }
 
@@ -813,7 +806,6 @@
         .testimonials-grid-sub { font-size: .95rem; color: var(--text2); line-height: 1.7; }
         .tg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; position: relative; z-index: 1; }
         .tg-card {
-            background: linear-gradient(135deg, rgba(255,255,255,.03) 0%, rgba(255,255,255,.01) 100%);
             backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
             border: 1px solid rgba(255,255,255,.08);
             border-radius: 18px;
@@ -821,32 +813,50 @@
             position: relative;
             overflow: hidden;
             transition: transform .6s var(--ease), border-color .6s var(--ease), box-shadow .6s var(--ease);
-            box-shadow: 0 4px 30px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.04);
         }
-        .tg-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(0,229,200,.2);
-            box-shadow: 0 24px 70px rgba(0,0,0,.3), 0 0 40px rgba(0,229,200,.06), inset 0 1px 0 rgba(255,255,255,.06);
+        .tg-card:hover { transform: translateY(-6px); border-color: rgba(0,229,200,.2); }
+        /* Top edge highlight — per card */
+        .tg-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; z-index: 2; }
+        /* Inner sheen — per card */
+        .tg-card .tg-sheen { position: absolute; pointer-events: none; z-index: 0; }
+        /* No ::after glow blobs — all glow via box-shadow */
+        .tg-card::after { display: none; }
+
+        /* Card 1 — gradient top-left, warm shadow */
+        .tg-card:nth-child(1) {
+            background: linear-gradient(145deg, rgba(255,255,255,.04) 0%, rgba(255,255,255,.008) 100%);
+            box-shadow: 0 4px 30px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.05), inset 0 -30px 60px -30px rgba(0,229,200,.03);
         }
-        /* Top edge highlight */
-        .tg-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; z-index: 2;
-            background: linear-gradient(90deg, transparent 5%, rgba(255,255,255,.1) 30%, rgba(255,255,255,.14) 50%, rgba(255,255,255,.1) 70%, transparent 95%);
+        .tg-card:nth-child(1):hover { box-shadow: 0 20px 60px rgba(0,0,0,.3), 0 0 50px rgba(0,229,200,.04), inset 0 1px 0 rgba(255,255,255,.06), inset 0 -30px 60px -30px rgba(0,229,200,.05); }
+        .tg-card:nth-child(1)::before { background: linear-gradient(90deg, transparent 5%, rgba(255,255,255,.12) 25%, rgba(255,255,255,.06) 60%, transparent 90%); }
+        .tg-card:nth-child(1) .tg-sheen { top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(145deg, rgba(255,255,255,.015) 0%, transparent 40%); }
+
+        /* Card 2 — gradient top-right, teal bottom tint */
+        .tg-card:nth-child(2) {
+            background: linear-gradient(160deg, rgba(255,255,255,.025) 0%, rgba(255,255,255,.012) 60%, rgba(0,229,200,.008) 100%);
+            box-shadow: 0 6px 35px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.035), inset 30px 0 60px -30px rgba(0,229,200,.025);
         }
-        /* Bottom accent glow */
-        .tg-card::after {
-            content: ''; position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%);
-            width: 80%; height: 120px; border-radius: 50%;
-            background: radial-gradient(ellipse, rgba(0,229,200,.12) 0%, rgba(0,229,200,.04) 40%, transparent 70%);
-            pointer-events: none; z-index: 0;
+        .tg-card:nth-child(2):hover { box-shadow: 0 20px 55px rgba(0,0,0,.28), 0 0 45px rgba(0,229,200,.05), inset 0 1px 0 rgba(255,255,255,.05), inset 30px 0 60px -30px rgba(0,229,200,.04); }
+        .tg-card:nth-child(2)::before { background: linear-gradient(90deg, transparent 15%, rgba(255,255,255,.08) 50%, rgba(255,255,255,.14) 75%, transparent 95%); }
+        .tg-card:nth-child(2) .tg-sheen { top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(200deg, rgba(255,255,255,.012) 0%, transparent 35%); }
+
+        /* Card 3 — subtle teal top-left, deeper glass */
+        .tg-card:nth-child(3) {
+            background: linear-gradient(130deg, rgba(0,229,200,.012) 0%, rgba(255,255,255,.028) 40%, rgba(255,255,255,.008) 100%);
+            box-shadow: 0 5px 28px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.04), inset -30px 0 60px -30px rgba(0,229,200,.025);
         }
-        /* Inner glass sheen — diagonal reflection */
-        .tg-card .tg-sheen {
-            position: absolute; top: -50%; left: -30%; width: 80%; height: 120%;
-            background: radial-gradient(ellipse at 40% 40%, rgba(255,255,255,.02) 0%, transparent 60%);
-            pointer-events: none; z-index: 0;
-            transform: rotate(-15deg);
+        .tg-card:nth-child(3):hover { box-shadow: 0 22px 60px rgba(0,0,0,.32), 0 0 35px rgba(0,229,200,.06), inset 0 1px 0 rgba(255,255,255,.055), inset -30px 0 60px -30px rgba(0,229,200,.04); }
+        .tg-card:nth-child(3)::before { background: linear-gradient(90deg, transparent 10%, rgba(255,255,255,.06) 35%, rgba(255,255,255,.1) 55%, transparent 80%); }
+        .tg-card:nth-child(3) .tg-sheen { top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(310deg, rgba(255,255,255,.01) 0%, transparent 30%); }
+
+        /* Card 4 — steep gradient, top glow */
+        .tg-card:nth-child(4) {
+            background: linear-gradient(170deg, rgba(255,255,255,.035) 0%, rgba(255,255,255,.006) 50%, rgba(0,229,200,.006) 100%);
+            box-shadow: 0 3px 25px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.045), inset 0 30px 60px -30px rgba(0,229,200,.02);
         }
+        .tg-card:nth-child(4):hover { box-shadow: 0 18px 50px rgba(0,0,0,.3), 0 0 40px rgba(0,229,200,.045), inset 0 1px 0 rgba(255,255,255,.06), inset 0 30px 60px -30px rgba(0,229,200,.035); }
+        .tg-card:nth-child(4)::before { background: linear-gradient(90deg, transparent 20%, rgba(255,255,255,.1) 45%, rgba(255,255,255,.05) 65%, transparent 90%); }
+        .tg-card:nth-child(4) .tg-sheen { top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(350deg, rgba(255,255,255,.018) 0%, transparent 35%); }
         /* Floating animation — staggered per card */
         @keyframes tg-float {
             0%, 100% { transform: translateY(0); }
@@ -1065,20 +1075,20 @@
         <div class="testimonial-glow testimonial-glow--l"></div>
         <div class="testimonial-glow testimonial-glow--r"></div>
         <div class="testimonial-inner reveal-scale">
-            <p class="testimonial-quote">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna eu turpis tincidunt fermentum. Nulla facilisi sed do eiusmod tempor incididunt.</p>
+            <p class="testimonial-quote">Daniel überzeugt durch hohe Fachkompetenz und hat für jede Veranstaltung das passende Equipment. Selbst in stressigen Situationen behält er einen kühlen Kopf und findet immer eine Lösung. Für uns ist er mittlerweile unser fester Tontechniker, der jede Veranstaltung zum Highlight macht.</p>
             <div class="testimonial-stars">★★★★★</div>
             <div class="testimonial-author">
                 <div class="testimonial-avatar-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
                 <div class="testimonial-info">
-                    <div class="testimonial-name">Vorname Nachname</div>
-                    <div class="testimonial-role">Bezeichnung / Unternehmen</div>
+                    <div class="testimonial-name">Roberto D'Amico</div>
+                    <div class="testimonial-role">Bassist Gmünder All Stars</div>
                 </div>
             </div>
         </div>
     </div></section>
 
     <section class="projects" id="projects"><div class="container">
-        <div class="projects-header reveal"><span class="section-label">Referenzen</span><h2 class="projects-title"><span style="color:var(--accent)">Highlights</span> aus den letzten <span class="italic-accent">Jahren.</span></h2><p class="projects-sub">Jedes Event ist anders, aber eines hatten alle gemeinsam: Am Ende des Abends hat einfach alles gestimmt. Hier sind ein paar Beispiele.</p></div>
+        <div class="projects-header reveal"><span class="section-label">Referenzen</span><h2 class="projects-title"><span style="color:var(--accent)">Highlights</span> aus den letzten Jahren.</h2><p class="projects-sub">Jedes Event ist anders, aber eines hatten alle gemeinsam: Am Ende des Abends hat einfach alles gestimmt. Hier sind ein paar Beispiele.</p></div>
         <div class="gallery-grid">
             <div class="gallery-item large reveal-scale d1" onclick="openProject(0)"><div class="gallery-ph g1"></div><img class="gallery-img" src="images/referenzen/soundofmovies.webp" alt="Sound of Movies" loading="lazy"><div class="gallery-overlay"><h4>Sound of Movies</h4><p>Musical-Großproduktion, 300+ Akteure, Filharmonie Filderstadt</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
             <div class="gallery-item reveal d2" onclick="openProject(1)"><div class="gallery-ph g2"></div><img class="gallery-img" src="images/referenzen/lichterfest-boebingen.webp" alt="Lichterfest Böbingen" loading="lazy"><div class="gallery-overlay"><h4>Lichterfest Böbingen</h4><p>Open-Air mit Live-Bands, zwei Abende</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
@@ -1350,37 +1360,37 @@
                 <div class="tg-card reveal-scale d1">
                     <div class="tg-sheen"></div>
                     <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
-                    <p class="tg-text">„Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel magna eu turpis tincidunt fermentum ac vel justo. Nulla facilisi sed do eiusmod tempor."</p>
+                    <p class="tg-text">„Zuverlässig und professionell – Anlieferung, Aufbau und Abholung verliefen stets reibungslos. Durch die professionelle Vorbereitung war für uns als Veranstalter kein zusätzlicher Aufwand nötig. Uneingeschränkt empfehlenswert."</p>
                     <div class="tg-author">
                         <div class="tg-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-                        <div><div class="tg-name">Christine S.</div><div class="tg-role">Chorleiterin MGV Aalen</div></div>
+                        <div><div class="tg-name">Felix Lakner</div><div class="tg-role">1. Vorstand Concordia Durlangen</div></div>
                     </div>
                 </div>
                 <div class="tg-card reveal-scale d2">
                     <div class="tg-sheen"></div>
                     <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
-                    <p class="tg-text">„Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium."</p>
+                    <p class="tg-text">„Zusammenarbeit immer auf Augenhöhe – kompetent, ehrlich und flexibel. Die Technik hat unsere Veranstaltungen deutlich aufgewertet, und von unseren Gästen kam ausschließlich positives Feedback."</p>
                     <div class="tg-author">
                         <div class="tg-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-                        <div><div class="tg-name">Peter K.</div><div class="tg-role">Vereinsvorsitzender</div></div>
+                        <div><div class="tg-name">Kai Weber</div><div class="tg-role">Fachschaft Sport PH Schwäbisch Gmünd</div></div>
                     </div>
                 </div>
                 <div class="tg-card reveal-scale d3">
                     <div class="tg-sheen"></div>
                     <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
-                    <p class="tg-text">„Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo."</p>
+                    <p class="tg-text">„Mit Dani haben wir jemanden, der für jedes Format und jede Größe das passende Equipment liefert und bedient. Nicht nur preislich fair, sondern auch absolut zuverlässig. Uneingeschränkte Empfehlung."</p>
                     <div class="tg-author">
                         <div class="tg-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-                        <div><div class="tg-name">Julia und Marco</div><div class="tg-role">Brautpaar 2024</div></div>
+                        <div><div class="tg-name">Domenic Böttinger</div><div class="tg-role">Ehem. Präsident Studierendenparlament PH Schwäbisch Gmünd</div></div>
                     </div>
                 </div>
                 <div class="tg-card reveal-scale d4">
                     <div class="tg-sheen"></div>
                     <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
-                    <p class="tg-text">„Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</p>
+                    <p class="tg-text">„Alles unkompliziert und problemlos – die Techniker wissen, worauf es ankommt. Sound im Front-Bereich und auf der Bühne top. Das brachte mich dazu, bei jedem großen Gig wieder zu buchen."</p>
                     <div class="tg-author">
                         <div class="tg-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-                        <div><div class="tg-name">Thomas R.</div><div class="tg-role">Geschäftsführer</div></div>
+                        <div><div class="tg-name">Maurizio Orlando</div><div class="tg-role">Band DuePiDue</div></div>
                     </div>
                 </div>
             </div>

@@ -343,13 +343,10 @@
         .testimonial-quote::before { content: '\201E'; display: inline; font-style: normal; font-weight: 800; color: var(--accent); margin-right: .15em; }
         .testimonial-quote::after { content: '\201C'; display: inline; font-style: normal; font-weight: 800; color: var(--accent); margin-left: .1em; }
         .testimonial-author { display: flex; align-items: center; justify-content: center; gap: 1rem; }
-        .testimonial-avatar { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,.06); border: 2px solid rgba(0,229,200,.2); object-fit: cover; flex-shrink: 0; }
         .testimonial-stars { font-size: 1.3rem; color: var(--accent); letter-spacing: .15em; margin-bottom: 1.5rem; }
-        .testimonial-avatar-ph { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,.06); border: 2px solid rgba(0,229,200,.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; animation: glowPulse 3s ease-in-out infinite; }
-        .testimonial-avatar-ph svg { width: 22px; height: 22px; color: var(--text3); }
-        .testimonial-info { text-align: left; }
+        .testimonial-info { text-align: center; }
         .testimonial-name { font-family: var(--font-h); font-size: .88rem; font-weight: 700; color: var(--text); letter-spacing: -.01em; }
-        .testimonial-role { font-family: var(--font-m); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text3); margin-top: .15rem; }
+        .testimonial-role { font-family: var(--font-m); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(240,240,245,.48); margin-top: .15rem; }
 
         /* ===================== PROJECTS ===================== */
         .projects { padding: clamp(6rem,12vh,10rem) 0; background: var(--bg); }
@@ -747,9 +744,9 @@
             .stat-number { font-size: clamp(1.8rem,6vw,2.8rem); }
             .stat-label { font-size: .5rem; letter-spacing: .1em; }
             .about-right { grid-template-columns: 1fr 1fr; }
-            .gallery-grid { grid-template-columns: 1fr; }
-            .gallery-item.large { grid-column: span 1; }
-            .gallery-item { aspect-ratio: 16/10; }
+            .gallery-grid { grid-template-columns: 1fr; overflow: hidden; }
+            .gallery-item.large { grid-column: span 1; aspect-ratio: 16/10; }
+            .gallery-item { aspect-ratio: 16/10; max-width: 100%; }
             .equipment-grid { grid-template-columns: 1fr; }
             .size-options { grid-template-columns: repeat(2,1fr); }
             .contact-fields { grid-template-columns: 1fr; }
@@ -837,125 +834,62 @@
 
         /* (Old modal overlay removed – inline forms used instead) */
 
-        /* ===================== TESTIMONIALS GRID ===================== */
+        /* ===================== TESTIMONIALS MARQUEE ===================== */
         .testimonials-grid-section { padding: clamp(6rem,12vh,10rem) 0; background: var(--bg); position: relative; overflow: hidden; }
         .testimonials-grid-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(0,229,200,.03) 0%, rgba(0,229,200,.008) 40%, transparent 70%); pointer-events: none; transform: translate3d(0,0,0); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
         .testimonials-grid-header { text-align: center; margin-bottom: clamp(3rem,5vh,4.5rem); }
         .testimonials-grid-title { font-family: var(--font-h); font-size: clamp(2.5rem,4.5vw,4rem); font-weight: 900; line-height: 1.02; letter-spacing: -.035em; text-transform: uppercase; margin-bottom: 1rem; }
         .testimonials-grid-sub { font-size: .95rem; color: var(--text2); line-height: 1.7; }
-        .tg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; position: relative; z-index: 1; }
+        .tg-marquee {
+            position: relative; overflow: hidden; padding: 1rem 0 2rem;
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+        }
+        .tg-track { display: flex; gap: 1.25rem; will-change: transform; }
         .tg-card {
+            flex: 0 0 380px; min-width: 380px;
             backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255,255,255,.08);
-            border-radius: 18px;
-            padding: 2.25rem 2.25rem 2rem;
-            position: relative;
-            overflow: hidden;
-            -webkit-backface-visibility: hidden; backface-visibility: hidden;
-            transition: transform .6s var(--ease), border-color .6s var(--ease), box-shadow .6s var(--ease);
-        }
-        .tg-card.reveal { will-change: transform, opacity, filter; transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.9s cubic-bezier(0.16,1,0.3,1); }
-        .tg-card.reveal.visible { transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.9s cubic-bezier(0.16,1,0.3,1), border-color .6s var(--ease), box-shadow .6s var(--ease);
-        }
-        .tg-card:hover { transform: translateY(-6px) translateZ(0); border-color: rgba(0,229,200,.2); }
-        /* Top edge highlight — per card */
-        .tg-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; z-index: 2; }
-        /* Inner sheen — per card */
-        .tg-card .tg-sheen { position: absolute; pointer-events: none; z-index: 0; transform: translate3d(0,0,0); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
-        .tg-card::after { display: none; }
-
-        /* Card 1 — gradient top-left, warm shadow */
-        .tg-card:nth-child(1) {
             background: linear-gradient(145deg, rgba(255,255,255,.04) 0%, rgba(255,255,255,.008) 100%);
-            box-shadow: 0 4px 30px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.05), inset 0 -30px 60px -30px rgba(0,229,200,.03);
+            border: 1px solid rgba(255,255,255,.08); border-radius: 18px;
+            padding: 2rem 2rem 1.75rem; position: relative; overflow: hidden;
+            box-shadow: 0 4px 30px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.05);
+            transition: border-color .4s var(--ease), box-shadow .4s var(--ease);
+            -webkit-backface-visibility: hidden; backface-visibility: hidden;
         }
-        .tg-card:nth-child(1):hover { box-shadow: 0 20px 60px rgba(0,0,0,.3), 0 0 20px rgba(0,229,200,.04), 0 0 50px rgba(0,229,200,.02), 0 0 80px rgba(0,229,200,.01), inset 0 1px 0 rgba(255,255,255,.06), inset 0 -30px 60px -30px rgba(0,229,200,.05); }
-        .tg-card:nth-child(1)::before { background: linear-gradient(90deg, transparent 5%, rgba(255,255,255,.12) 25%, rgba(255,255,255,.06) 60%, transparent 90%); }
-        .tg-card:nth-child(1) .tg-sheen { top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(145deg, rgba(255,255,255,.015) 0%, transparent 40%); }
-
-        /* Card 2 — gradient top-right, teal bottom tint */
-        .tg-card:nth-child(2) {
-            background: linear-gradient(160deg, rgba(255,255,255,.025) 0%, rgba(255,255,255,.012) 60%, rgba(0,229,200,.008) 100%);
-            box-shadow: 0 6px 35px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.035), inset 30px 0 60px -30px rgba(0,229,200,.025);
-        }
-        .tg-card:nth-child(2):hover { box-shadow: 0 20px 55px rgba(0,0,0,.28), 0 0 18px rgba(0,229,200,.05), 0 0 45px rgba(0,229,200,.025), 0 0 75px rgba(0,229,200,.01), inset 0 1px 0 rgba(255,255,255,.05), inset 30px 0 60px -30px rgba(0,229,200,.04); }
-        .tg-card:nth-child(2)::before { background: linear-gradient(90deg, transparent 15%, rgba(255,255,255,.08) 50%, rgba(255,255,255,.14) 75%, transparent 95%); }
-        .tg-card:nth-child(2) .tg-sheen { top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(200deg, rgba(255,255,255,.012) 0%, transparent 35%); }
-
-        /* Card 3 — subtle teal top-left, deeper glass */
-        .tg-card:nth-child(3) {
-            background: linear-gradient(130deg, rgba(0,229,200,.012) 0%, rgba(255,255,255,.028) 40%, rgba(255,255,255,.008) 100%);
-            box-shadow: 0 5px 28px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.04), inset -30px 0 60px -30px rgba(0,229,200,.025);
-        }
-        .tg-card:nth-child(3):hover { box-shadow: 0 22px 60px rgba(0,0,0,.32), 0 0 15px rgba(0,229,200,.06), 0 0 35px rgba(0,229,200,.03), 0 0 65px rgba(0,229,200,.012), inset 0 1px 0 rgba(255,255,255,.055), inset -30px 0 60px -30px rgba(0,229,200,.04); }
-        .tg-card:nth-child(3)::before { background: linear-gradient(90deg, transparent 10%, rgba(255,255,255,.06) 35%, rgba(255,255,255,.1) 55%, transparent 80%); }
-        .tg-card:nth-child(3) .tg-sheen { top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(310deg, rgba(255,255,255,.01) 0%, transparent 30%); }
-
-        /* Card 4 — steep gradient, top glow */
-        .tg-card:nth-child(4) {
-            background: linear-gradient(170deg, rgba(255,255,255,.035) 0%, rgba(255,255,255,.006) 50%, rgba(0,229,200,.006) 100%);
-            box-shadow: 0 3px 25px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.045), inset 0 30px 60px -30px rgba(0,229,200,.02);
-        }
-        .tg-card:nth-child(4):hover { box-shadow: 0 18px 50px rgba(0,0,0,.3), 0 0 16px rgba(0,229,200,.045), 0 0 40px rgba(0,229,200,.022), 0 0 70px rgba(0,229,200,.01), inset 0 1px 0 rgba(255,255,255,.06), inset 0 30px 60px -30px rgba(0,229,200,.035); }
-        .tg-card:nth-child(4)::before { background: linear-gradient(90deg, transparent 20%, rgba(255,255,255,.1) 45%, rgba(255,255,255,.05) 65%, transparent 90%); }
-        .tg-card:nth-child(4) .tg-sheen { top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(350deg, rgba(255,255,255,.018) 0%, transparent 35%); }
-        /* Floating animation — only after reveal completes */
-        @keyframes tg-float {
-            0%, 100% { transform: translate3d(0,0,0); }
-            50% { transform: translate3d(0,-6px,0); }
-        }
-        .tg-card.visible.float-ready:nth-child(1) { animation: tg-float 6s ease-in-out infinite; }
-        .tg-card.visible.float-ready:nth-child(2) { animation: tg-float 7s ease-in-out infinite 1.5s; }
-        .tg-card.visible.float-ready:nth-child(3) { animation: tg-float 6.5s ease-in-out infinite 3s; }
-        .tg-card.visible.float-ready:nth-child(4) { animation: tg-float 7.5s ease-in-out infinite 0.8s; }
-        .tg-card:hover { animation-play-state: paused; }
-        /* Stars with staggered glow sweep */
-        .tg-stars { font-size: 1.15rem; letter-spacing: .15em; margin-bottom: 1.25rem; position: relative; z-index: 1; display: flex; gap: .1em; }
-        .tg-star {
-            color: var(--accent);
-            display: inline-block;
-            text-shadow: 0 0 6px rgba(0,229,200,.15);
-            animation: tg-star-glow 4s ease-in-out infinite;
-        }
-        .tg-card:nth-child(1) .tg-star:nth-child(1) { animation-delay: 0s; }
-        .tg-card:nth-child(1) .tg-star:nth-child(2) { animation-delay: .7s; }
-        .tg-card:nth-child(1) .tg-star:nth-child(3) { animation-delay: 1.4s; }
-        .tg-card:nth-child(1) .tg-star:nth-child(4) { animation-delay: 2.1s; }
-        .tg-card:nth-child(1) .tg-star:nth-child(5) { animation-delay: 2.8s; }
-        .tg-card:nth-child(2) .tg-star:nth-child(1) { animation-delay: 1s; }
-        .tg-card:nth-child(2) .tg-star:nth-child(2) { animation-delay: 1.7s; }
-        .tg-card:nth-child(2) .tg-star:nth-child(3) { animation-delay: 2.4s; }
-        .tg-card:nth-child(2) .tg-star:nth-child(4) { animation-delay: 3.1s; }
-        .tg-card:nth-child(2) .tg-star:nth-child(5) { animation-delay: 3.8s; }
-        .tg-card:nth-child(3) .tg-star:nth-child(1) { animation-delay: 2s; }
-        .tg-card:nth-child(3) .tg-star:nth-child(2) { animation-delay: 2.7s; }
-        .tg-card:nth-child(3) .tg-star:nth-child(3) { animation-delay: 3.4s; }
-        .tg-card:nth-child(3) .tg-star:nth-child(4) { animation-delay: 4.1s; }
-        .tg-card:nth-child(3) .tg-star:nth-child(5) { animation-delay: 4.8s; }
-        .tg-card:nth-child(4) .tg-star:nth-child(1) { animation-delay: .5s; }
-        .tg-card:nth-child(4) .tg-star:nth-child(2) { animation-delay: 1.2s; }
-        .tg-card:nth-child(4) .tg-star:nth-child(3) { animation-delay: 1.9s; }
-        .tg-card:nth-child(4) .tg-star:nth-child(4) { animation-delay: 2.6s; }
-        .tg-card:nth-child(4) .tg-star:nth-child(5) { animation-delay: 3.3s; }
-        @keyframes tg-star-glow {
-            0%, 100% { text-shadow: 0 0 4px rgba(0,229,200,.1); }
-            50% { text-shadow: 0 0 14px rgba(0,229,200,.4), 0 0 28px rgba(0,229,200,.12); }
-        }
-        .tg-text { font-family: var(--font-b); font-size: .92rem; color: rgba(240,240,245,.68); line-height: 1.8; margin-bottom: 1.75rem; position: relative; z-index: 1; }
-        .tg-author { display: flex; align-items: center; gap: .85rem; position: relative; z-index: 1; }
-        .tg-avatar {
-            width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
-            background: rgba(255,255,255,.04);
-            border: 1.5px solid rgba(0,229,200,.18);
-            box-shadow: 0 0 6px rgba(0,229,200,.08), 0 0 14px rgba(0,229,200,.04), 0 0 30px rgba(0,229,200,.02), inset 0 0 8px rgba(0,229,200,.04);
-            display: flex; align-items: center; justify-content: center;
-        }
-        .tg-avatar svg { width: 20px; height: 20px; color: var(--text3); }
+        .tg-card:hover { border-color: rgba(0,229,200,.18); box-shadow: 0 8px 40px rgba(0,0,0,.28), 0 0 20px rgba(0,229,200,.04), inset 0 1px 0 rgba(255,255,255,.06); }
+        .tg-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent 5%, rgba(255,255,255,.1) 30%, rgba(255,255,255,.06) 60%, transparent 90%); z-index: 2; }
+        .tg-card .tg-sheen { position: absolute; inset: 0; pointer-events: none; z-index: 0; background: linear-gradient(145deg, rgba(255,255,255,.015) 0%, transparent 40%); }
+        .tg-stars { font-size: 1.15rem; letter-spacing: .15em; margin-bottom: 1rem; position: relative; z-index: 1; display: flex; gap: .1em; }
+        .tg-star { color: var(--accent); display: inline-block; text-shadow: 0 0 6px rgba(0,229,200,.15); }
+        .tg-text { font-family: var(--font-b); font-size: .88rem; color: rgba(240,240,245,.68); line-height: 1.75; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+        .tg-author { position: relative; z-index: 1; }
         .tg-name { font-family: var(--font-h); font-size: .88rem; font-weight: 700; color: var(--text); letter-spacing: -.01em; }
-        .tg-role { font-family: var(--font-m); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text3); margin-top: .15rem; }
+        .tg-role { font-family: var(--font-m); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(240,240,245,.48); margin-top: .15rem; }
+        /* Mobile swipe controls */
+        .tg-mobile-controls { display: none; }
+        .tg-dots { display: flex; justify-content: center; gap: .5rem; margin-bottom: .75rem; }
+        .tg-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.15); border: none; padding: 0; cursor: pointer; transition: background .3s, transform .3s; }
+        .tg-dot.active { background: var(--accent); transform: scale(1.25); box-shadow: 0 0 8px rgba(0,229,200,.3); }
+        .tg-swipe-hint { display: flex; align-items: center; justify-content: center; gap: .5rem; color: var(--text3); font-family: var(--font-m); font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; }
+        .tg-swipe-hint svg { width: 18px; height: 18px; animation: tg-swipe-arrow 2s ease-in-out infinite; }
+        @keyframes tg-swipe-arrow { 0%,100% { transform: translateX(0); opacity: .4; } 50% { transform: translateX(6px); opacity: 1; } }
+        .tg-marquee.tg-mobile {
+            -webkit-mask-image: none; mask-image: none;
+            overflow-x: auto; scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 1rem 1.25rem;
+        }
+        .tg-marquee.tg-mobile::-webkit-scrollbar { display: none; }
+        .tg-marquee.tg-mobile .tg-card { flex: 0 0 85vw; min-width: 85vw; scroll-snap-align: center; }
+        .tg-marquee.tg-mobile ~ .container .tg-mobile-controls { display: block; padding: 1rem 0 0; text-align: center; }
         @media (max-width: 768px) {
-            .tg-grid { grid-template-columns: 1fr; }
-            .tg-card { padding: 1.5rem 1.5rem 1.35rem; }
+            .tg-marquee {
+                -webkit-mask-image: none; mask-image: none;
+                overflow-x: auto; scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 1rem 1.25rem;
+            }
+            .tg-marquee::-webkit-scrollbar { display: none; }
+            .tg-card { flex: 0 0 85vw; min-width: 85vw; scroll-snap-align: center; }
+            .tg-mobile-controls { display: block; padding: 1rem 0 0; text-align: center; }
         }
 
     </style>
@@ -1119,7 +1053,6 @@
             <p class="testimonial-quote">Daniel überzeugt durch hohe Fachkompetenz und hat für jede Veranstaltung das passende Equipment. Selbst in stressigen Situationen behält er einen kühlen Kopf und findet immer eine Lösung. Für uns ist er mittlerweile unser fester Tontechniker, der jede Veranstaltung zum Highlight macht.</p>
             <div class="testimonial-stars">★★★★★</div>
             <div class="testimonial-author">
-                <div class="testimonial-avatar-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
                 <div class="testimonial-info">
                     <div class="testimonial-name">Roberto D'Amico</div>
                     <div class="testimonial-role">Bassist Gmünder All Stars</div>
@@ -1402,42 +1335,77 @@
                 <h2 class="testimonials-grid-title">Das sagen unsere <span class="accent">Kunden.</span></h2>
                 <p class="testimonials-grid-sub">Die schönste Bestätigung kommt immer nach dem Event.</p>
             </div>
-            <div class="tg-grid">
-                <div class="tg-card reveal">
+        </div>
+        <div class="tg-marquee">
+            <div class="tg-track">
+                <div class="tg-card">
                     <div class="tg-sheen"></div>
                     <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
                     <p class="tg-text">„Zuverlässig und professionell. Anlieferung, Aufbau und Abholung verliefen stets reibungslos. Durch die professionelle Vorbereitung war für uns als Veranstalter kein zusätzlicher Aufwand nötig. Uneingeschränkt empfehlenswert."</p>
-                    <div class="tg-author">
-                        <div class="tg-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-                        <div><div class="tg-name">Felix Lakner</div><div class="tg-role">1. Vorstand Concordia Durlangen</div></div>
-                    </div>
+                    <div class="tg-author"><div class="tg-name">Felix Lakner</div><div class="tg-role">1. Vorstand Concordia Durlangen</div></div>
                 </div>
-                <div class="tg-card reveal">
+                <div class="tg-card">
                     <div class="tg-sheen"></div>
                     <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
                     <p class="tg-text">„Die Zusammenarbeit war immer auf Augenhöhe, kompetent, ehrlich und flexibel. Die Technik hat unsere Veranstaltungen deutlich aufgewertet und von unseren Gästen kam ausschließlich positives Feedback."</p>
-                    <div class="tg-author">
-                        <div class="tg-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-                        <div><div class="tg-name">Kai Weber</div><div class="tg-role">Fachschaft Sport PH Schwäbisch Gmünd</div></div>
-                    </div>
+                    <div class="tg-author"><div class="tg-name">Kai Weber</div><div class="tg-role">Fachschaft Sport PH Schwäbisch Gmünd</div></div>
                 </div>
-                <div class="tg-card reveal">
+                <div class="tg-card">
                     <div class="tg-sheen"></div>
                     <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
                     <p class="tg-text">„Mit Dani haben wir jemanden, der für jedes Format und jede Größe das passende Equipment liefert und bedient. Nicht nur preislich fair, sondern auch absolut zuverlässig. Uneingeschränkte Empfehlung."</p>
-                    <div class="tg-author">
-                        <div class="tg-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-                        <div><div class="tg-name">Domenic Böttinger</div><div class="tg-role">Ehem. Präsident Studierendenparlament PH Schwäbisch Gmünd</div></div>
-                    </div>
+                    <div class="tg-author"><div class="tg-name">Domenic Böttinger</div><div class="tg-role">Ehem. Präsident Studierendenparlament PH Schwäbisch Gmünd</div></div>
                 </div>
-                <div class="tg-card reveal">
+                <div class="tg-card">
                     <div class="tg-sheen"></div>
                     <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
                     <p class="tg-text">„Alles unkompliziert und problemlos. Die Techniker wissen, worauf es ankommt. Sound im Frontbereich und auf der Bühne war top. Das brachte mich dazu, bei jedem großen Gig wieder zu buchen."</p>
-                    <div class="tg-author">
-                        <div class="tg-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-                        <div><div class="tg-name">Maurizio Orlando</div><div class="tg-role">Band DuePiDue</div></div>
-                    </div>
+                    <div class="tg-author"><div class="tg-name">Maurizio Orlando</div><div class="tg-role">Band DuePiDue</div></div>
+                </div>
+                <div class="tg-card">
+                    <div class="tg-sheen"></div>
+                    <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
+                    <p class="tg-text">„Zuverlässiger Partner, der das Equipment auf- und abbaut und bei dem die Zusammenarbeit immer reibungslos verlief. Wenn mal was nicht funktioniert hat, war sofort Hilfe am Start. Wenn ich noch auflegen würde, gäbe es keine andere Firma."</p>
+                    <div class="tg-author"><div class="tg-name">Manoj Chamakala</div><div class="tg-role">DJ</div></div>
+                </div>
+                <div class="tg-card">
+                    <div class="tg-sheen"></div>
+                    <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
+                    <p class="tg-text">„Alle Erwartungen sind erfüllt worden, auch wenn sie noch so kompliziert waren. Man kann sich drauf verlassen, dass alles bestens gemischt wird, sowohl Ton als auch Licht."</p>
+                    <div class="tg-author"><div class="tg-name">Fabi S.</div><div class="tg-role">Gitarrist</div></div>
+                </div>
+                <div class="tg-card">
+                    <div class="tg-sheen"></div>
+                    <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
+                    <p class="tg-text">„Besonders in Drucksituationen bleibt das Team ruhig und lösungsorientiert, was großes Vertrauen schafft. Sehr professionelle und freundliche Zusammenarbeit."</p>
+                    <div class="tg-author"><div class="tg-name">Tobi</div><div class="tg-role">Gitarrist</div></div>
+                </div>
+                <div class="tg-card">
+                    <div class="tg-sheen"></div>
+                    <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
+                    <p class="tg-text">„Lokal und faire Preise. Auch in Notfällen immer hilfsbereit. Schnelle, unkomplizierte Kommunikation und qualifizierte Mischer, die wissen was sie tun."</p>
+                    <div class="tg-author"><div class="tg-name">Gerhard Six</div><div class="tg-role">Gitarrist</div></div>
+                </div>
+                <div class="tg-card">
+                    <div class="tg-sheen"></div>
+                    <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
+                    <p class="tg-text">„Flexibel, zuverlässig, pünktlich und kompetent in einer Kombination, die man selten findet. Als Musiker und Veranstalter konnte ich mich immer zu 100% auf Daniel und sein Team verlassen."</p>
+                    <div class="tg-author"><div class="tg-name">Axel</div><div class="tg-role">Feed The Foxx / Old Johnnys Crew</div></div>
+                </div>
+                <div class="tg-card">
+                    <div class="tg-sheen"></div>
+                    <div class="tg-stars"><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span><span class="tg-star">★</span></div>
+                    <p class="tg-text">„Wir müssen uns nicht um die Live-Technik kümmern und können uns voll auf die Musik konzentrieren. Professionell, unkompliziert und fördernd. Vom Pub bis zum Open Air ist alles möglich."</p>
+                    <div class="tg-author"><div class="tg-name">Cath n Country</div><div class="tg-role">Live-Band für Modern Country</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="tg-mobile-controls">
+                <div class="tg-dots"></div>
+                <div class="tg-swipe-hint">
+                    <span>Swipen</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
                 </div>
             </div>
         </div>
@@ -1515,14 +1483,12 @@
             el.addEventListener('transitionend',function h(e){
                 if(e.target!==el)return;
                 el.style.willChange='auto';
-                if(el.classList.contains('tg-card'))el.classList.add('float-ready');
                 el.removeEventListener('transitionend',h);
             });
         }
         /* Group observer: when container enters view, stagger-reveal children */
         var groupContainers=[
-            {sel:'.gallery-grid',children:'.gallery-item.reveal',delay:100},
-            {sel:'.tg-grid',children:'.tg-card.reveal',delay:100}
+            {sel:'.gallery-grid',children:'.gallery-item.reveal',delay:100}
         ];
         var groupDone=new Set();
         var groupObs=new IntersectionObserver(function(entries){
@@ -1559,6 +1525,80 @@
             if(!groupChildren.has(el))obs.observe(el);
         });
         var kabel=document.querySelector('.footer-kabel');if(kabel)obs.observe(kabel);
+
+        /* Testimonials marquee — responsive: checks viewport every frame */
+        (function(){
+            var marquee=document.querySelector('.tg-marquee');
+            var track=document.querySelector('.tg-track');
+            if(!marquee||!track)return;
+            var mql=window.matchMedia('(max-width:768px)');
+            var origCount=track.children.length;
+            var pos=0,speed=0.65,targetSpeed=0.65,resetPoint=0;
+            var desktopReady=false;
+            /* --- Mobile dots (always created, hidden on desktop via CSS) --- */
+            var dotsContainer=document.querySelector('.tg-dots');
+            if(dotsContainer){
+                for(var i=0;i<origCount;i++){
+                    var dot=document.createElement('button');
+                    dot.className='tg-dot'+(i===0?' active':'');
+                    dot.setAttribute('aria-label','Kundenstimme '+(i+1));
+                    dot.dataset.index=i;
+                    dotsContainer.appendChild(dot);
+                }
+                var scrollTimer;
+                marquee.addEventListener('scroll',function(){
+                    clearTimeout(scrollTimer);
+                    scrollTimer=setTimeout(function(){
+                        var sl=marquee.scrollLeft,cw=track.children[0].offsetWidth;
+                        var g=parseFloat(getComputedStyle(track).gap)||20;
+                        var idx=Math.min(Math.round(sl/(cw+g)),origCount-1);
+                        dotsContainer.querySelectorAll('.tg-dot').forEach(function(d,j){d.classList.toggle('active',j===idx);});
+                    },50);
+                });
+                dotsContainer.addEventListener('click',function(e){
+                    var d=e.target.closest('.tg-dot');if(!d)return;
+                    var idx=parseInt(d.dataset.index),cw=track.children[0].offsetWidth;
+                    var g=parseFloat(getComputedStyle(track).gap)||20;
+                    marquee.scrollTo({left:idx*(cw+g),behavior:'smooth'});
+                });
+            }
+            /* --- Desktop: clone cards for seamless loop --- */
+            function enterDesktop(){
+                if(desktopReady)return;
+                marquee.classList.remove('tg-mobile');
+                var orig=Array.from(track.children).slice(0,origCount);
+                orig.forEach(function(c){track.appendChild(c.cloneNode(true));});
+                resetPoint=track.children[origCount].offsetLeft;
+                pos=0;speed=0.65;targetSpeed=0.65;
+                desktopReady=true;
+            }
+            function leaveDesktop(){
+                if(!desktopReady)return;
+                while(track.children.length>origCount)track.removeChild(track.lastChild);
+                track.style.transform='';
+                marquee.classList.add('tg-mobile');
+                marquee.scrollLeft=0;
+                desktopReady=false;
+            }
+            /* --- Animation loop — checks mql every frame --- */
+            function tick(){
+                if(!mql.matches){
+                    if(!desktopReady)enterDesktop();
+                    speed+=(targetSpeed-speed)*0.04;
+                    pos-=speed;
+                    if(pos<=-resetPoint)pos+=resetPoint;
+                    track.style.transform='translate3d('+pos+'px,0,0)';
+                }else{
+                    if(desktopReady)leaveDesktop();
+                }
+                requestAnimationFrame(tick);
+            }
+            marquee.addEventListener('mouseenter',function(){targetSpeed=0.12;});
+            marquee.addEventListener('mouseleave',function(){targetSpeed=0.65;});
+            if(mql.matches)marquee.classList.add('tg-mobile');
+            else enterDesktop();
+            requestAnimationFrame(tick);
+        })();
 
         function countUp(el,duration){const t=+el.dataset.target,sfx=el.dataset.suffix||'';if(el.dataset.display){el.textContent=el.dataset.display;return;}let c=0;const steps=Math.ceil(duration/20),s=Math.max(1,Math.ceil(t/steps)),iv=setInterval(()=>{c+=s;if(c>=t){c=t;clearInterval(iv);}let d=c.toLocaleString('de-DE');if(t===100)d=c+'%';else if(t===48)d=c+'h';else if(sfx)d=d+sfx;el.textContent=d;},20);}
         const stats=document.querySelectorAll('.stat-number[data-target]');

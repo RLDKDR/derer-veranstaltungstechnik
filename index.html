@@ -1545,15 +1545,15 @@
                     dot.dataset.index=i;
                     dotsContainer.appendChild(dot);
                 }
-                var scrollTimer;
+                var lastDotIdx=-1;
                 marquee.addEventListener('scroll',function(){
-                    clearTimeout(scrollTimer);
-                    scrollTimer=setTimeout(function(){
-                        var sl=marquee.scrollLeft,cw=track.children[0].offsetWidth;
-                        var g=parseFloat(getComputedStyle(track).gap)||20;
-                        var idx=Math.min(Math.round(sl/(cw+g)),origCount-1);
+                    var sl=marquee.scrollLeft,cw=track.children[0].offsetWidth;
+                    var g=parseFloat(getComputedStyle(track).gap)||20;
+                    var idx=Math.min(Math.round(sl/(cw+g)),origCount-1);
+                    if(idx!==lastDotIdx){
+                        lastDotIdx=idx;
                         dotsContainer.querySelectorAll('.tg-dot').forEach(function(d,j){d.classList.toggle('active',j===idx);});
-                    },50);
+                    }
                 });
                 dotsContainer.addEventListener('click',function(e){
                     var d=e.target.closest('.tg-dot');if(!d)return;

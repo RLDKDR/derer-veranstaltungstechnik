@@ -882,6 +882,14 @@
         .pkg-details[open] .pkg-chevron { transform: rotate(180deg); }
         .pkg-details-content { font-size: .78rem; color: var(--text3); line-height: 1.6; padding: .5rem 0 .25rem; }
         /* Inline card form */
+        /* Datenschutz-Checkbox */
+        .dsgvo-check { display: flex; align-items: flex-start; gap: .6rem; margin-top: .25rem; }
+        .dsgvo-check input[type="checkbox"] { width: 16px; height: 16px; margin-top: 2px; accent-color: var(--accent); flex-shrink: 0; cursor: pointer; }
+        .dsgvo-check label { font-family: var(--font-b); font-size: .72rem; color: var(--text2); line-height: 1.5; cursor: pointer; }
+        .dsgvo-check label a { color: var(--accent); text-decoration: underline; }
+        /* Honeypot — unsichtbar für Menschen, Bots füllen es aus */
+        .ohnehonig { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; overflow: hidden; }
+        .pkg-inline-form .dsgvo-check label { font-size: .68rem; }
         .pkg-inline-form { display: none; flex-direction: column; gap: .6rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,.06); animation: pkgFormIn .3s var(--ease); position: relative; }
         .pkg-inline-form.open { display: flex; }
         .pkg-inline-form .pkg-if-header { display: flex; align-items: center; justify-content: space-between; gap: .75rem; margin-bottom: .25rem; }
@@ -1384,6 +1392,11 @@
                         <div class="form-field"><input type="email" placeholder="E-Mail-Adresse" required></div>
                         <div class="form-field"><input type="tel" placeholder="Telefonnummer" required></div>
                     </div>
+                    <div class="ohnehonig"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
+                    <div class="dsgvo-check">
+                        <input type="checkbox" id="dsgvoMain" required>
+                        <label for="dsgvoMain">Ich stimme zu, dass meine Angaben zur Bearbeitung meiner Anfrage verarbeitet werden. Weitere Infos in der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.</label>
+                    </div>
                     <div class="form-nav form-nav--split"><button class="btn-back" onclick="goStep(3)">← Zurück</button><button class="btn-p btn-next" onclick="submitForm()">Anfrage absenden <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button></div>
                     <div class="form-timeline">
                         <div class="ft-step ft-step--active"><div class="ft-dot">1</div><div class="ft-label">Anfrage absenden</div></div>
@@ -1684,7 +1697,20 @@
         function sel(c){c.parentElement.querySelectorAll('.option-card,.size-option').forEach(s=>s.classList.remove('selected'));c.classList.add('selected');}
         function tog(c){c.classList.toggle('selected');}
         function goStep(s){document.getElementById(`step${cur}`).classList.remove('active');document.getElementById(`step${s}`).classList.add('active');var t=document.getElementById('stepText');if(t)t.innerHTML='Schritt <span>'+s+'</span> von 4';var b=document.getElementById('stepBarFill');if(b)b.style.width=(s*25)+'%';cur=s;}
-        function submitForm(){document.getElementById(`step${cur}`).classList.remove('active');document.getElementById('stepOk').classList.add('active');document.getElementById('formProgress').style.display='none';}
+        function submitForm(){
+            var step=document.getElementById('step'+cur);
+            var inputs=step.querySelectorAll('input[required]');
+            var valid=true;
+            inputs.forEach(function(inp){
+                if(inp.type==='checkbox'&&!inp.checked){inp.parentElement.style.outline='1px solid #ff4444';valid=false;}
+                else if(inp.type!=='checkbox'&&!inp.value.trim()){inp.style.borderColor='#ff4444';valid=false;}
+                else{inp.style.borderColor='';if(inp.type==='checkbox')inp.parentElement.style.outline='';}
+            });
+            if(!valid)return;
+            var hp=step.parentElement.querySelector('.ohnehonig input');
+            if(hp&&hp.value)return;
+            document.getElementById('step'+cur).classList.remove('active');document.getElementById('stepOk').classList.add('active');document.getElementById('formProgress').style.display='none';
+        }
 
         document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-80,behavior:'smooth'});});});
 
@@ -1784,6 +1810,8 @@
                 +'<input type="text" placeholder="Name" required>'
                 +'<input type="text" placeholder="E-Mail oder Telefonnummer" required>'
                 +'<textarea placeholder="Nachricht (optional)"></textarea>'
+                +'<div class="ohnehonig"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>'
+                +'<div class="dsgvo-check"><input type="checkbox" id="dsgvo_'+Date.now()+'" required><label>Ich stimme zu, dass meine Angaben zur Bearbeitung meiner Anfrage verarbeitet werden. <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a></label></div>'
                 +'<button class="pkg-if-submit" onclick="submitInlineForm(this)">Anfrage absenden <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>'
                 +'<div class="pkg-if-ok"><div style="font-size:2rem;margin-bottom:.5rem;">&#9989;</div><div style="font-size:.85rem;font-weight:700;margin-bottom:.25rem;">Anfrage abgeschickt!</div><div style="font-size:.78rem;color:var(--text2);line-height:1.5;">Wir melden uns innerhalb von 24 Stunden.</div></div>';
             card.appendChild(form);
@@ -1807,8 +1835,14 @@
             var form=btn.closest('.pkg-inline-form');
             var inputs=form.querySelectorAll('input[required]');
             var valid=true;
-            inputs.forEach(function(inp){if(!inp.value.trim()){inp.style.borderColor='#ff4444';valid=false;}else{inp.style.borderColor='';}});
+            inputs.forEach(function(inp){
+                if(inp.type==='checkbox'&&!inp.checked){inp.parentElement.style.outline='1px solid #ff4444';valid=false;}
+                else if(inp.type!=='checkbox'&&!inp.value.trim()){inp.style.borderColor='#ff4444';valid=false;}
+                else{inp.style.borderColor='';if(inp.type==='checkbox')inp.parentElement.style.outline='';}
+            });
             if(!valid)return;
+            var hp=form.querySelector('.ohnehonig input');
+            if(hp&&hp.value)return;
             var fields=form.querySelectorAll('input,textarea,button.pkg-if-submit,.pkg-if-title');
             fields.forEach(function(el){el.style.display='none';});
             form.querySelector('.pkg-if-ok').classList.add('show');

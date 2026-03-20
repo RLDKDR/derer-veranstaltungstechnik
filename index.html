@@ -1709,7 +1709,31 @@
             if(!valid)return;
             var hp=step.parentElement.querySelector('.ohnehonig input');
             if(hp&&hp.value)return;
-            document.getElementById('step'+cur).classList.remove('active');document.getElementById('stepOk').classList.add('active');document.getElementById('formProgress').style.display='none';
+            // Collect multistep data
+            var eventTypSel=document.querySelector('#step1 .option-card.selected .option-label');
+            var eventTyp=eventTypSel?eventTypSel.textContent:'';
+            var gaesteSel=document.querySelector('#step2 .size-option.selected .size-number');
+            var gaeste=gaesteSel?gaesteSel.textContent+' Gäste':'';
+            var equipment=[];
+            document.querySelectorAll('#step3 .equipment-option.selected .eq-label').forEach(function(el){equipment.push(el.textContent);});
+            var contactInputs=document.querySelectorAll('#step4 .contact-fields input');
+            var nameVal='',emailVal='',telVal='';
+            contactInputs.forEach(function(inp){
+                if(inp.type==='text')nameVal=inp.value.trim();
+                else if(inp.type==='email')emailVal=inp.value.trim();
+                else if(inp.type==='tel')telVal=inp.value.trim();
+            });
+            var submitBtn=step.querySelector('.btn-next');
+            if(submitBtn){submitBtn.disabled=true;submitBtn.textContent='Wird gesendet...';}
+            fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({formType:'individuell',eventTyp:eventTyp,gaeste:gaeste,equipment:equipment,name:nameVal,email:emailVal,telefon:telVal,website:hp?hp.value:''})})
+            .then(function(r){return r.json();})
+            .then(function(){
+                document.getElementById('step'+cur).classList.remove('active');document.getElementById('stepOk').classList.add('active');document.getElementById('formProgress').style.display='none';
+            })
+            .catch(function(){
+                if(submitBtn){submitBtn.disabled=false;submitBtn.innerHTML='Anfrage absenden <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>';}
+                alert('Fehler beim Senden. Bitte versuche es erneut oder kontaktiere uns telefonisch.');
+            });
         }
 
         document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-80,behavior:'smooth'});});});
@@ -1843,9 +1867,27 @@
             if(!valid)return;
             var hp=form.querySelector('.ohnehonig input');
             if(hp&&hp.value)return;
-            var fields=form.querySelectorAll('input,textarea,button.pkg-if-submit,.pkg-if-title');
-            fields.forEach(function(el){el.style.display='none';});
-            form.querySelector('.pkg-if-ok').classList.add('show');
+            var card=form.closest('.pkg-card');
+            var paketName=card.querySelector('.pkg-card-name').textContent;
+            var allInputs=form.querySelectorAll('input:not([type=checkbox]):not([name=website]),textarea');
+            var nameVal='',kontaktVal='',nachrichtVal='';
+            allInputs.forEach(function(inp){
+                if(inp.tagName==='TEXTAREA')nachrichtVal=inp.value.trim();
+                else if(!nameVal)nameVal=inp.value.trim();
+                else if(!kontaktVal)kontaktVal=inp.value.trim();
+            });
+            btn.disabled=true;btn.textContent='Wird gesendet...';
+            fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({formType:'paket',paketName:paketName,name:nameVal,kontakt:kontaktVal,nachricht:nachrichtVal,website:hp?hp.value:''})})
+            .then(function(r){return r.json();})
+            .then(function(){
+                var fields=form.querySelectorAll('input,textarea,button.pkg-if-submit,.pkg-if-title,.pkg-if-header,.dsgvo-check,.ohnehonig');
+                fields.forEach(function(el){el.style.display='none';});
+                form.querySelector('.pkg-if-ok').classList.add('show');
+            })
+            .catch(function(){
+                btn.disabled=false;btn.innerHTML='Anfrage absenden <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>';
+                alert('Fehler beim Senden. Bitte versuche es erneut oder kontaktiere uns telefonisch.');
+            });
         }
 
 

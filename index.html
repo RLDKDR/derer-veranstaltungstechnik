@@ -1577,6 +1577,8 @@
     </div>
 
     <script>
+        if('scrollRestoration' in history) history.scrollRestoration='manual';
+        window.scrollTo(0,0);
         const nav=document.getElementById('nav');
         window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
         const nt=document.getElementById('navToggle'),nl=document.getElementById('navLinks');

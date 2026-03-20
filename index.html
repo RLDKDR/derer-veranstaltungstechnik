@@ -905,6 +905,22 @@
         .pkg-inline-form .pkg-if-submit svg { width: 14px; height: 14px; }
         .pkg-if-ok { display: none; text-align: center; padding: 1rem 0; }
         .pkg-if-ok.show { display: block; }
+        .success-check {
+            width: 64px; height: 64px; margin: 0 auto 1.25rem; border-radius: 18px;
+            background: linear-gradient(135deg, rgba(0,229,200,.12) 0%, rgba(0,229,200,.04) 50%, rgba(0,180,200,.08) 100%);
+            border: 1.5px solid rgba(0,229,200,.3);
+            box-shadow: 0 0 12px rgba(0,229,200,.12), 0 0 30px rgba(0,229,200,.06), 0 0 60px rgba(0,229,200,.03), inset 0 1px 0 rgba(255,255,255,.12), inset 0 -1px 0 rgba(0,229,200,.08);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
+        }
+        .success-check::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,.18) 0%, transparent 60%);
+            pointer-events: none; border-radius: inherit;
+        }
+        .success-check svg { width: 28px; height: 28px; color: var(--accent); stroke-width: 2.5; filter: drop-shadow(0 0 6px rgba(0,229,200,.3)); }
+        .success-check-sm { width: 48px; height: 48px; margin: 0 auto .75rem; border-radius: 14px; }
+        .success-check-sm svg { width: 22px; height: 22px; }
         @keyframes pkgFormIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 1024px) {
             .pkg-grid > .pkg-card { width: calc((100% - 1.25rem) / 2); }
@@ -1407,9 +1423,9 @@
                     </div>
                 </div>
                 <div class="form-step" id="stepOk" style="text-align:center;padding:3rem 0;">
-                    <div style="font-size:3rem;margin-bottom:1rem;">✅</div>
+                    <div class="success-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
                     <h3 class="step-question" style="margin-bottom:.75rem;">Anfrage abgeschickt.</h3>
-                    <p style="color:var(--text2);font-size:.95rem;line-height:1.6;">Wir melden uns innerhalb von 24 Stunden. Falls es eilig ist: <a href="tel:+4917621810688" style="color:var(--accent);">+49 176 218 10 688</a></p>
+                    <p style="color:var(--text2);font-size:.95rem;line-height:1.6;">Wir melden uns innerhalb von 48 Stunden bei dir. Falls es eilig ist: <a href="tel:+4917621810688" style="color:var(--accent);">+49 176 218 10 688</a></p>
                 </div>
             </div>
             </div>
@@ -1837,7 +1853,7 @@
                 +'<div class="ohnehonig"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>'
                 +'<div class="dsgvo-check"><input type="checkbox" id="dsgvo_'+Date.now()+'" required><label>Ich stimme zu, dass meine Angaben zur Bearbeitung meiner Anfrage verarbeitet werden. <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a></label></div>'
                 +'<button class="pkg-if-submit" onclick="submitInlineForm(this)">Anfrage absenden <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>'
-                +'<div class="pkg-if-ok"><div style="font-size:2rem;margin-bottom:.5rem;">&#9989;</div><div style="font-size:.85rem;font-weight:700;margin-bottom:.25rem;">Anfrage abgeschickt!</div><div style="font-size:.78rem;color:var(--text2);line-height:1.5;">Wir melden uns innerhalb von 24 Stunden.</div></div>';
+                +'<div class="pkg-if-ok"><div class="success-check success-check-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div><div style="font-size:.85rem;font-weight:700;margin-bottom:.25rem;">Anfrage abgeschickt!</div><div style="font-size:.78rem;color:var(--text2);line-height:1.5;">Wir melden uns innerhalb von 48 Stunden bei dir.</div></div>';
             card.appendChild(form);
             btn.style.display='none';
             card.scrollIntoView({behavior:'smooth',block:'nearest'});

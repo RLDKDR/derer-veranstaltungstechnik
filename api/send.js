@@ -140,7 +140,7 @@ export default async function handler(req, res) {
             },
             body: JSON.stringify({
                 from: 'Neue Anfrage <anfrage@anfrageseite.io>',
-                to: 'roland@anfrageseite.io',
+                to: ['roland@anfrageseite.io', 'info@derer-veranstaltungstechnik.de'],
                 subject,
                 html,
             }),

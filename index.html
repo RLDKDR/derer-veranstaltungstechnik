@@ -168,6 +168,14 @@
         .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
         .nav-links a { font-family: var(--font-m); font-size: .72rem; font-weight: 400; letter-spacing: .06em; color: var(--text2); transition: color .3s var(--ease); }
         .nav-links a:hover { color: var(--text); }
+        .nav-dropdown { position: relative; }
+        .nav-dropdown > a { cursor: pointer; display: inline-flex; align-items: center; gap: .35rem; }
+        .nav-dropdown > a svg { width: 10px; height: 10px; transition: transform .3s var(--ease); }
+        .nav-dropdown:hover > a svg { transform: rotate(180deg); }
+        .nav-dropdown-menu { position: absolute; top: calc(100% + .75rem); right: 0; min-width: 200px; background: rgba(7,7,12,.94); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,.07); border-radius: 10px; padding: .5rem; opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity .25s var(--ease), transform .25s var(--ease); }
+        .nav-dropdown:hover .nav-dropdown-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        .nav-dropdown-menu a { display: block; padding: .6rem .9rem; border-radius: 7px; font-size: .72rem; white-space: nowrap; transition: background .2s var(--ease), color .2s var(--ease); }
+        .nav-dropdown-menu a:hover { background: rgba(0,229,200,.08); color: var(--accent); }
         .nav-cta { font-family: var(--font-h); font-size: .78rem; font-weight: 700; padding: .7rem 1.4rem; background: var(--accent); color: var(--bg); border: none; border-radius: 10px; cursor: pointer; display: inline-flex; align-items: center; gap: .45rem; transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
         .nav-cta:hover { transform: scale(1.04); box-shadow: 0 0 12px rgba(0,229,200,.3), 0 0 35px rgba(0,229,200,.15), 0 0 70px rgba(0,229,200,.05); }
         .nav-cta svg { width: 14px; height: 14px; }
@@ -187,9 +195,19 @@
             position: absolute; inset: 0;
             background-size: cover; background-position: center;
             opacity: 0; transform: scale(1);
+            transition: opacity .8s cubic-bezier(.4,0,.2,1);
+            will-change: opacity, transform;
+            -webkit-backface-visibility: hidden; backface-visibility: hidden;
         }
-        .hero-bg-slide.active { opacity: .35; animation: heroZoom 20s ease-out forwards; }
-        @keyframes heroZoom { 0% { opacity: 0; transform: scale(1); } 8% { opacity: .35; } 100% { opacity: .35; transform: scale(1.15); } }
+        .hero-bg-slide.active { opacity: .35; }
+        .hero-bg-slide.zoom-a { animation: heroZoomA 7s ease-out forwards; }
+        .hero-bg-slide.zoom-b { animation: heroZoomB 7s ease-out forwards; }
+        .hero-bg-slide.zoom-c { animation: heroZoomC 7s ease-out forwards; }
+        .hero-bg-slide.zoom-d { animation: heroZoomD 7s ease-out forwards; }
+        @keyframes heroZoomA { 0% { transform: scale(1) translate3d(0,0,0); } 100% { transform: scale(1.12) translate3d(-1.5%,-1%,0); } }
+        @keyframes heroZoomB { 0% { transform: scale(1.04) translate3d(1%,0,0); } 100% { transform: scale(1.15) translate3d(-0.5%,-1.5%,0); } }
+        @keyframes heroZoomC { 0% { transform: scale(1) translate3d(-1%,1%,0); } 100% { transform: scale(1.1) translate3d(1%,-0.5%,0); } }
+        @keyframes heroZoomD { 0% { transform: scale(1.02) translate3d(0.5%,-0.5%,0); } 100% { transform: scale(1.14) translate3d(-1%,0.5%,0); } }
         .hero-bg::after {
             content: ''; position: absolute; inset: 0;
             background:
@@ -211,6 +229,12 @@
         .hero-deco-3 { top: 28%; right: 14%; width: 5px; height: 5px; background: var(--accent); border-radius: 50%; opacity: .25; animation: float-c 8s ease-in-out infinite, glow-p 3s ease-in-out infinite; }
         .hero-deco-4 { bottom: 35%; left: 18%; width: 4px; height: 4px; background: rgba(255,255,255,.25); border-radius: 50%; animation: float-b 10s ease-in-out infinite reverse, glow-p 4s ease-in-out infinite 1s; }
 
+        .hero-logo-backdrop { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(1400px, 92vw); aspect-ratio: 1920 / 1080; pointer-events: none; z-index: 3; user-select: none; }
+        .hero-logo-backdrop img { width: 100%; height: 100%; display: block; opacity: .1; mix-blend-mode: screen; }
+        .hero-logo-backdrop::after { content: ''; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 44%, rgba(255,255,255,.55) 50%, transparent 56%); background-size: 260% 100%; background-repeat: no-repeat; -webkit-mask: url('images/backdrop-logo-1.webp') center/contain no-repeat; mask: url('images/backdrop-logo-1.webp') center/contain no-repeat; mix-blend-mode: screen; opacity: .28; animation: logoShine 11s ease-in-out infinite; pointer-events: none; }
+        @keyframes logoShine { 0% { background-position: 160% 0; } 55% { background-position: -60% 0; } 100% { background-position: -60% 0; } }
+        @media (max-width: 900px) { .hero-logo-backdrop { width: 130vw; max-width: none; } .hero-logo-backdrop img { opacity: .09; } .hero-logo-backdrop::after { opacity: .22; } }
+
         .hero-social { position: absolute; left: clamp(.75rem,2.5vw,2.5rem); top: 50%; transform: translateY(-50%); z-index: 20; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; opacity: 0; animation: fadeIn .8s ease 1.8s forwards; }
         @keyframes fadeIn { to { opacity: 1; } }
         .hero-social .s-lbl { font-family: var(--font-m); font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--text3); writing-mode: vertical-lr; transform: rotate(180deg); margin-bottom: .4rem; }
@@ -225,19 +249,23 @@
         .hero-badge { display: inline-flex; align-items: center; gap: .55rem; padding: .55rem 1.1rem; background: rgba(0,229,200,.14); border: 1px solid rgba(0,229,200,.22); border-radius: 10px; font-family: var(--font-m); font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 2.25rem; opacity: 0; animation: fadeUp .8s var(--ease) .2s forwards; }
         .hero-badge .pulse { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
         .hero-tagline {
-            display: inline-flex; align-items: center; gap: .55rem;
-            padding: .55rem 1.2rem; border-radius: 100px;
-            background: rgba(0,229,200,.16); border: 1px solid rgba(0,229,200,.28);
+            display: inline-flex; align-items: center; gap: .6rem;
+            padding: .65rem 1.4rem; border-radius: 10px;
+            background: linear-gradient(135deg, rgba(0,229,200,.12), rgba(0,229,200,.06));
+            border: 1px solid rgba(0,229,200,.22);
+            box-shadow: 0 0 20px rgba(0,229,200,.06), inset 0 1px 0 rgba(255,255,255,.06);
             font-family: var(--font-m); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
             color: var(--accent); margin-bottom: 2.25rem; text-align: center;
             opacity: 0; filter: blur(12px); transform: translateY(20px); animation: blurUp 1.4s cubic-bezier(.25,.1,.25,1) .15s forwards;
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
         }
-        .hero-tagline .tagline-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; opacity: .6; }
+        .hero-tagline .tagline-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 6px rgba(0,229,200,.6), 0 0 12px rgba(0,229,200,.3); animation: dotPulse 2.5s ease-in-out infinite; }
+        @keyframes dotPulse { 0%, 100% { opacity: .5; box-shadow: 0 0 6px rgba(0,229,200,.4), 0 0 12px rgba(0,229,200,.2); } 50% { opacity: 1; box-shadow: 0 0 8px rgba(0,229,200,.8), 0 0 20px rgba(0,229,200,.4); } }
         .hero-h1 { font-family: var(--font-h); font-size: clamp(2rem,5.5vw,5.5rem); font-weight: 900; line-height: 1.05; letter-spacing: -.04em; text-transform: uppercase; margin-bottom: 1.75rem; text-align: center; opacity: 0; filter: blur(12px); transform: translateY(20px); animation: blurUp 1.4s cubic-bezier(.25,.1,.25,1) .3s forwards; }
 
         .h1-line { display: block; white-space: nowrap; padding: 0; margin: 0; text-align: center; }
         .hero-h1 .accent { color: var(--text); text-shadow: none; animation: glowIn 1.2s cubic-bezier(.25,.1,.25,1) 2s forwards; }
-        .hero-sub { font-family: var(--font-b); font-size: clamp(.88rem,1.4vw,1.22rem); font-weight: 400; line-height: 1.7; color: rgba(240,240,245,.65); max-width: 620px; margin: 0 auto 1.5rem; opacity: 0; filter: blur(12px); transform: translateY(20px); animation: blurUp 1.4s cubic-bezier(.25,.1,.25,1) .6s forwards; }
+        .hero-sub { font-family: var(--font-b); font-size: clamp(.88rem,1.4vw,1.22rem); font-weight: 400; line-height: 1.7; color: rgba(240,240,245,.65); max-width: 750px; margin: 0 auto 1.5rem; opacity: 0; filter: blur(12px); transform: translateY(20px); animation: blurUp 1.4s cubic-bezier(.25,.1,.25,1) .6s forwards; }
         .hero-actions { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; opacity: 0; filter: blur(12px); transform: translateY(20px); animation: blurUp 1.4s cubic-bezier(.25,.1,.25,1) .9s forwards; }
 
         .hero-reviews {
@@ -287,6 +315,59 @@
         .tape-item .tape-star { font-size: .6rem; line-height: 1; color: var(--accent); opacity: .5; }
 
         /* ===================== SERVICES — LIQUID GLASS CARDS ===================== */
+        /* ===================== WHY DERER ===================== */
+        .why { padding: clamp(6rem,12vh,10rem) 0; background: var(--bg); position: relative; overflow: hidden; }
+        .why::before { content: ''; position: absolute; top: -30%; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, rgba(0,229,200,.03) 0%, transparent 60%); pointer-events: none; }
+        .why-header { text-align: center; margin-bottom: clamp(3.5rem,6vh,5.5rem); max-width: 700px; margin-left: auto; margin-right: auto; }
+        .why-title { font-family: var(--font-h); font-size: clamp(2rem,3.8vw,3.4rem); font-weight: 900; line-height: 1.05; letter-spacing: -.035em; text-transform: uppercase; margin-bottom: 1rem; }
+        .why-sub { font-size: .95rem; color: var(--text2); line-height: 1.7; }
+        .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+        .why-card {
+            position: relative; padding: clamp(2rem, 3vw, 2.75rem); border-radius: 16px;
+            background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06);
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            transition: transform .5s var(--ease), border-color .5s var(--ease), box-shadow .5s var(--ease);
+            overflow: hidden;
+        }
+        .why-card:hover { transform: translateY(-5px); border-color: var(--border-h); box-shadow: 0 20px 60px rgba(0,0,0,.25), var(--glow); }
+        .why-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent 10%, rgba(255,255,255,.08) 50%, transparent 90%); }
+        .why-card-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: rgba(0,229,200,.08); border: 1px solid rgba(0,229,200,.15); margin-bottom: 1.5rem; color: var(--accent); }
+        .why-card-icon svg { width: 22px; height: 22px; }
+        .why-card h3 { font-family: var(--font-h); font-size: clamp(1.1rem, 1.4vw, 1.3rem); font-weight: 700; letter-spacing: -.01em; margin-bottom: .75rem; }
+        .why-card p { font-size: .85rem; color: var(--text2); line-height: 1.7; }
+        @media (max-width: 900px) { .why-grid { grid-template-columns: 1fr; } }
+
+        /* ===================== PROCESS ===================== */
+        .process { padding: clamp(6rem,12vh,10rem) 0; background: var(--bg2); position: relative; overflow: hidden; }
+        .process::before { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 1000px; height: 600px; background: radial-gradient(ellipse, rgba(0,229,200,.04) 0%, transparent 60%); pointer-events: none; }
+        .process-header { text-align: center; margin-bottom: clamp(4rem,7vh,6rem); max-width: 700px; margin-left: auto; margin-right: auto; }
+        .process-title { font-family: var(--font-h); font-size: clamp(2rem,3.8vw,3.4rem); font-weight: 900; line-height: 1.05; letter-spacing: -.035em; text-transform: uppercase; margin-bottom: 1rem; }
+        .process-sub { font-size: .95rem; color: var(--text2); line-height: 1.7; }
+        .process-timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; position: relative; }
+        .process-card {
+            position: relative; border-radius: 20px; padding: clamp(2rem, 3vw, 2.75rem);
+            background: linear-gradient(160deg, rgba(255,255,255,.035) 0%, rgba(255,255,255,.01) 100%);
+            border: 1px solid rgba(255,255,255,.06);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            overflow: hidden;
+            transition: transform .5s var(--ease), border-color .5s var(--ease), box-shadow .5s var(--ease);
+        }
+        .process-card:hover { transform: translateY(-6px); border-color: var(--border-h); box-shadow: 0 24px 64px rgba(0,0,0,.3), var(--glow); }
+        .process-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent 5%, rgba(255,255,255,.1) 50%, transparent 95%); }
+        .process-card::after { content: ''; position: absolute; top: -40%; left: -20%; width: 70%; height: 70%; background: radial-gradient(ellipse, rgba(255,255,255,.02) 0%, transparent 70%); pointer-events: none; }
+        .process-card-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .process-step-num { width: 56px; height: 56px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 14px; background: rgba(0,229,200,.08); border: 1px solid rgba(0,229,200,.18); font-family: var(--font-h); font-size: 1.3rem; font-weight: 900; color: var(--accent); position: relative; z-index: 2; transition: all .4s var(--ease); }
+        .process-card:hover .process-step-num { background: rgba(0,229,200,.14); border-color: rgba(0,229,200,.35); box-shadow: 0 0 20px rgba(0,229,200,.12); }
+        .process-step h3 { font-family: var(--font-h); font-size: clamp(1.1rem, 1.4vw, 1.3rem); font-weight: 700; letter-spacing: -.01em; position: relative; z-index: 2; }
+        .process-step p { font-size: .85rem; color: var(--text2); line-height: 1.75; position: relative; z-index: 2; margin-bottom: 1.25rem; }
+        .process-step-details { display: flex; flex-direction: column; gap: .6rem; position: relative; z-index: 2; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,.06); }
+        .process-step-detail { display: flex; align-items: center; gap: .6rem; font-size: .78rem; color: var(--text3); font-family: var(--font-m); letter-spacing: .02em; }
+        .process-step-detail::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: .5; flex-shrink: 0; }
+        .process-cta { text-align: center; margin-top: clamp(3.5rem, 6vh, 5rem); }
+        @media (max-width: 768px) {
+            .process-timeline { grid-template-columns: 1fr; }
+        }
+
         .services { padding: clamp(6rem,12vh,10rem) 0; background: var(--bg); }
         .services-header { text-align: center; margin-bottom: clamp(3.5rem,6vh,5.5rem); max-width: 700px; margin-left: auto; margin-right: auto; }
         .services-title { font-family: var(--font-h); font-size: clamp(2rem,3.8vw,3.4rem); font-weight: 900; line-height: 1.05; letter-spacing: -.035em; text-transform: uppercase; margin-bottom: 1rem; }
@@ -515,7 +596,21 @@
         .inquiry-label-line .section-label { margin-bottom: 0; }
         .inquiry-title { font-family: var(--font-h); font-size: clamp(48px, 5.5vw, 72px); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; text-transform: uppercase; margin-bottom: 1.5rem; }
         .inquiry-sub { font-size: 1rem; color: var(--text2); line-height: 1.75; max-width: 460px; }
-        .inquiry-trust { display: none; }
+        .inquiry-trust { display: flex; flex-direction: column; gap: 1rem; margin-top: 2.5rem; }
+        .inquiry-trust-item { display: flex; align-items: center; gap: .75rem; }
+        .inquiry-trust-icon { width: 36px; height: 36px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: rgba(0,229,200,.08); border: 1px solid rgba(0,229,200,.15); color: var(--accent); }
+        .inquiry-trust-label { font-size: .85rem; color: var(--text2); line-height: 1.4; }
+        .inquiry-form { display: flex; flex-direction: column; gap: 1rem; position: relative; z-index: 2; }
+        .inq-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .inquiry-form .form-field { width: 100%; }
+        .inquiry-form input, .inquiry-form select, .inquiry-form textarea { width: 100%; font-family: var(--font-b); font-size: .9rem; padding: .85rem 1rem; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; color: var(--text); outline: none; transition: border-color .3s var(--ease), box-shadow .3s var(--ease); -webkit-appearance: none; appearance: none; }
+        .inquiry-form input:focus, .inquiry-form select:focus, .inquiry-form textarea:focus { border-color: rgba(0,229,200,.4); box-shadow: 0 0 0 3px rgba(0,229,200,.08); }
+        .inquiry-form input::placeholder, .inquiry-form textarea::placeholder { color: var(--text3); }
+        .inquiry-form select { color: var(--text3); cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2300e5c8' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 14px; padding-right: 2.5rem; }
+        .inquiry-form select:has(option:checked:not([disabled])) { color: var(--text); }
+        .inquiry-form textarea { resize: vertical; min-height: 80px; }
+        .inq-submit { width: 100%; justify-content: center; margin-top: .5rem; padding: 1rem 2rem; font-size: .9rem; }
+        @media (max-width: 768px) { .inq-field-row { grid-template-columns: 1fr; } }
 
         /* Glassmorphism form container */
         .form-container {
@@ -800,6 +895,8 @@
             .nav-links.open { opacity: 1; pointer-events: auto; }
             .nav-cta-desktop { display: none; }
             .nav-toggle { display: flex; }
+            .nav-dropdown-menu { position: static; opacity: 1; pointer-events: auto; transform: none; background: none; border: none; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 0 0 0 1rem; min-width: auto; }
+            .nav-dropdown > a svg { display: none; }
             .hero-social { display: none; }
             .hero-glow-blue { top: -200px; left: auto; right: -200px; width: 500px; height: 500px; }
             .hero { padding-top: 120px; padding-bottom: 180px; align-items: flex-start; min-height: auto; }
@@ -1002,17 +1099,21 @@
 
     <nav class="nav" id="nav"><div class="nav-bar">
         <a href="#" class="nav-logo"><img src="images/derer-logo.webp" alt="Derer Veranstaltungstechnik Logo" style="height:32px;width:auto;display:block;"></a>
-        <ul class="nav-links" id="navLinks"><li><a href="#services">Leistungen</a></li><li><a href="#about">Über uns</a></li><li><a href="#projects">Projekte</a></li><li><a href="#packages">Mietpakete</a></li><li><a href="#inquiry">Individuelle Anfrage</a></li><li><a href="#contact">Kontakt</a></li></ul>
+        <ul class="nav-links" id="navLinks"><li><a href="#why">Warum DERER?</a></li><li><a href="#about">Über uns</a></li><li><a href="#services">Leistungen</a></li><li><a href="#projects">Projekte</a></li><li><a href="#contact">Kontakt</a></li><li><a href="mietpakete.html">Mietpakete</a></li></ul>
         <a href="#packages" class="nav-cta nav-cta-desktop">Jetzt anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
         <button class="nav-toggle" id="navToggle" aria-label="Menü"><span></span><span></span><span></span></button>
     </div></nav>
 
     <section class="hero" id="hero">
         <div class="hero-bg">
-            <div class="hero-bg-slide active" style="background-image:url('images/ATF1.webp')"></div>
+            <div class="hero-bg-slide active zoom-a" style="background-image:url('images/hero1.webp')"></div>
+            <div class="hero-bg-slide zoom-b" style="background-image:url('images/hero2.webp')"></div>
+            <div class="hero-bg-slide zoom-c" style="background-image:url('images/hero3.webp')"></div>
+            <div class="hero-bg-slide zoom-d" style="background-image:url('images/hero4.webp')"></div>
         </div>
         <div class="hero-orb hero-orb-1"></div><div class="hero-orb hero-orb-2"></div><div class="hero-glow-blue"></div>
 <div class="hero-deco hero-deco-3"></div><div class="hero-deco hero-deco-4"></div>
+        <div class="hero-logo-backdrop" aria-hidden="true"><img src="images/backdrop-logo-1.webp" alt="" fetchpriority="high"></div>
         <div class="hero-social">
             <span class="s-lbl">Folge uns</span><div class="s-line"></div>
             <a href="https://www.instagram.com/derer_veranstaltungstechnik" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
@@ -1023,8 +1124,8 @@
         <div class="hero-content">
             <div class="hero-tagline"><span class="tagline-dot"></span> Veranstaltungstechnik aus Böbingen</div>
             <div class="hero-text-wrap">
-                <h1 class="hero-h1"><span class="h1-line">Damit dein Event</span><span class="h1-line"><span class="accent">unvergesslich</span> wird.</span></h1>
-                <p class="hero-sub">Von der Technik über den DJ bis zur kompletten Eventproduktion. Wir betreuen alles persönlich und mit dem Anspruch, dass am Ende einfach alles stimmt.</p>
+                <h1 class="hero-h1"><span class="h1-line">Wir geben deinem Event</span><span class="h1-line">den <span class="accent">Wow-Effekt.</span></span></h1>
+                <p class="hero-sub">Wir denken Licht, Ton und Atmosphäre von Anfang an zusammen.<br>Für Gänsehautmomente, über die deine Gäste noch lange reden werden.</p>
             </div>
             <div class="hero-actions">
                 <a href="#packages" class="btn-p">Jetzt anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
@@ -1060,10 +1161,68 @@
         </div>
     </section>
 
+    <section class="about" id="about"><div class="container"><div class="about-grid">
+        <div class="about-left">
+            <div><span class="section-label reveal">Über uns</span><h2 class="about-headline reveal d1">Mehr als nur hell <span class="accent">und laut.</span></h2></div>
+            <div>
+                <p class="about-text reveal d2">Was als große Leidenschaft für Musik und Technik begann, ist über die Jahre zu einem professionellen Eventservice gewachsen, der von Böbingen aus ganz Süddeutschland beschallt, beleuchtet und zum Staunen bringt.</p>
+                <p class="about-text reveal d3">Vieles hat sich seitdem verändert, aber eines ist geblieben: der Anspruch, aus jedem Event etwas zu machen, das sich nicht nur gut anhört und gut aussieht, sondern sich auch richtig anfühlt. Für deine Gäste, für deine Künstler und für dich.</p>
+                <p class="about-text reveal d4">Du hast die Vision für dein Event und wir bringen die Erfahrung, die Kreativität und die Technik mit, um daraus einen Abend zu machen, über den noch lange gesprochen wird.</p>
+                <div class="about-sig reveal d5"><div class="sig-av"><img src="images/danielderer.webp" alt="Daniel Derer, Gründer Derer Veranstaltungstechnik Böbingen" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div><div><div class="sig-name">Daniel Derer</div><div class="sig-role">Gründer und Technischer Leiter</div><img src="images/signatur-neu.webp" alt="Unterschrift Daniel Derer, Gründer und Technischer Leiter" class="about-signature"></div></div>
+            </div>
+        </div>
+        <div class="about-right reveal d2">
+            <div class="about-img about-img-1"><img src="images/ueberuns1.webp" alt="Derer Veranstaltungstechnik Team bei der Arbeit an einem Event" loading="lazy"></div>
+            <div class="about-img about-img-2"><img src="images/ueberuns2.webp" alt="Veranstaltungstechnik Setup mit Licht- und Tontechnik" loading="lazy"></div>
+            <div class="about-img about-img-3"><img src="images/ueberuns3.webp" alt="Backstage-Bereich bei Veranstaltung mit Technikequipment" loading="lazy"></div>
+            <div class="about-img about-img-4"><img src="images/ueberuns4.webp" alt="Veranstaltungstechnik im Einsatz bei Live-Event" loading="lazy"></div>
+        </div>
+    </div></div></section>
+
+    <section class="why" id="why"><div class="container">
+        <div class="why-header reveal">
+            <span class="section-label">Warum DERER?</span>
+            <h2 class="why-title">Was uns <span class="accent">unterscheidet.</span></h2>
+            <p class="why-sub">Andere liefern Equipment. Wir denken dein Event von der ersten Idee bis zum letzten Kabel.</p>
+        </div>
+        <div class="why-grid">
+            <div class="why-card reveal d1">
+                <div class="why-card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg></div>
+                <h3>Kreative Mitdenker.</h3>
+                <p>Andere stellen auf, was du bestellst. Wir setzen uns vorher mit dir hin und überlegen gemeinsam, was dein Event unvergesslich macht.</p>
+            </div>
+            <div class="why-card reveal d2">
+                <div class="why-card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m9 9 10.5-3m0 6.553v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 11-.99-3.467l2.31-.66a2.25 2.25 0 001.632-2.163zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 01-.99-3.467l2.31-.66A2.25 2.25 0 009 15.553z"/></svg></div>
+                <h3>Musiker am Pult.</h3>
+                <p>Wer selbst Musik macht, hört anders zu. Unser Team kommt aus der Musikszene und versteht, was auf der Bühne passieren muss, damit es das Publikum begeistert.</p>
+            </div>
+            <div class="why-card reveal d3">
+                <div class="why-card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1.001A3.75 3.75 0 0012 18z"/></svg></div>
+                <h3>Ein kühler Kopf.</h3>
+                <p>Ein Live-Event passiert genau einmal. Wenn irgendwas nicht nach Plan läuft, haben wir das gelöst, bevor es jemand mitbekommt. Dafür machen wir das seit über 15 Jahren.</p>
+            </div>
+        </div>
+    </div></section>
+
+    <section class="testimonial reveal"><div class="testimonial-bg"></div><div class="container">
+        <div class="testimonial-glow testimonial-glow--l"></div>
+        <div class="testimonial-glow testimonial-glow--r"></div>
+        <div class="testimonial-inner reveal">
+            <p class="testimonial-quote">Daniel überzeugt durch hohe <strong class="accent">Fachkompetenz</strong> und hat für jede Veranstaltung das passende Equipment. Selbst in stressigen Situationen behält er einen <strong class="accent">kühlen Kopf</strong> und findet immer eine Lösung. Für uns ist er mittlerweile unser fester Tontechniker, der jede Veranstaltung zum <strong class="accent">Highlight</strong> macht.</p>
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-author">
+                <div class="testimonial-info">
+                    <div class="testimonial-name">Roberto D'Amico</div>
+                    <div class="testimonial-role">Bassist Gmünder All Stars</div>
+                </div>
+            </div>
+        </div>
+    </div></section>
+
     <section class="services" id="services"><div class="container">
         <div class="services-header reveal">
-            <span class="section-label">Was wir machen</span>
-            <h2 class="services-title"><span class="h1-line">Alles aus einer <span class="accent">Hand.</span></span></h2>
+            <span class="section-label">Unsere Leistungen</span>
+            <h2 class="services-title"><span class="h1-line">Was wir für dich <span class="accent">tun.</span></span></h2>
             <p class="services-desc">Du sagst uns was du brauchst, wir kümmern uns um den Rest.</p>
         </div>
         <div class="glass-grid">
@@ -1096,6 +1255,7 @@
                     </div>
                     <div>
                         <p>Manchmal reicht ein Lautsprecher und ein Mikro. Bei uns kannst du Einzelgeräte mieten, ohne gleich ein Komplettpaket buchen zu müssen.</p>
+                        <a href="mietpakete.html" class="glass-card-link">Zu unseren Mietpaketen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
                     </div>
                 </div>
                 <div class="glass-card-img"><img src="images/eq-verleih.webp" alt="Veranstaltungstechnik Equipment zum Verleih" loading="lazy"></div>
@@ -1125,53 +1285,58 @@
         </div>
     </div></section>
 
-    <section class="stats"><div class="container"><div class="stats-grid">
-        <div class="stat-item reveal"><div class="stat-number" data-target="2000">0</div><div class="stat-label">Max. Gästekapazität</div></div>
-        <div class="stat-item reveal d1"><div class="stat-number" data-target="100">0</div><div class="stat-label">Persönlich betreut</div></div>
-        <div class="stat-item reveal d2"><div class="stat-number" data-target="30" data-suffix="+">0</div><div class="stat-label">Erfolgreiche Events</div></div>
-    </div></div></section>
-
-    <section class="about" id="about"><div class="container"><div class="about-grid">
-        <div class="about-left">
-            <div><span class="section-label reveal">Über uns</span><h2 class="about-headline reveal d1">Das sind <span class="accent">wir.</span></h2></div>
-            <div>
-                <p class="about-text reveal d2">Derer Veranstaltungstechnik ist Daniel Derer und ein Team aus Musikern und Technikern aus Böbingen an der Rems.</p>
-                <p class="about-text reveal d3">Bei uns bekommst du keine reine Technikfirma, sondern Leute die selbst auf der Bühne stehen und wissen, wie sich ein guter Abend anfühlen muss.</p>
-                <p class="about-text reveal d4">Von der familiären Feier bis zur großen Show betreuen wir dein Event persönlich.</p>
-                <div class="about-sig reveal d5"><div class="sig-av"><img src="images/danielderer.webp" alt="Daniel Derer, Gründer Derer Veranstaltungstechnik Böbingen" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div><div><div class="sig-name">Daniel Derer</div><div class="sig-role">Gründer und Technischer Leiter</div><img src="images/signatur-neu.webp" alt="Unterschrift Daniel Derer, Gründer und Technischer Leiter" class="about-signature"></div></div>
+    <section class="process" id="process"><div class="container">
+        <div class="process-header reveal">
+            <span class="section-label">Ablauf</span>
+            <h2 class="process-title">Von der Idee bis zum <span class="accent">letzten Kabel.</span></h2>
+            <p class="process-sub">Wir begleiten dein Event von Anfang an. Persönlich, kreativ und mit dem Anspruch, dass am Ende jeder Moment sitzt.</p>
+        </div>
+        <div class="process-timeline">
+            <div class="process-card reveal d1">
+                <div class="process-step">
+                    <div class="process-card-top">
+                        <div class="process-step-num">01</div>
+                        <h3>Kick-off und Konzept</h3>
+                    </div>
+                    <p>Wir setzen uns zusammen, hören zu und verstehen, was dein Event ausstrahlen soll. Daraus entwickeln wir ein maßgeschneidertes Konzept, das Licht, Ton und Atmosphäre von Anfang an zusammendenkt.</p>
+                    <div class="process-step-details">
+                        <div class="process-step-detail">Persönlicher Ansprechpartner</div>
+                        <div class="process-step-detail">Gemeinsam Ziele erarbeiten</div>
+                        <div class="process-step-detail">Kreatives Konzept mit Wow-Effekt</div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="about-right reveal d2">
-            <div class="about-img about-img-1"><img src="images/ueberuns1.webp" alt="Derer Veranstaltungstechnik Team bei der Arbeit an einem Event" loading="lazy"></div>
-            <div class="about-img about-img-2"><img src="images/ueberuns2.webp" alt="Veranstaltungstechnik Setup mit Licht- und Tontechnik" loading="lazy"></div>
-            <div class="about-img about-img-3"><img src="images/ueberuns3.webp" alt="Backstage-Bereich bei Veranstaltung mit Technikequipment" loading="lazy"></div>
-            <div class="about-img about-img-4"><img src="images/ueberuns4.webp" alt="Veranstaltungstechnik im Einsatz bei Live-Event" loading="lazy"></div>
-        </div>
-    </div></div></section>
-
-    <section class="testimonial reveal"><div class="testimonial-bg"></div><div class="container">
-        <div class="testimonial-glow testimonial-glow--l"></div>
-        <div class="testimonial-glow testimonial-glow--r"></div>
-        <div class="testimonial-inner reveal">
-            <p class="testimonial-quote">Daniel überzeugt durch hohe <strong class="accent">Fachkompetenz</strong> und hat für jede Veranstaltung das passende Equipment. Selbst in stressigen Situationen behält er einen <strong class="accent">kühlen Kopf</strong> und findet immer eine Lösung. Für uns ist er mittlerweile unser fester Tontechniker, der jede Veranstaltung zum <strong class="accent">Highlight</strong> macht.</p>
-            <div class="testimonial-stars">★★★★★</div>
-            <div class="testimonial-author">
-                <div class="testimonial-info">
-                    <div class="testimonial-name">Roberto D'Amico</div>
-                    <div class="testimonial-role">Bassist Gmünder All Stars</div>
+            <div class="process-card reveal d2">
+                <div class="process-step">
+                    <div class="process-card-top">
+                        <div class="process-step-num">02</div>
+                        <h3>Planung und Feinschliff</h3>
+                    </div>
+                    <p>Wir checken deine Location vor Ort, planen jedes Detail und stimmen alle Gewerke aufeinander ab. Du bekommst laufende Updates und kannst dich darauf verlassen, dass wir an alles denken.</p>
+                    <div class="process-step-details">
+                        <div class="process-step-detail">Location-Besichtigung vor Ort</div>
+                        <div class="process-step-detail">Detailplanung aller Gewerke</div>
+                        <div class="process-step-detail">Laufende Abstimmung mit dir</div>
+                    </div>
+                </div>
+            </div>
+            <div class="process-card reveal d3">
+                <div class="process-step">
+                    <div class="process-card-top">
+                        <div class="process-step-num">03</div>
+                        <h3>Showtime</h3>
+                    </div>
+                    <p>Aufbau, Soundcheck, Live-Betreuung am Mischpult und auf der Bühne. Wir sind vor Ort, damit du den Abend genauso genießen kannst wie deine Gäste. Danach bauen wir ab, du gehst nach Hause.</p>
+                    <div class="process-step-details">
+                        <div class="process-step-detail">Aufbau und Inbetriebnahme</div>
+                        <div class="process-step-detail">Live-Betreuung während des Events</div>
+                        <div class="process-step-detail">Abbau und Rücktransport</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div></section>
-
-    <section class="projects" id="projects"><div class="container">
-        <div class="projects-header reveal"><span class="section-label">Referenzen</span><h2 class="projects-title"><span style="color:var(--accent)">Highlights</span> aus den letzten Jahren.</h2><p class="projects-sub">Jedes Event ist anders, aber eines hatten alle gemeinsam: Am Ende des Abends hat einfach alles gestimmt. Hier sind ein paar Beispiele.</p></div>
-        <div class="gallery-grid">
-            <div class="gallery-item large reveal" onclick="openProject(0)"><div class="gallery-ph g1"></div><img class="gallery-img" src="images/referenzen/soundofmovies.webp" alt="Bühnenbeleuchtung Sound of Movies Musical Filharmonie Filderstadt 2024" loading="lazy"><div class="gallery-overlay"><h3>Sound of Movies</h3><p>Musical-Großproduktion, 300+ Akteure, Filharmonie Filderstadt</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
-            <div class="gallery-item reveal" onclick="openProject(1)"><div class="gallery-ph g2"></div><img class="gallery-img" src="images/referenzen/lichterfest-boebingen.webp" alt="Lichterfest Böbingen an der Rems Open-Air Bühne 2024" loading="lazy"><div class="gallery-overlay"><h3>Lichterfest Böbingen</h3><p>Open-Air mit Live-Bands, zwei Abende</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
-            <div class="gallery-item reveal" onclick="openProject(2)"><div class="gallery-ph g3"></div><img class="gallery-img" src="images/referenzen/bluesbrothers.webp" alt="Blues Brothers Musical Bühnenproduktion Wolf-Ferrari-Haus Ottobrunn" loading="lazy"><div class="gallery-overlay"><h3>Blues Brothers Musical</h3><p>Musical, Wolf-Ferrari-Haus Ottobrunn</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
-            <div class="gallery-item reveal" onclick="openProject(3)"><div class="gallery-ph g4"></div><img class="gallery-img" src="images/referenzen/hochzeit.webp" alt="Hochzeit Ambientebeleuchtung und DJ im Dorfhaus Pfersbach" loading="lazy"><div class="gallery-overlay"><h3>Hochzeit in Pfersbach</h3><p>Ambiente, DJ und Partylicht im Dorfhaus</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
-            <div class="gallery-item reveal" onclick="openProject(4)"><div class="gallery-ph g5"></div><img class="gallery-img" src="images/referenzen/parkfullofsound.webp" alt="Park Full of Sound Mehrbühnen-Festival Böbingen an der Rems" loading="lazy"><div class="gallery-overlay"><h3>Park Full of Sound</h3><p>Mehrbühnen-Festival, Recording, Böbingen</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
+        <div class="process-cta reveal">
+            <a href="#inquiry" class="btn-p">Jetzt anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
         </div>
     </div></section>
 
@@ -1200,135 +1365,16 @@
         </div>
     </div>
 
-    <!-- PACKAGES SECTION -->
-    <section class="packages" id="packages"><div class="container">
-        <div class="packages-header reveal">
-            <span class="section-label">Mietpakete</span>
-            <h2 class="packages-title">Such dir aus, was du <span class="accent">brauchst.</span></h2>
-            <p class="packages-sub">Hier findest du fertige Pakete für jeden Anlass. Du sagst uns wann und wo, wir bringen alles mit und zeigen dir wie es funktioniert.</p>
-        </div>
-        <div class="pkg-tabs reveal d1">
-            <button class="pkg-tab active" data-filter="licht">Licht</button>
-            <button class="pkg-tab" data-filter="sound">Musik und Sound</button>
-            <button class="pkg-tab" data-filter="reden">Reden und Vorträge</button>
-            <button class="pkg-tab" data-filter="stimmung">Stimmungslicht</button>
-            <button class="pkg-tab" data-filter="komplett">Rundum-sorglos</button>
-        </div>
-        <div class="pkg-grid reveal d2">
-            <!-- LICHT -->
-            <div class="pkg-card" data-category="licht" hidden>
-                <div class="pkg-card-name">Lichtset mini</div>
-                <div class="pkg-card-desc">Einfache Lichtshow für kleine Räume. Bunte Farbwechsel und ein Effektstrahler sorgen für Party-Atmosphäre.</div>
-                <details class="pkg-details"><summary>Technische Details <svg class="pkg-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></summary><div class="pkg-details-content">1x T-Bar mit 2x AT3 LED-Scheinwerfern, 1x ADJ Quad Phase Effekt, 1x Lichtstativ, Kabelsatz und Zubehör inklusive.</div></details>
-                <div class="pkg-card-price">30 € <span>netto</span></div>
-                <button class="pkg-card-btn" onclick="requestPackage(this)">Dieses Paket anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>
-            </div>
-            <div class="pkg-card" data-category="licht" hidden>
-                <div class="pkg-card-name">Lichtset klein</div>
-                <div class="pkg-card-desc">Doppelte Lichtpower für mittelgroße Räume. Zwei Lichtleisten mit Farbwechsel und Effekten von zwei Seiten.</div>
-                <details class="pkg-details"><summary>Technische Details <svg class="pkg-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></summary><div class="pkg-details-content">2x T-Bar mit je 2x AT3 LED-Scheinwerfern, je 1x ADJ Quad Phase Effekt, 2x Lichtstativ, Kabelsatz und Zubehör inklusive.</div></details>
-                <div class="pkg-card-price">60 € <span>netto</span></div>
-                <button class="pkg-card-btn" onclick="requestPackage(this)">Dieses Paket anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>
-            </div>
-            <div class="pkg-card" data-category="licht" hidden>
-                <div class="pkg-card-name">Lichtset groß</div>
-                <div class="pkg-card-desc">Volle Lichtshow für große Feiern. Sechs Scheinwerfer und zwei Effektstrahler bringen richtig Farbe rein.</div>
-                <details class="pkg-details"><summary>Technische Details <svg class="pkg-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></summary><div class="pkg-details-content">2x T-Bar mit je 3x AT3 LED-Scheinwerfern, je 1x ADJ Quad Phase Effekt, 2x Lichtstativ, Kabelsatz und Zubehör inklusive.</div></details>
-                <div class="pkg-card-price">90 € <span>netto</span></div>
-                <button class="pkg-card-btn" onclick="requestPackage(this)">Dieses Paket anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>
-            </div>
-            <!-- MUSIK UND SOUND -->
-            <div class="pkg-card" data-category="sound" hidden>
-                <div class="pkg-card-name">Musik Mini</div>
-                <div class="pkg-card-guests">Bis 50 Gäste</div>
-                <div class="pkg-card-desc">Ein Lautsprecher, der locker einen kleinen Raum beschallt. Perfekt zum Musik abspielen auf deiner Feier.</div>
-                <details class="pkg-details"><summary>Technische Details <svg class="pkg-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></summary><div class="pkg-details-content">1x Fullrange Lautsprecher aktiv, 1x Lautsprecherstativ, Kabelsatz und Zubehör inklusive.</div></details>
-                <div class="pkg-card-price">40 € <span>netto</span></div>
-                <button class="pkg-card-btn" onclick="requestPackage(this)">Dieses Paket anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>
-            </div>
-            <div class="pkg-card" data-category="sound" hidden>
-                <div class="pkg-card-name">Musik Klein</div>
-                <div class="pkg-card-guests">Bis 100 Gäste</div>
-                <div class="pkg-card-desc">Zwei Lautsprecher plus ein Subwoofer für satten Bass. Deine Gäste hören die Musik klar und spüren sie im Bauch.</div>
-                <details class="pkg-details"><summary>Technische Details <svg class="pkg-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></summary><div class="pkg-details-content">2x Fullrange Lautsprecher aktiv, 1x 18″ Subwoofer aktiv, 2x Lautsprecherstativ, Kabelsatz und Zubehör inklusive.</div></details>
-                <div class="pkg-card-price">130 € <span>netto</span></div>
-                <button class="pkg-card-btn" onclick="requestPackage(this)">Dieses Paket anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>
-            </div>
-            <div class="pkg-card" data-category="sound" hidden>
-                <div class="pkg-card-name">Musik Groß</div>
-                <div class="pkg-card-guests">Bis 350 Gäste</div>
-                <div class="pkg-card-desc">Professionelle Beschallung für große Feiern. Mischpult und Mikrofon sind mit dabei, falls jemand eine Ansage machen will.</div>
-                <details class="pkg-details"><summary>Technische Details <svg class="pkg-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></summary><div class="pkg-details-content">2x HK Linear 5 LTS, 1x HK Linear Sub 4000, 1x 4-Kanal Mischpult, 1x dynamisches Mikrofon, 2x Lautsprecher-Distanzstange und Stativ, Kabelsatz und Zubehör inklusive.</div></details>
-                <div class="pkg-card-price">180 € <span>netto</span></div>
-                <button class="pkg-card-btn" onclick="requestPackage(this)">Dieses Paket anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>
-            </div>
-            <!-- REDEN UND VORTRÄGE -->
-            <div class="pkg-card" data-category="reden" hidden>
-                <div class="pkg-card-name">Sprachset Klein</div>
-                <div class="pkg-card-guests">Bis 100 Gäste</div>
-                <div class="pkg-card-desc">Alles was du brauchst damit jede Rede im Raum ankommt. Ein Kabelmikrofon für den festen Platz, ein Funkmikrofon für Bewegungsfreiheit.</div>
-                <details class="pkg-details"><summary>Technische Details <svg class="pkg-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></summary><div class="pkg-details-content">2x Fullrange Lautsprecher aktiv, 1x 4-Kanal Mischpult, 1x dynamisches Mikrofon, 1x Funkmikrofon, 2x Lautsprecherstativ, 2x Mikrofonstativ, Kabelsatz und Zubehör inklusive.</div></details>
-                <div class="pkg-card-price">130 € <span>netto</span></div>
-                <button class="pkg-card-btn" onclick="requestPackage(this)">Dieses Paket anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>
-            </div>
-            <div class="pkg-card" data-category="reden" hidden>
-                <div class="pkg-card-name">Sprachset Groß</div>
-                <div class="pkg-card-guests">Bis 250 Gäste</div>
-                <div class="pkg-card-desc">Glasklare Sprachbeschallung für größere Veranstaltungen. Zwei Funkmikrofone für flexible Moderation oder Podiumsdiskussionen.</div>
-                <details class="pkg-details"><summary>Technische Details <svg class="pkg-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></summary><div class="pkg-details-content">2x HK Linear 5 LTS, 1x 4-Kanal Mischpult, 2x Funkmikrofone, 2x Lautsprecherstative, 2x Mikrofonstative, Kabelsatz und Zubehör inklusive.</div></details>
-                <div class="pkg-card-price">160 € <span>netto</span></div>
-                <button class="pkg-card-btn" onclick="requestPackage(this)">Dieses Paket anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>
-            </div>
-            <!-- STIMMUNGSLICHT -->
-            <div class="pkg-card" data-category="stimmung" hidden>
-                <div class="pkg-card-name">Stimmungslicht Klein</div>
-                <div class="pkg-card-desc">Acht kabellose LED-Scheinwerfer, die du überall hinstellen kannst. Tauchen deinen Raum in jede Farbe die du willst, ganz ohne Kabelsalat.</div>
-                <details class="pkg-details"><summary>Technische Details <svg class="pkg-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></summary><div class="pkg-details-content">8x RGBUV LED Akku-Scheinwerfer, Kabelsatz und Zubehör inklusive.</div></details>
-                <div class="pkg-card-price">120 € <span>netto</span></div>
-                <button class="pkg-card-btn" onclick="requestPackage(this)">Dieses Paket anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>
-            </div>
-            <div class="pkg-card" data-category="stimmung" hidden>
-                <div class="pkg-card-name">Stimmungslicht Groß</div>
-                <div class="pkg-card-desc">Acht professionelle LED-Scheinwerfer für gleichmäßiges, flächiges Licht. Ideal für Hochzeiten, Empfänge oder überall wo die Atmosphäre stimmen muss.</div>
-                <details class="pkg-details"><summary>Technische Details <svg class="pkg-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></summary><div class="pkg-details-content">8x AT10 RGBA LED Scheinwerfer, Kabelsatz und Zubehör inklusive.</div></details>
-                <div class="pkg-card-price">120 € <span>netto</span></div>
-                <button class="pkg-card-btn" onclick="requestPackage(this)">Dieses Paket anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>
-            </div>
-            <!-- RUNDUM-SORGLOS -->
-            <div class="pkg-card" data-category="komplett">
-                <div class="pkg-card-name">Rundum-sorglos Mini</div>
-                <div class="pkg-card-guests">Bis 50 Gäste</div>
-                <div class="pkg-card-desc">Sound und Licht in einem Paket für kleine Feiern. Aufstellen, einschalten, genießen.</div>
-                <details class="pkg-details"><summary>Technische Details <svg class="pkg-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></summary><div class="pkg-details-content">1x Fullrange Lautsprecher aktiv, 1x Lautsprecherstativ, 1x T-Bar mit 2x AT3 und 1x ADJ Quad Phase, 1x Lichtstativ, Kabelsatz und Zubehör inklusive.</div></details>
-                <div class="pkg-card-price">120 € <span>netto</span></div>
-                <button class="pkg-card-btn" onclick="requestPackage(this)">Dieses Paket anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>
-            </div>
-            <div class="pkg-card" data-category="komplett">
-                <div class="pkg-card-name">Rundum-sorglos Klein</div>
-                <div class="pkg-card-guests">Bis 100 Gäste</div>
-                <div class="pkg-card-desc">Voller Sound mit Bass und eine komplette Lichtshow für mittelgroße Feiern. Du kümmerst dich um die Gäste, wir kümmern uns um den Rest.</div>
-                <details class="pkg-details"><summary>Technische Details <svg class="pkg-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></summary><div class="pkg-details-content">2x Fullrange Lautsprecher aktiv, 2x Lautsprecherstativ, 1x 18″ Subwoofer aktiv, 2x T-Bar mit je 2x AT3 und 1x ADJ Quad Phase, 2x Lichtstativ, Kabelsatz und Zubehör inklusive.</div></details>
-                <div class="pkg-card-price">210 € <span>netto</span></div>
-                <button class="pkg-card-btn" onclick="requestPackage(this)">Dieses Paket anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>
-            </div>
-            <div class="pkg-card" data-category="komplett">
-                <div class="pkg-card-name">Rundum-sorglos Groß</div>
-                <div class="pkg-card-guests">Bis 350 Gäste</div>
-                <div class="pkg-card-desc">Das volle Programm für große Events. Professioneller Sound, beeindruckendes Licht mit Moving Heads und Traversentürmen. Dein Event sieht aus und klingt wie ein Konzerterlebnis.</div>
-                <details class="pkg-details"><summary>Technische Details <svg class="pkg-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></summary><div class="pkg-details-content">2x HK Linear 5 LTS, 1x HK Linear Sub 4000, 1x 4-Kanal Mischpult, 1x dynamisches Mikrofon, 2x Lautsprecher-Distanzstange und Stativ, 2x T-Bar mit je 3x AT3 und 1x ADJ Quad Phase, 2x Beam Washer Moving-Heads, 2x AT3 Uplights, 2x Traversenturm 1,5m, 2x Lichtstativ.</div></details>
-                <div class="pkg-card-price">400 € <span>netto</span></div>
-                <button class="pkg-card-btn" onclick="requestPackage(this)">Dieses Paket anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>
-            </div>
-            <!-- INDIVIDUELL (alle Kategorien) -->
-            <div class="pkg-card pkg-card--custom" data-category="licht sound reden stimmung komplett">
-                <div class="pkg-card-name">Ab 500 Gäste?</div>
-                <div class="pkg-card-desc">Festivals, Open-Airs und Großveranstaltungen planen wir komplett individuell für dich. Sag uns was du vorhast und wir machen den Rest.</div>
-                <button class="pkg-card-btn" onclick="requestPackage(this)" style="margin-top:1.5rem;">Individuell anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>
-            </div>
+    <section class="projects" id="projects"><div class="container">
+        <div class="projects-header reveal"><span class="section-label">Referenzen</span><h2 class="projects-title"><span style="color:var(--accent)">Highlights</span> aus den letzten Jahren.</h2><p class="projects-sub">Jedes Event ist anders, aber eines hatten alle gemeinsam: Am Ende des Abends hat einfach alles gestimmt. Hier sind ein paar Beispiele.</p></div>
+        <div class="gallery-grid">
+            <div class="gallery-item large reveal" onclick="openProject(0)"><div class="gallery-ph g1"></div><img class="gallery-img" src="images/referenzen/soundofmovies.webp" alt="Bühnenbeleuchtung Sound of Movies Musical Filharmonie Filderstadt 2024" loading="lazy"><div class="gallery-overlay"><h3>Sound of Movies</h3><p>Musical-Großproduktion, 300+ Akteure, Filharmonie Filderstadt</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
+            <div class="gallery-item reveal" onclick="openProject(1)"><div class="gallery-ph g2"></div><img class="gallery-img" src="images/referenzen/lichterfest-boebingen.webp" alt="Lichterfest Böbingen an der Rems Open-Air Bühne 2024" loading="lazy"><div class="gallery-overlay"><h3>Lichterfest Böbingen</h3><p>Open-Air mit Live-Bands, zwei Abende</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
+            <div class="gallery-item reveal" onclick="openProject(2)"><div class="gallery-ph g3"></div><img class="gallery-img" src="images/referenzen/bluesbrothers.webp" alt="Blues Brothers Musical Bühnenproduktion Wolf-Ferrari-Haus Ottobrunn" loading="lazy"><div class="gallery-overlay"><h3>Blues Brothers Musical</h3><p>Musical, Wolf-Ferrari-Haus Ottobrunn</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
+            <div class="gallery-item reveal" onclick="openProject(3)"><div class="gallery-ph g4"></div><img class="gallery-img" src="images/referenzen/hochzeit.webp" alt="Hochzeit Ambientebeleuchtung und DJ im Dorfhaus Pfersbach" loading="lazy"><div class="gallery-overlay"><h3>Hochzeit in Pfersbach</h3><p>Ambiente, DJ und Partylicht im Dorfhaus</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
+            <div class="gallery-item reveal" onclick="openProject(4)"><div class="gallery-ph g5"></div><img class="gallery-img" src="images/referenzen/parkfullofsound.webp" alt="Park Full of Sound Mehrbühnen-Festival Böbingen an der Rems" loading="lazy"><div class="gallery-overlay"><h3>Park Full of Sound</h3><p>Mehrbühnen-Festival, Recording, Böbingen</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
         </div>
     </div></section>
-
-    <!-- Inline forms are injected into cards via JS -->
 
     <section class="inquiry" id="inquiry">
         <div class="inquiry-bg"></div>
@@ -1339,97 +1385,58 @@
         <div class="container"><div class="inquiry-wrapper">
             <div class="inquiry-left">
                 <div class="inquiry-header reveal">
-                    <div class="inquiry-label-line"><span class="section-label">Maßgeschneidert für dich</span></div>
-                    <h2 class="inquiry-title">Individuelle <span class="accent">Anfrage.</span></h2>
-                    <p class="inquiry-sub">Du planst etwas Größeres oder hast eine ganz eigene Vorstellung? Dann lass uns kurz wissen, was du brauchst. Wir melden uns innerhalb von 48 Stunden bei dir.</p>
+                    <div class="inquiry-label-line"><span class="section-label">Jetzt anfragen</span></div>
+                    <h2 class="inquiry-title">Erzähl uns von deinem <span class="accent">Event.</span></h2>
+                    <p class="inquiry-sub">Egal ob erste Idee oder konkreter Plan. Schreib uns kurz, was du vorhast. Wir melden uns persönlich und beraten dich gerne ganz unverbindlich.</p>
                 </div>
                 <div class="inquiry-trust reveal d2">
-                    <div class="inquiry-trust-item"><div class="inquiry-trust-num">250+</div><div class="inquiry-trust-label">Events betreut</div></div>
-                    <div class="inquiry-trust-item"><div class="inquiry-trust-num">&lt; 48h</div><div class="inquiry-trust-label">Antwortzeit</div></div>
+                    <div class="inquiry-trust-item">
+                        <div class="inquiry-trust-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                        <div><div class="inquiry-trust-label">Persönliche Rückmeldung in 48h</div></div>
+                    </div>
+                    <div class="inquiry-trust-item">
+                        <div class="inquiry-trust-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                        <div><div class="inquiry-trust-label">Kostenloses, unverbindliches Angebot</div></div>
+                    </div>
                 </div>
             </div>
             <div class="inquiry-right">
             <div class="form-container reveal d2">
                 <div class="form-sheen"></div>
                 <div class="form-glow-bottom"></div>
-                <div class="form-progress" id="formProgress">
-                    <div class="step-indicator-text" id="stepText">Schritt <span>1</span> von 4</div>
-                    <div class="step-bar"><div class="step-bar-fill" id="stepBarFill" style="width:25%"></div></div>
-                </div>
-                <div class="form-step active" id="step1">
-                    <h3 class="step-question">Was für ein Event planst du?</h3>
-                    <div class="option-grid">
-                        <div class="option-card" onclick="sel(this)">
-                            <div class="option-icon-wrap"><img src="images/firmenfeier-icon.webp" alt="Icon Firmenfeier Veranstaltungstechnik"></div>
-                            <div class="option-text"><span class="option-label">Firmenfeier</span><span class="option-desc">Betriebsfest, Jubiläum, Weihnachtsfeier</span></div>
-                            <div class="option-radio"></div>
-                        </div>
-                        <div class="option-card" onclick="sel(this)">
-                            <div class="option-icon-wrap"><img src="images/privatfeier-icon.webp" alt="Icon Privatfeier und Hochzeiten"></div>
-                            <div class="option-text"><span class="option-label">Privatfeier</span><span class="option-desc">Geburtstag, Hochzeit, Familienfeier</span></div>
-                            <div class="option-radio"></div>
-                        </div>
-                        <div class="option-card" onclick="sel(this)">
-                            <div class="option-icon-wrap"><img src="images/komzertodershow-icon.webp" alt="Icon Konzert und Bühnenshow"></div>
-                            <div class="option-text"><span class="option-label">Konzert oder Show</span><span class="option-desc">Live-Musik, Theater, Musical</span></div>
-                            <div class="option-radio"></div>
-                        </div>
-                        <div class="option-card" onclick="sel(this)">
-                            <div class="option-icon-wrap"><img src="images/konferenz-icon.webp" alt="Icon Konferenz und Tagung"></div>
-                            <div class="option-text"><span class="option-label">Konferenz</span><span class="option-desc">Meeting, Vortrag, Tagung</span></div>
-                            <div class="option-radio"></div>
-                        </div>
+                <div class="inquiry-form" id="inquiryForm">
+                    <div class="inq-field-row">
+                        <div class="form-field"><input type="text" id="inqName" placeholder="Name *" required></div>
+                        <div class="form-field"><input type="tel" id="inqPhone" placeholder="Telefon"></div>
                     </div>
-                    <div class="form-nav"><div></div><button class="btn-p btn-next" onclick="goStep(2)">Weiter <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button></div>
-                </div>
-                <div class="form-step" id="step2">
-                    <h3 class="step-question">Wie viele Gäste erwartest du?</h3>
-                    <div class="size-options">
-                        <div class="size-option" onclick="sel(this)"><div class="size-number">bis 50</div><div class="size-label">Gäste</div></div>
-                        <div class="size-option" onclick="sel(this)"><div class="size-number">bis 100</div><div class="size-label">Gäste</div></div>
-                        <div class="size-option" onclick="sel(this)"><div class="size-number">bis 250</div><div class="size-label">Gäste</div></div>
-                        <div class="size-option" onclick="sel(this)"><div class="size-number">bis 350</div><div class="size-label">Gäste</div></div>
-                        <div class="size-option" onclick="sel(this)"><div class="size-number">500+</div><div class="size-label">Gäste</div></div>
+                    <div class="form-field"><input type="email" id="inqEmail" placeholder="E-Mail-Adresse *" required></div>
+                    <div class="inq-field-row">
+                        <div class="form-field">
+                            <select id="inqEventType" required>
+                                <option value="" disabled selected>Art des Events *</option>
+                                <option value="Hochzeit">Hochzeit</option>
+                                <option value="Firmenfeier">Firmenfeier</option>
+                                <option value="Konzert / Show">Konzert / Show</option>
+                                <option value="Privatfeier">Privatfeier</option>
+                                <option value="Konferenz">Konferenz</option>
+                                <option value="Festival">Festival</option>
+                                <option value="Anderes">Anderes</option>
+                            </select>
+                        </div>
+                        <div class="form-field"><input type="text" id="inqDate" placeholder="Wann? z.B. Juni 2026"></div>
                     </div>
-                    <div class="form-nav form-nav--split"><button class="btn-back" onclick="goStep(1)">← Zurück</button><button class="btn-p btn-next" onclick="goStep(3)">Weiter <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button></div>
-                </div>
-                <div class="form-step" id="step3">
-                    <h3 class="step-question">Was brauchst du?</h3>
-                    <div class="equipment-grid">
-                        <div class="equipment-option" onclick="tog(this)"><div class="eq-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div><span class="eq-label">Tontechnik</span></div>
-                        <div class="equipment-option" onclick="tog(this)"><div class="eq-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div><span class="eq-label">Lichttechnik</span></div>
-                        <div class="equipment-option" onclick="tog(this)"><div class="eq-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div><span class="eq-label">DJ-Service</span></div>
-                        <div class="equipment-option" onclick="tog(this)"><div class="eq-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div><span class="eq-label">Künstler / Band</span></div>
-                        <div class="equipment-option" onclick="tog(this)"><div class="eq-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div><span class="eq-label">Komplettpaket</span></div>
-                        <div class="equipment-option" onclick="tog(this)"><div class="eq-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div><span class="eq-label">Weiß noch nicht</span></div>
-                    </div>
-                    <div class="form-nav form-nav--split"><button class="btn-back" onclick="goStep(2)">← Zurück</button><button class="btn-p btn-next" onclick="goStep(4)">Weiter <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button></div>
-                </div>
-                <div class="form-step" id="step4">
-                    <h3 class="step-question">Wie erreichen wir dich?</h3>
-                    <div class="contact-fields">
-                        <div class="form-field full-width"><input type="text" placeholder="Name" required></div>
-                        <div class="form-field"><input type="email" placeholder="E-Mail-Adresse" required></div>
-                        <div class="form-field"><input type="tel" placeholder="Telefonnummer" required></div>
-                    </div>
+                    <div class="form-field"><textarea id="inqMessage" placeholder="Nachricht (optional)" rows="3"></textarea></div>
                     <div class="ohnehonig"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
                     <div class="dsgvo-check">
                         <input type="checkbox" id="dsgvoMain" required>
                         <label for="dsgvoMain">Ich stimme zu, dass meine Angaben zur Bearbeitung meiner Anfrage verarbeitet werden. Weitere Infos in der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.</label>
                     </div>
-                    <div class="form-nav form-nav--split"><button class="btn-back" onclick="goStep(3)">← Zurück</button><button class="btn-p btn-next" onclick="submitForm()">Anfrage absenden <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button></div>
-                    <div class="form-timeline">
-                        <div class="ft-step ft-step--active"><div class="ft-dot">1</div><div class="ft-label">Anfrage absenden</div></div>
-                        <div class="ft-line"></div>
-                        <div class="ft-step ft-step--active"><div class="ft-dot">2</div><div class="ft-label">Rückmeldung in 48h</div></div>
-                        <div class="ft-line"></div>
-                        <div class="ft-step ft-step--active"><div class="ft-dot">3</div><div class="ft-label">Kostenloses Angebot</div></div>
-                    </div>
+                    <button class="btn-p inq-submit" id="inqSubmit" onclick="submitInquiry()">Anfrage absenden <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>
                 </div>
-                <div class="form-step" id="stepOk" style="text-align:center;padding:3rem 0;">
+                <div class="inq-success" id="inqSuccess" style="display:none;text-align:center;padding:3rem 0;">
                     <div class="success-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
-                    <h3 class="step-question" style="margin-bottom:.75rem;text-align:center;">Anfrage abgeschickt.</h3>
-                    <p style="color:var(--text2);font-size:.95rem;line-height:1.6;text-align:center;">Wir melden uns innerhalb von 48 Stunden bei dir.</p>
+                    <h3 style="font-family:var(--font-h);font-size:1.3rem;font-weight:700;margin-bottom:.75rem;">Anfrage abgeschickt.</h3>
+                    <p style="color:var(--text2);font-size:.95rem;line-height:1.6;">Wir melden uns persönlich bei dir.</p>
                 </div>
             </div>
             </div>
@@ -1587,6 +1594,24 @@
         nt.addEventListener('click',()=>{nt.classList.toggle('active');nl.classList.toggle('open');});
         nl.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>{nt.classList.remove('active');nl.classList.remove('open');}));
 
+        /* Hero slideshow */
+        (function(){
+            const slides=document.querySelectorAll('.hero-bg-slide');
+            if(slides.length<2)return;
+            const zooms=['zoom-a','zoom-b','zoom-c','zoom-d'];
+            let cur=0;
+            setInterval(()=>{
+                const prev=slides[cur];
+                cur=(cur+1)%slides.length;
+                const next=slides[cur];
+                zooms.forEach(z=>next.classList.remove(z));
+                void next.offsetWidth;
+                next.classList.add(zooms[cur%zooms.length]);
+                prev.classList.remove('active');
+                next.classList.add('active');
+            },5000);
+        })();
+
         /* Reveal observer — group stagger for gallery & testimonial cards */
         function revealEl(el){
             el.classList.add('visible');
@@ -1716,12 +1741,9 @@
         stats.forEach(el=>cObs.observe(el));
 
         let cur=1;
-        function sel(c){c.parentElement.querySelectorAll('.option-card,.size-option').forEach(s=>s.classList.remove('selected'));c.classList.add('selected');}
-        function tog(c){c.classList.toggle('selected');}
-        function goStep(s){document.getElementById(`step${cur}`).classList.remove('active');document.getElementById(`step${s}`).classList.add('active');var t=document.getElementById('stepText');if(t)t.innerHTML='Schritt <span>'+s+'</span> von 4';var b=document.getElementById('stepBarFill');if(b)b.style.width=(s*25)+'%';cur=s;}
-        function submitForm(){
-            var step=document.getElementById('step'+cur);
-            var inputs=step.querySelectorAll('input[required]');
+        function submitInquiry(){
+            var form=document.getElementById('inquiryForm');
+            var inputs=form.querySelectorAll('input[required],select[required]');
             var valid=true;
             inputs.forEach(function(inp){
                 if(inp.type==='checkbox'&&!inp.checked){inp.parentElement.style.outline='1px solid #ff4444';valid=false;}
@@ -1729,31 +1751,28 @@
                 else{inp.style.borderColor='';if(inp.type==='checkbox')inp.parentElement.style.outline='';}
             });
             if(!valid)return;
-            var hp=step.parentElement.querySelector('.ohnehonig input');
+            var hp=form.querySelector('.ohnehonig input');
             if(hp&&hp.value)return;
-            // Collect multistep data
-            var eventTypSel=document.querySelector('#step1 .option-card.selected .option-label');
-            var eventTyp=eventTypSel?eventTypSel.textContent:'';
-            var gaesteSel=document.querySelector('#step2 .size-option.selected .size-number');
-            var gaeste=gaesteSel?gaesteSel.textContent+' Gäste':'';
-            var equipment=[];
-            document.querySelectorAll('#step3 .equipment-option.selected .eq-label').forEach(function(el){equipment.push(el.textContent);});
-            var contactInputs=document.querySelectorAll('#step4 .contact-fields input');
-            var nameVal='',emailVal='',telVal='';
-            contactInputs.forEach(function(inp){
-                if(inp.type==='text')nameVal=inp.value.trim();
-                else if(inp.type==='email')emailVal=inp.value.trim();
-                else if(inp.type==='tel')telVal=inp.value.trim();
-            });
-            var submitBtn=step.querySelector('.btn-next');
-            if(submitBtn){submitBtn.disabled=true;submitBtn.textContent='Wird gesendet...';}
-            fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({formType:'individuell',eventTyp:eventTyp,gaeste:gaeste,equipment:equipment,name:nameVal,email:emailVal,telefon:telVal,website:hp?hp.value:''})})
+            var btn=document.getElementById('inqSubmit');
+            btn.disabled=true;btn.textContent='Wird gesendet...';
+            var data={
+                formType:'individuell',
+                name:document.getElementById('inqName').value.trim(),
+                email:document.getElementById('inqEmail').value.trim(),
+                telefon:document.getElementById('inqPhone').value.trim(),
+                eventTyp:document.getElementById('inqEventType').value,
+                datum:document.getElementById('inqDate').value.trim(),
+                nachricht:document.getElementById('inqMessage').value.trim(),
+                website:hp?hp.value:''
+            };
+            fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
             .then(function(r){return r.json();})
             .then(function(){
-                document.getElementById('step'+cur).classList.remove('active');document.getElementById('stepOk').classList.add('active');document.getElementById('formProgress').style.display='none';
+                form.style.display='none';
+                document.getElementById('inqSuccess').style.display='block';
             })
             .catch(function(){
-                if(submitBtn){submitBtn.disabled=false;submitBtn.innerHTML='Anfrage absenden <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>';}
+                btn.disabled=false;btn.innerHTML='Anfrage absenden <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>';
                 alert('Fehler beim Senden. Bitte versuche es erneut oder kontaktiere uns telefonisch.');
             });
         }

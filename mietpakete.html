@@ -146,7 +146,7 @@
             text-transform: uppercase; margin-bottom: 1.25rem;
         }
         .mini-hero .mini-hero-sub {
-            font-size: clamp(.88rem, 1.2vw, 1.05rem); color: var(--text2); line-height: 1.7; max-width: 620px;
+            font-size: clamp(.98rem, 1.35vw, 1.18rem); color: var(--text2); line-height: 1.7; max-width: 620px;
         }
 
         /* ===================== BUTTONS ===================== */
@@ -263,7 +263,11 @@
             font-weight: 900; line-height: 1.1; letter-spacing: -.03em; text-transform: uppercase;
             margin-bottom: 1.25rem;
         }
-        .cta-sub { font-size: .95rem; color: var(--text2); line-height: 1.7; max-width: 550px; margin: 0 auto 2rem; }
+        .cta-sub { font-size: 1.08rem; color: var(--text2); line-height: 1.7; max-width: 550px; margin: 0 auto 2rem; }
+        .cta-back { display: inline-flex; align-items: center; gap: .5rem; margin-top: 1.75rem; font-family: var(--font-m); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text2); transition: color .3s var(--ease); }
+        .cta-back:hover { color: var(--accent); }
+        .cta-back svg { width: 14px; height: 14px; transition: transform .3s var(--ease); }
+        .cta-back:hover svg { transform: translateX(-3px); }
 
         /* ===================== FOOTER ===================== */
         .footer { padding: clamp(5rem,10vh,8rem) 0 2rem; border-top: 1px solid var(--border); background: var(--bg); position: relative; overflow: hidden; }
@@ -327,8 +331,8 @@
 
     <nav class="nav" id="nav"><div class="nav-bar">
         <a href="index.html" class="nav-logo"><img src="images/derer-logo.webp" alt="Derer Veranstaltungstechnik Logo" style="height:32px;width:auto;display:block;"></a>
-        <ul class="nav-links" id="navLinks"><li><a href="index.html#why">Warum DERER?</a></li><li><a href="index.html#about">Über uns</a></li><li><a href="index.html#services">Leistungen</a></li><li><a href="index.html#projects">Projekte</a></li><li><a href="index.html#contact">Kontakt</a></li><li><a href="#packages">Mietpakete</a></li></ul>
-        <a href="#packages" class="nav-cta nav-cta-desktop">Jetzt anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+        <ul class="nav-links" id="navLinks"><li><a href="index.html#about">Über uns</a></li><li><a href="index.html#why">Warum DERER?</a></li><li><a href="index.html#services">Leistungen</a></li><li><a href="index.html#projects">Projekte</a></li><li><a href="index.html#contact">Kontakt</a></li><li><a href="#packages">Mietpakete</a></li></ul>
+        <a href="index.html#inquiry" class="nav-cta nav-cta-desktop">Jetzt anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
         <button class="nav-toggle" id="navToggle" aria-label="Menü"><span></span><span></span><span></span></button>
     </div></nav>
 
@@ -474,6 +478,7 @@
                     <h2 class="cta-title">Du planst etwas <span class="accent">Größeres?</span></h2>
                     <p class="cta-sub">Festivals, Firmenfeiern oder Großveranstaltungen planen wir komplett individuell. Erzähl uns von deinem Event.</p>
                     <a href="index.html#inquiry" class="btn-p">Individuelle Anfrage <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+                    <div><a href="index.html" class="cta-back"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg> Zurück zur Startseite</a></div>
                 </div>
             </div>
         </section>
@@ -504,8 +509,10 @@
             </div>
             <div>
                 <div class="footer-col-title">Navigation</div>
-                <a href="index.html#services" class="footer-nav-link">Leistungen</a>
+                <a href="index.html" class="footer-nav-link">Zurück zur Startseite</a>
                 <a href="index.html#about" class="footer-nav-link">Über uns</a>
+                <a href="index.html#why" class="footer-nav-link">Warum DERER?</a>
+                <a href="index.html#services" class="footer-nav-link">Leistungen</a>
                 <a href="index.html#projects" class="footer-nav-link">Projekte</a>
                 <a href="#packages" class="footer-nav-link">Mietpakete</a>
                 <a href="index.html#inquiry" class="footer-nav-link">Individuelle Anfrage</a>

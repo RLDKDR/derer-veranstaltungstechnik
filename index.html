@@ -285,8 +285,8 @@
         .btn-p:hover { transform: scale(1.04); box-shadow: 0 0 12px rgba(0,229,200,.3), 0 0 40px rgba(0,229,200,.15), 0 0 80px rgba(0,229,200,.05); }
         .btn-p svg { width: 16px; height: 16px; transition: transform .3s var(--ease); }
         .btn-p:hover svg { transform: translateX(3px); }
-        .btn-o { display: inline-flex; align-items: center; gap: .6rem; font-family: var(--font-h); font-size: .85rem; font-weight: 600; padding: 1rem 2rem; background: rgba(255,255,255,.14); color: var(--text); border: 1px solid rgba(255,255,255,.18); border-radius: 10px; cursor: pointer; transition: border-color .3s var(--ease), background .3s var(--ease); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
-        .btn-o:hover { border-color: var(--accent-dim); background: rgba(0,229,200,.03); }
+        .btn-o { display: inline-flex; align-items: center; gap: .6rem; font-family: var(--font-h); font-size: .85rem; font-weight: 600; padding: 1rem 2rem; background: rgba(10,10,20,.55); color: var(--text); border: 1px solid rgba(255,255,255,.18); border-radius: 10px; cursor: pointer; transition: border-color .3s var(--ease), background .3s var(--ease); backdrop-filter: blur(24px) saturate(1.4); -webkit-backdrop-filter: blur(24px) saturate(1.4); }
+        .btn-o:hover { border-color: var(--accent-dim); background: rgba(0,229,200,.12); }
 
         /* ===================== TAPE BANDS — centered X at hero bottom ===================== */
         .tape-section {
@@ -321,7 +321,7 @@
         .why::before { content: ''; position: absolute; top: -30%; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, rgba(0,229,200,.03) 0%, transparent 60%); pointer-events: none; }
         .why-header { text-align: center; margin-bottom: clamp(3.5rem,6vh,5.5rem); max-width: 700px; margin-left: auto; margin-right: auto; }
         .why-title { font-family: var(--font-h); font-size: clamp(2.1rem,4.5vw,4rem); font-weight: 900; line-height: 1.05; letter-spacing: -.03em; text-transform: uppercase; margin-bottom: 1rem; }
-        .why-sub { font-size: 1.05rem; color: var(--text2); line-height: 1.7; white-space: nowrap; }
+        .why-sub { font-size: 1.15rem; color: var(--text2); line-height: 1.7; }
         .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
         .why-card {
             position: relative; padding: clamp(2rem, 3vw, 2.75rem); border-radius: 16px;
@@ -343,7 +343,7 @@
         .process::before { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 1000px; height: 600px; background: radial-gradient(ellipse, rgba(0,229,200,.04) 0%, transparent 60%); pointer-events: none; }
         .process-header { text-align: center; margin-bottom: clamp(4rem,7vh,6rem); max-width: 700px; margin-left: auto; margin-right: auto; }
         .process-title { font-family: var(--font-h); font-size: clamp(2.1rem,4.5vw,4rem); font-weight: 900; line-height: 1.05; letter-spacing: -.03em; text-transform: uppercase; margin-bottom: 1rem; }
-        .process-sub { font-size: 1.05rem; color: var(--text2); line-height: 1.7; }
+        .process-sub { font-size: 1.15rem; color: var(--text2); line-height: 1.7; }
         .process-timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; position: relative; }
         .process-card {
             position: relative; border-radius: 20px; padding: clamp(2rem, 3vw, 2.75rem);
@@ -361,9 +361,6 @@
         .process-step-icon img { width: 76px; height: 76px; object-fit: contain; display: block; }
         .process-step h3 { font-family: var(--font-h); font-size: clamp(1.1rem, 1.4vw, 1.3rem); font-weight: 700; letter-spacing: -.01em; position: relative; z-index: 2; }
         .process-step p { font-size: .95rem; color: var(--text2); line-height: 1.75; position: relative; z-index: 2; margin-bottom: 1.25rem; }
-        .process-step-details { display: flex; flex-direction: column; gap: .6rem; position: relative; z-index: 2; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,.06); }
-        .process-step-detail { display: flex; align-items: center; gap: .6rem; font-size: .78rem; color: var(--text3); font-family: var(--font-m); letter-spacing: .02em; }
-        .process-step-detail::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: .5; flex-shrink: 0; }
         .process-cta { text-align: center; margin-top: clamp(3.5rem, 6vh, 5rem); }
         @media (max-width: 768px) {
             .process-timeline { grid-template-columns: 1fr; }
@@ -372,7 +369,7 @@
         .services { padding: clamp(6rem,12vh,10rem) 0; background: var(--bg); }
         .services-header { text-align: center; margin-bottom: clamp(3.5rem,6vh,5.5rem); max-width: 700px; margin-left: auto; margin-right: auto; }
         .services-title { font-family: var(--font-h); font-size: clamp(2.1rem,4.5vw,4rem); font-weight: 900; line-height: 1.05; letter-spacing: -.03em; text-transform: uppercase; margin-bottom: 1rem; }
-        .services-desc { font-size: 1.05rem; color: var(--text2); line-height: 1.7; }
+        .services-desc { font-size: 1.15rem; color: var(--text2); line-height: 1.7; }
 
         .glass-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
@@ -451,21 +448,12 @@
             .glass-card-img { aspect-ratio: 4/3; }
         }
 
-        /* ===================== STATS ===================== */
-        .stats { padding: clamp(4.5rem,9vh,7rem) 0; background: var(--bg2); position: relative; overflow: hidden; }
-        .stats::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 90% at 50% 50%, rgba(0,229,200,.025) 0%, rgba(0,229,200,.008) 40%, transparent 70%); transform: translate3d(0,0,0); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
-        .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; position: relative; z-index: 1; }
-        .stat-item { text-align: center; position: relative; }
-        .stat-item:not(:last-child)::after { content: ''; position: absolute; right: -1rem; top: 50%; transform: translateY(-50%); width: 1px; height: 50%; background: var(--border); }
-        .stat-number { font-family: var(--font-h); font-size: clamp(3.5rem,6vw,5.5rem); font-weight: 900; line-height: 1; letter-spacing: -.04em; color: rgba(240,240,245,.15); }
-        .stat-label { font-family: var(--font-h); font-size: clamp(.58rem,.8vw,.72rem); font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-top: -.3em; }
-
         /* ===================== ABOUT ===================== */
         .about { padding: clamp(6rem,12vh,10rem) 0; background: var(--bg); }
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; min-height: 520px; }
         .about-left { display: flex; flex-direction: column; justify-content: center; gap: 0; padding-right: clamp(2rem,4vw,5rem); }
         .about-headline { font-family: var(--font-h); font-size: clamp(2.1rem,4.5vw,4rem); font-weight: 900; line-height: 1.05; letter-spacing: -.03em; text-transform: uppercase; color: rgba(240,240,245,.85); margin-bottom: 1.5rem; }
-        .about-text { font-size: 1rem; color: var(--text2); line-height: 1.75; margin-bottom: .85rem; max-width: 440px; }
+        .about-text { font-size: 1.1rem; color: var(--text2); line-height: 1.75; margin-bottom: .85rem; max-width: 440px; }
         .about-cta-link { display: inline-flex; align-items: center; gap: 3rem; padding: .85rem 0; border-top: 1px solid rgba(255,255,255,.08); border-bottom: 1px solid rgba(255,255,255,.08); margin-top: 1.25rem; max-width: 240px; font-family: var(--font-m); font-size: .72rem; letter-spacing: .05em; color: var(--text); cursor: pointer; transition: color .3s var(--ease); position: relative; }
         .about-cta-link::before,.about-cta-link::after { content: ''; position: absolute; width: 5px; height: 5px; border: 1px solid rgba(255,255,255,.15); }
         .about-cta-link::before { top: -2.5px; left: -1px; }
@@ -510,9 +498,9 @@
 
         /* ===================== PROJECTS ===================== */
         .projects { padding: clamp(6rem,12vh,10rem) 0; background: var(--bg); }
-        .projects-header { margin-bottom: clamp(3rem,5vh,5rem); }
+        .projects-header { text-align: center; margin-bottom: clamp(3rem,5vh,5rem); max-width: 700px; margin-left: auto; margin-right: auto; }
         .projects-title { font-family: var(--font-h); font-size: clamp(2.5rem,4.5vw,4rem); font-weight: 900; line-height: 1.02; letter-spacing: -.035em; text-transform: uppercase; }
-        .projects-sub { font-size: 1.05rem; color: var(--text2); line-height: 1.7; margin-top: 1rem; }
+        .projects-sub { font-size: 1.15rem; color: var(--text2); line-height: 1.7; margin-top: 1rem; }
         .gallery-grid { display: grid; grid-template-columns: 1.4fr .8fr .8fr; grid-template-rows: 260px 260px; gap: .7rem; }
         .gallery-item { border-radius: 10px; overflow: hidden; position: relative; cursor: pointer; min-height: 260px; transition: transform .5s var(--ease); }
         .gallery-item.reveal { transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.9s cubic-bezier(0.16,1,0.3,1); }
@@ -597,7 +585,7 @@
         .inquiry-label-line::before { display: none; }
         .inquiry-label-line .section-label { margin-bottom: 0; }
         .inquiry-title { font-family: var(--font-h); font-size: clamp(2.1rem,4.5vw,4rem); font-weight: 900; line-height: 1.05; letter-spacing: -.03em; text-transform: uppercase; margin-bottom: 1.5rem; }
-        .inquiry-sub { font-size: 1.08rem; color: var(--text2); line-height: 1.75; max-width: 460px; }
+        .inquiry-sub { font-size: 1.18rem; color: var(--text2); line-height: 1.75; max-width: 460px; }
         .inquiry-trust { display: flex; flex-direction: column; gap: 1rem; margin-top: 2.5rem; }
         .inquiry-trust-item { display: flex; align-items: center; gap: .75rem; }
         .inquiry-trust-icon { width: 36px; height: 36px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: rgba(0,229,200,.08); border: 1px solid rgba(0,229,200,.15); color: var(--accent); }
@@ -808,7 +796,7 @@
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem,5vw,5rem); }
         .contact-info { display: flex; flex-direction: column; justify-content: center; }
         .contact-title { font-family: var(--font-h); font-size: clamp(1.8rem,3.2vw,2.8rem); font-weight: 900; line-height: 1.05; letter-spacing: -.03em; text-transform: uppercase; margin-bottom: 1.1rem; }
-        .contact-text { font-size: .9rem; color: var(--text2); line-height: 1.7; margin-bottom: 2.5rem; }
+        .contact-text { font-size: 1.02rem; color: var(--text2); line-height: 1.7; margin-bottom: 2.5rem; }
         .contact-detail { display: flex; align-items: flex-start; gap: .85rem; margin-bottom: 1.2rem; }
         .cd-icon { width: 35px; height: 35px; background: rgba(0,229,200,.04); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--accent); }
         .cd-label { font-family: var(--font-m); font-size: .55rem; letter-spacing: .15em; text-transform: uppercase; color: var(--text3); margin-bottom: .12rem; }
@@ -883,9 +871,6 @@
             .tape-band-1 { transform: rotate(-4.5deg); }
             .tape-band-2 { transform: rotate(4.5deg); }
             .services { padding-top: 1.5rem; }
-            .stats-grid { grid-template-columns: repeat(2,1fr); gap: 2.5rem; }
-            .stats-grid { grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-            .stat-number { font-size: clamp(2.5rem,5vw,4rem); }
             .about-grid { grid-template-columns: 1fr; gap: 3rem; }
             .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
             .gallery-item.large { grid-row: span 1; grid-column: span 2; aspect-ratio: 16/9; }
@@ -918,9 +903,6 @@
             .services { padding-top: 4rem; }
             .hero-actions { flex-direction: column; align-items: stretch; }
             .btn-p,.btn-o { justify-content: center; }
-            .stats-grid { grid-template-columns: repeat(3,1fr); gap: 1rem; }
-            .stat-number { font-size: clamp(1.8rem,6vw,2.8rem); }
-            .stat-label { font-size: .5rem; letter-spacing: .1em; }
             .about-right { grid-template-columns: 1fr 1fr; }
             .gallery-grid { grid-template-columns: 1fr; overflow: hidden; }
             .gallery-item.large { grid-column: span 1; aspect-ratio: 16/10; }
@@ -1041,7 +1023,7 @@
         .testimonials-grid-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(0,229,200,.03) 0%, rgba(0,229,200,.008) 40%, transparent 70%); pointer-events: none; transform: translate3d(0,0,0); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
         .testimonials-grid-header { text-align: center; margin-bottom: clamp(3rem,5vh,4.5rem); }
         .testimonials-grid-title { font-family: var(--font-h); font-size: clamp(2.5rem,4.5vw,4rem); font-weight: 900; line-height: 1.02; letter-spacing: -.035em; text-transform: uppercase; margin-bottom: 1rem; }
-        .testimonials-grid-sub { font-size: .95rem; color: var(--text2); line-height: 1.7; }
+        .testimonials-grid-sub { font-size: 1.08rem; color: var(--text2); line-height: 1.7; }
         .tg-marquee {
             position: relative; overflow: hidden; padding: 1rem 0 2rem;
             -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
@@ -1101,8 +1083,8 @@
 
     <nav class="nav" id="nav"><div class="nav-bar">
         <a href="#" class="nav-logo"><img src="images/derer-logo.webp" alt="Derer Veranstaltungstechnik Logo" style="height:32px;width:auto;display:block;"></a>
-        <ul class="nav-links" id="navLinks"><li><a href="#why">Warum DERER?</a></li><li><a href="#about">Über uns</a></li><li><a href="#services">Leistungen</a></li><li><a href="#projects">Projekte</a></li><li><a href="#contact">Kontakt</a></li><li><a href="mietpakete.html">Mietpakete</a></li></ul>
-        <a href="#packages" class="nav-cta nav-cta-desktop">Jetzt anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+        <ul class="nav-links" id="navLinks"><li><a href="#about">Über uns</a></li><li><a href="#why">Warum DERER?</a></li><li><a href="#services">Leistungen</a></li><li><a href="#projects">Projekte</a></li><li><a href="#contact">Kontakt</a></li><li><a href="mietpakete.html">Mietpakete</a></li></ul>
+        <a href="#inquiry" class="nav-cta nav-cta-desktop">Jetzt anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
         <button class="nav-toggle" id="navToggle" aria-label="Menü"><span></span><span></span><span></span></button>
     </div></nav>
 
@@ -1128,7 +1110,7 @@
                 <p class="hero-sub">Wir denken Licht, Ton und Atmosphäre von Anfang an zusammen.<br>Für Gänsehautmomente, über die deine Gäste noch lange reden werden.</p>
             </div>
             <div class="hero-actions">
-                <a href="#packages" class="btn-p">Jetzt anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+                <a href="#inquiry" class="btn-p">Jetzt anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
                 <a href="#projects" class="btn-o">Projekte ansehen</a>
             </div>
             <div class="hero-reviews">
@@ -1232,7 +1214,7 @@
                         <h3>Tontechnik</h3>
                     </div>
                     <div>
-                        <p>Ob deine Rede bei 300 Leuten ankommen soll oder der Bass um Mitternacht den Raum zum Beben bringt. Wir liefern ein Setup, bei dem einfach alles sitzt.</p>
+                        <p>Ob deine Rede bei 300 Leuten ankommen soll oder der Bass um Mitternacht den Raum zum Beben bringt. Wir liefern ein Setup, bei dem die Soundkulisse stimmt.</p>
                     </div>
                 </div>
                 <div class="glass-card-img"><img src="images/tontechnik.webp" alt="Professionelles Tontechnik Setup für Veranstaltungen" loading="lazy"></div>
@@ -1288,8 +1270,8 @@
     <section class="process" id="process"><div class="container">
         <div class="process-header reveal">
             <span class="section-label">Ablauf</span>
-            <h2 class="process-title">Von der Idee bis zum <span class="accent">letzten Kabel.</span></h2>
-            <p class="process-sub">Wir begleiten dein Event von Anfang an. Persönlich, kreativ und mit dem Anspruch, dass am Ende jeder Moment sitzt.</p>
+            <h2 class="process-title">So läuft ein Event <span class="accent">mit uns.</span></h2>
+            <p class="process-sub">Drei Schritte von der ersten Ideensammlung bis nach dem letzten Applaus.</p>
         </div>
         <div class="process-timeline">
             <div class="process-card reveal d1" data-step="1">
@@ -1298,12 +1280,7 @@
                     <div class="process-card-top">
                         <h3>Kick-off und Konzept</h3>
                     </div>
-                    <p>Wir setzen uns zusammen, hören zu und verstehen, was dein Event ausstrahlen soll. Daraus entwickeln wir ein maßgeschneidertes Konzept, das Licht, Ton und Atmosphäre von Anfang an zusammendenkt.</p>
-                    <div class="process-step-details">
-                        <div class="process-step-detail">Persönlicher Ansprechpartner</div>
-                        <div class="process-step-detail">Gemeinsam Ziele erarbeiten</div>
-                        <div class="process-step-detail">Kreatives Konzept mit Wow-Effekt</div>
-                    </div>
+                    <p>Bevor wir über Equipment reden, wollen wir wissen, was dein Event bei den Gästen auslösen soll. Aus dem, was du erzählst, wird ein Konzept, in dem Licht, Ton und Raum zusammenspielen statt nebeneinander zu laufen.</p>
                 </div>
             </div>
             <div class="process-card reveal d2" data-step="2">
@@ -1312,12 +1289,7 @@
                     <div class="process-card-top">
                         <h3>Planung und Feinschliff</h3>
                     </div>
-                    <p>Wir checken deine Location vor Ort, planen jedes Detail und stimmen alle Gewerke aufeinander ab. Du bekommst laufende Updates und kannst dich darauf verlassen, dass wir an alles denken.</p>
-                    <div class="process-step-details">
-                        <div class="process-step-detail">Location-Besichtigung vor Ort</div>
-                        <div class="process-step-detail">Detailplanung aller Gewerke</div>
-                        <div class="process-step-detail">Laufende Abstimmung mit dir</div>
-                    </div>
+                    <p>Wir kommen bei dir vorbei, schauen uns die Location an und planen alles bis auf den letzten Kabelmeter durch. Ändert sich unterwegs etwas, erfährst du es sofort und nicht erst beim Aufbau.</p>
                 </div>
             </div>
             <div class="process-card reveal d3" data-step="3">
@@ -1326,12 +1298,7 @@
                     <div class="process-card-top">
                         <h3>Showtime</h3>
                     </div>
-                    <p>Aufbau, Soundcheck, Live-Betreuung am Mischpult und auf der Bühne. Wir sind vor Ort, damit du den Abend genauso genießen kannst wie deine Gäste. Danach bauen wir ab, du gehst nach Hause.</p>
-                    <div class="process-step-details">
-                        <div class="process-step-detail">Aufbau und Inbetriebnahme</div>
-                        <div class="process-step-detail">Live-Betreuung während des Events</div>
-                        <div class="process-step-detail">Abbau und Rücktransport</div>
-                    </div>
+                    <p>Am Veranstaltungstag sind wir vor Ort, lange bevor die ersten Gäste kommen. Wir machen den Soundcheck, mischen den Abend live an Pult und Bühne und räumen hinterher alles weg. Im besten Fall hast du uns gar nicht bemerkt.</p>
                 </div>
             </div>
         </div>
@@ -1551,10 +1518,11 @@
             </div>
             <div>
                 <div class="footer-col-title">Navigation</div>
-                <a href="#services" class="footer-nav-link">Leistungen</a>
                 <a href="#about" class="footer-nav-link">Über uns</a>
+                <a href="#why" class="footer-nav-link">Warum DERER?</a>
+                <a href="#services" class="footer-nav-link">Leistungen</a>
                 <a href="#projects" class="footer-nav-link">Projekte</a>
-                <a href="#packages" class="footer-nav-link">Mietpakete</a>
+                <a href="mietpakete.html" class="footer-nav-link">Mietpakete</a>
                 <a href="#inquiry" class="footer-nav-link">Individuelle Anfrage</a>
             </div>
             <div>
@@ -1734,11 +1702,6 @@
             else enterDesktop();
             requestAnimationFrame(tick);
         })();
-
-        function countUp(el,duration){const t=+el.dataset.target,sfx=el.dataset.suffix||'';if(el.dataset.display){el.textContent=el.dataset.display;return;}let c=0;const steps=Math.ceil(duration/20),s=Math.max(1,Math.ceil(t/steps)),iv=setInterval(()=>{c+=s;if(c>=t){c=t;clearInterval(iv);}let d=c.toLocaleString('de-DE');if(t===100)d=c+'%';else if(t===48)d=c+'h';else if(sfx)d=d+sfx;el.textContent=d;},20);}
-        const stats=document.querySelectorAll('.stat-number[data-target]');
-        const cObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){countUp(stats[0],800);countUp(stats[1],1200);countUp(stats[2],1600);cObs.disconnect();}});},{threshold:.5});
-        stats.forEach(el=>cObs.observe(el));
 
         let cur=1;
         function submitInquiry(){

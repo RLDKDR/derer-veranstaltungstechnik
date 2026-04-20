@@ -9,6 +9,9 @@
     <link rel="canonical" href="https://derer-veranstaltungstechnik.vercel.app/projekte.html">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="preload" href="fonts/space-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/epilogue-300.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/dm-sans-400.woff2" as="font" type="font/woff2" crossorigin>
     <meta property="og:title" content="Projekte & Referenzen | Derer Veranstaltungstechnik">
     <meta property="og:description" content="Musicals, Chöre, Festivals und private Events: Eine Auswahl unserer Projekte.">
     <meta property="og:type" content="website">
@@ -39,7 +42,7 @@
             --ease: cubic-bezier(0.4, 0, 0.2, 1);
         }
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { -webkit-font-smoothing: antialiased; overflow-x: hidden; background: var(--bg); }
+        html { -webkit-font-smoothing: antialiased; overflow-x: hidden; overflow-y: scroll; scrollbar-gutter: stable; background: var(--bg); }
         body { font-family: var(--font-b); background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
         img { max-width: 100%; display: block; }
         a { color: inherit; text-decoration: none; }
@@ -53,24 +56,26 @@
         .accent { color: var(--accent); }
 
         /* ===== NAV ===== */
-        .nav { position: fixed; top: 1rem; left: 50%; transform: translateX(-50%); width: calc(100% - 2rem); max-width: 1320px; z-index: 100; }
-        .nav-bar { display: flex; align-items: center; justify-content: space-between; padding: .85rem 1.5rem; background: rgba(5,5,9,.7); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid var(--border); border-radius: 12px; transition: background .3s var(--ease), border-color .3s var(--ease); }
-        .nav.scrolled .nav-bar { background: rgba(5,5,9,.92); border-color: rgba(0,229,200,.12); }
+        .nav { position: fixed; top: 1rem; left: 50%; transform: translateX(-50%); z-index: 1000; width: min(calc(100vw - 2rem), 1320px); }
+        .nav-bar { display: flex; align-items: center; justify-content: space-between; padding: .85rem .85rem .85rem 1.75rem; background: #07070c; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; box-sizing: border-box; }
+        .nav-logo { display: flex; align-items: center; }
         .nav-logo img { height: 32px; width: auto; display: block; }
         .nav-links { display: flex; list-style: none; gap: 2rem; align-items: center; }
-        .nav-links a { font-family: var(--font-m); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text2); transition: color .3s var(--ease); }
+        .nav-links a { font-family: var(--font-m); font-size: .7rem; font-weight: 400; letter-spacing: .1em; text-transform: uppercase; color: var(--text2); transition: color .3s var(--ease); }
         .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-        .nav-cta { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--font-h); font-size: .75rem; font-weight: 700; padding: .7rem 1.2rem; background: var(--accent); color: var(--bg); border-radius: 8px; transition: transform .3s var(--ease); }
+        .nav-cta { display: inline-flex; align-items: center; gap: .45rem; font-family: var(--font-h); font-size: .78rem; font-weight: 700; padding: .7rem 1.4rem; background: var(--accent); color: var(--bg); border: none; border-radius: 10px; cursor: pointer; transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
         .nav-cta:hover { transform: scale(1.04); }
         .nav-cta svg { width: 14px; height: 14px; }
         .nav-dropdown { position: relative; }
         .nav-dropdown > a { cursor: pointer; display: inline-flex; align-items: center; gap: .35rem; }
         .nav-dropdown > a svg { width: 10px; height: 10px; transition: transform .3s var(--ease); }
         .nav-dropdown:hover > a svg { transform: rotate(180deg); }
-        .nav-dropdown-menu { position: absolute; top: calc(100% + .75rem); right: 0; min-width: 200px; background: rgba(7,7,12,.94); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,.07); border-radius: 10px; padding: .5rem; opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity .25s var(--ease), transform .25s var(--ease); }
+        .nav-dropdown-menu { position: absolute; top: calc(100% - 1px); left: -1rem; min-width: 240px; background: rgba(5,5,9,.82); backdrop-filter: blur(28px) saturate(1.3); -webkit-backdrop-filter: blur(28px) saturate(1.3); border: 1px solid var(--border); border-radius: 12px; padding: .4rem; opacity: 0; pointer-events: none; transform: translateY(-4px); transition: opacity .25s var(--ease), transform .25s var(--ease); box-shadow: 0 12px 40px rgba(0,0,0,.4), 0 0 24px rgba(0,229,200,.05); }
         .nav-dropdown:hover .nav-dropdown-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
-        .nav-dropdown-menu a { display: block; padding: .6rem .9rem; border-radius: 7px; font-size: .72rem; white-space: nowrap; transition: background .2s var(--ease), color .2s var(--ease); }
+        .nav-dropdown-menu a { display: flex; align-items: center; gap: .7rem; padding: .75rem 1rem; border-radius: 8px; font-size: .72rem; white-space: nowrap; transition: background .2s var(--ease), color .2s var(--ease); letter-spacing: .06em; }
         .nav-dropdown-menu a:hover { background: rgba(0,229,200,.08); color: var(--accent); }
+        .nav-dropdown-menu a::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); opacity: .3; transition: opacity .2s var(--ease), transform .2s var(--ease); }
+        .nav-dropdown-menu a:hover::before { opacity: 1; transform: scale(1.4); }
         .nav-dropdown-menu a.active { color: var(--accent); }
         .nav-toggle { display: none; width: 32px; height: 32px; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; justify-content: center; align-items: center; padding: 0; }
         .nav-toggle span { width: 20px; height: 2px; background: var(--text); transition: transform .3s var(--ease), opacity .3s var(--ease); }
@@ -87,8 +92,9 @@
         .breadcrumb a { color: var(--text2); transition: color .3s var(--ease); }
         .breadcrumb a:hover { color: var(--accent); }
         .breadcrumb .sep { color: var(--text3); }
-        .mini-hero h1 { font-family: var(--font-h); font-size: clamp(2.2rem,5vw,4.5rem); font-weight: 900; line-height: 1.02; letter-spacing: -.035em; text-transform: uppercase; margin-bottom: 1.25rem; }
+        .mini-hero h1 { font-family: var(--font-h); font-size: clamp(2.2rem,5vw,4.5rem); font-weight: 900; line-height: 1.05; letter-spacing: -.035em; text-transform: uppercase; margin-bottom: 1.25rem; }
         .mini-hero .mini-hero-sub { font-size: clamp(.98rem,1.35vw,1.18rem); color: var(--text2); line-height: 1.7; max-width: 620px; }
+        @keyframes miniHeroIn { to { opacity: 1; filter: blur(0); transform: translateY(0); } }
 
         /* ===== FILTER TABS ===== */
         .references { padding: clamp(1rem,3vh,2rem) 0 clamp(6rem,10vh,8rem); background: var(--bg); position: relative; }
@@ -110,7 +116,7 @@
         .ref-card-title { font-family: var(--font-h); font-size: 1.25rem; font-weight: 800; line-height: 1.15; margin-bottom: .4rem; }
         .ref-card-meta { display: flex; align-items: center; gap: .6rem; font-family: var(--font-m); font-size: .65rem; letter-spacing: .05em; color: var(--text3); margin-bottom: .8rem; }
         .ref-card-meta .sep { opacity: .5; }
-        .ref-card-desc { font-size: .88rem; color: var(--text2); line-height: 1.6; margin-bottom: 1rem; }
+        .ref-card-desc { font-size: .95rem; color: var(--text2); line-height: 1.7; margin-bottom: 1rem; }
         .ref-card-more { display: inline-flex; align-items: center; gap: .4rem; font-family: var(--font-m); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); transition: gap .3s var(--ease); }
         .ref-card:hover .ref-card-more { gap: .7rem; }
         .ref-card-more svg { width: 12px; height: 12px; }
@@ -144,7 +150,7 @@
 
         /* ===== CTA SECTION ===== */
         .cta-section { padding: clamp(4rem,8vh,6rem) 0; background: var(--bg2); text-align: center; position: relative; overflow: hidden; }
-        .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,229,200,.04) 0%, transparent 70%); pointer-events: none; }
+        .cta-bg { position: absolute; inset: 0; background: url('images/referenzen-cta-backdrop.webp') center/cover no-repeat; opacity: .15; pointer-events: none; z-index: 0; }
         .cta-content { position: relative; z-index: 1; }
         .cta-title { font-family: var(--font-h); font-size: clamp(2rem,4vw,3.2rem); font-weight: 900; line-height: 1.05; letter-spacing: -.03em; text-transform: uppercase; margin-bottom: 1rem; }
         .cta-sub { font-size: 1.08rem; color: var(--text2); line-height: 1.7; max-width: 550px; margin: 0 auto 2rem; }
@@ -199,7 +205,7 @@
 <body>
 
     <nav class="nav" id="nav"><div class="nav-bar">
-        <a href="index.html" class="nav-logo"><img src="images/derer-logo.webp" alt="Derer Veranstaltungstechnik Logo"></a>
+        <a href="index.html" class="nav-logo"><img src="images/derer-logo.webp" alt="Derer Veranstaltungstechnik Logo" style="height:32px;width:auto;display:block;"></a>
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html#about">Über uns</a></li>
             <li><a href="index.html#why">Warum DERER?</a></li>
@@ -217,7 +223,7 @@
             <div class="container">
                 <div class="mini-hero-content">
                     <span class="breadcrumb"><a href="index.html">Start</a><span class="sep">›</span> Projekte</span>
-                    <h1>Highlights aus den <span class="accent">letzten Jahren.</span></h1>
+                    <h1>Projekte, auf die wir <span class="accent">stolz sind.</span></h1>
                     <p class="mini-hero-sub">Eine Auswahl unserer Projekte: Musicals mit über 200 Sängern, Benefizkonzerte, Festivals und private Feiern. Klick rein und schau hinter die Kulissen.</p>
                 </div>
             </div>
@@ -254,7 +260,7 @@
                             <img src="images/referenzen/scraped/fasnet-stuardessen.webp" alt="MGV Neuhausen Filder-Fasnets-Show 2024 Flughafen Bühnenshow" loading="lazy">
                         </div>
                         <div class="ref-card-body">
-                            <h3 class="ref-card-title">MGV Fasnet 2024 – „Flughafen"</h3>
+                            <h3 class="ref-card-title">MGV Fasnet 2024: „Flughafen"</h3>
                             <div class="ref-card-meta">MGV 1851 Neuhausen <span class="sep">·</span> Feb 2024</div>
                             <p class="ref-card-desc">Drei Filder-Fasnets-Shows mit SevenUp und Nici Nightingale.</p>
                             <span class="ref-card-more">Mehr sehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
@@ -293,7 +299,7 @@
                             <img src="images/referenzen/scraped/mgv-notengang.webp" alt="MGV Notengang Kinderchor Musikalische Weltreise Bühnenshow" loading="lazy">
                         </div>
                         <div class="ref-card-body">
-                            <h3 class="ref-card-title">Notengang – Musikalische Weltreise</h3>
+                            <h3 class="ref-card-title">Notengang, eine musikalische Weltreise</h3>
                             <div class="ref-card-meta">MGV Neuhausen <span class="sep">·</span> Okt 2023</div>
                             <p class="ref-card-desc">Über 150 Kinder auf der Bühne, eine Weltreise in Gesang und Tanz.</p>
                             <span class="ref-card-more">Mehr sehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
@@ -358,9 +364,9 @@
                             <img src="images/referenzen/scraped/mgv-fasnet-2023.jpg" alt="MGV Filder Fasnets Show 2023 Der Berg ruft" loading="lazy">
                         </div>
                         <div class="ref-card-body">
-                            <h3 class="ref-card-title">MGV Fasnet 2023 – „Der Berg ruft"</h3>
+                            <h3 class="ref-card-title">MGV Fasnet 2023: „Der Berg ruft"</h3>
                             <div class="ref-card-meta">MGV Neuhausen 1851 <span class="sep">·</span> Feb 2023</div>
-                            <p class="ref-card-desc">Filder-Fasnets-Show des MGV Neuhausen unter dem Motto „Der Berg ruft – Das ist der Gipfel".</p>
+                            <p class="ref-card-desc">Filder-Fasnets-Show des MGV Neuhausen unter dem Motto „Der Berg ruft, das ist der Gipfel".</p>
                             <span class="ref-card-more">Mehr sehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
                         </div>
                     </div>
@@ -423,7 +429,7 @@
                             <img src="images/referenzen/scraped/mgv-fasching-2022.png" alt="MGV Fasching 2022 Filder-Fasnets-Zoo" loading="lazy">
                         </div>
                         <div class="ref-card-body">
-                            <h3 class="ref-card-title">MGV Fasching 2022 – „Filder-Fasnets-Zoo"</h3>
+                            <h3 class="ref-card-title">MGV Fasching 2022: „Filder-Fasnets-Zoo"</h3>
                             <div class="ref-card-meta">MGV Neuhausen <span class="sep">·</span> Mai 2022</div>
                             <p class="ref-card-desc">Bunte Show mit viel Helau, verlegt in den schönen Mai beim MGV.</p>
                             <span class="ref-card-more">Mehr sehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
@@ -449,7 +455,7 @@
                             <img src="images/referenzen/scraped/enslave-cd-release-2022.png" alt="Enslave the Chain CD Release Neresheim 2022" loading="lazy">
                         </div>
                         <div class="ref-card-body">
-                            <h3 class="ref-card-title">Enslave the Chain – CD Release</h3>
+                            <h3 class="ref-card-title">Enslave the Chain, CD Release</h3>
                             <div class="ref-card-meta">Neresheim <span class="sep">·</span> April 2022</div>
                             <p class="ref-card-desc">CD-Release-Show mit voller Licht- und Tontechnik-Unterstützung.</p>
                             <span class="ref-card-more">Mehr sehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
@@ -488,9 +494,9 @@
                             <img src="images/referenzen/scraped/old-johnnys-meran-2020.jpg" alt="Old Johnnys Crew Cafe am Tore Meran 2020" loading="lazy">
                         </div>
                         <div class="ref-card-body">
-                            <h3 class="ref-card-title">Old Johnny's Crew – Meran</h3>
+                            <h3 class="ref-card-title">Old Johnny's Crew in Meran</h3>
                             <div class="ref-card-meta">Cafe am Tore, Meran <span class="sep">·</span> März 2020</div>
-                            <p class="ref-card-desc">CD-Präsentation im Cafe am Tore – ein Raum, der gebebt hat.</p>
+                            <p class="ref-card-desc">CD-Präsentation im Cafe am Tore, der Raum hat gebebt.</p>
                             <span class="ref-card-more">Mehr sehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
                         </div>
                     </div>
@@ -592,7 +598,7 @@
                             <img src="images/referenzen/scraped/open-air-theater-2019.jpg" alt="Open Air Theater Ein Sommernachtstraum Böbingen 2019" loading="lazy">
                         </div>
                         <div class="ref-card-body">
-                            <h3 class="ref-card-title">Ein Sommernachtstraum – Open Air</h3>
+                            <h3 class="ref-card-title">Ein Sommernachtstraum als Open Air</h3>
                             <div class="ref-card-meta">Bühne am alten Bahndamm, Böbingen <span class="sep">·</span> Juli 2019</div>
                             <p class="ref-card-desc">Open-Air-Theater mit Licht- und Tontechnik für die Akteure auf der Bühne.</p>
                             <span class="ref-card-more">Mehr sehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
@@ -617,6 +623,7 @@
         </section>
 
         <section class="cta-section">
+            <div class="cta-bg"></div>
             <div class="container">
                 <div class="cta-content">
                     <h2 class="cta-title">Dein Event soll hier <span class="accent">auch mal stehen?</span></h2>
@@ -700,7 +707,6 @@
     <script>
         /* Nav toggle */
         const nav = document.getElementById('nav');
-        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
         const nt = document.getElementById('navToggle'), nl = document.getElementById('navLinks');
         nt.addEventListener('click', () => { nt.classList.toggle('active'); nl.classList.toggle('open'); });
         nl.querySelectorAll('a').forEach(l => l.addEventListener('click', () => { nt.classList.remove('active'); nl.classList.remove('open'); }));
@@ -737,10 +743,10 @@
             },
             fasnet: {
                 cat: 'Show',
-                title: 'MGV Fasnet 2024 – „Flughafen"',
+                title: 'MGV Fasnet 2024: „Flughafen"',
                 meta: ['MGV 1851 Neuhausen', '3./9./10. Februar 2024'],
                 hero: 'images/referenzen/scraped/fasnet-stuardessen.webp',
-                desc: 'Drei Filder-Fasnets-Shows unter dem Motto „Flughafen – Der MGV hebt ab". Mitreißende Partyband SevenUp und Nici Nightingale, ein Fest der Emotionen und Gemeinschaft. Die langjährige Zusammenarbeit ist für uns mehr als Geschäft – eine Freundschaft, die über die Jahre gewachsen ist.',
+                desc: 'Drei Filder-Fasnets-Shows unter dem Motto „Flughafen, der MGV hebt ab". Mitreißende Partyband SevenUp und Nici Nightingale, ein Fest der Emotionen und Gemeinschaft. Die langjährige Zusammenarbeit ist für uns mehr als Geschäft. Es ist eine Freundschaft, die über die Jahre gewachsen ist.',
                 tech: ['Allen & Heath DLive S-7000', 'Sennheiser Funkstrecken', 'JB-Lighting A8 & Varyscan 7', 'GrandMA 2 Tourpack', 'Lightcraft AT10 Outled'],
                 gallery: ['images/referenzen/scraped/fasnet-nearlyhat.webp','images/referenzen/scraped/fasnet-feuerwehr.webp','images/referenzen/scraped/fasnet-fanta5.webp','images/referenzen/scraped/fasnet-msingers.webp','images/referenzen/scraped/fasnet-wechselstube.webp','images/referenzen/scraped/fasnet-pagen.webp','images/referenzen/scraped/fasnet-sevenup.webp','images/referenzen/scraped/fasnet-publikum.webp']
             },
@@ -764,7 +770,7 @@
             },
             notengang: {
                 cat: 'Kinderprojekt',
-                title: 'Notengang – Eine musikalische Weltreise',
+                title: 'Notengang, eine musikalische Weltreise',
                 meta: ['MGV Neuhausen', '18. Oktober 2023'],
                 hero: 'images/referenzen/scraped/mgv-notengang.webp',
                 desc: 'Über 150 talentierte Kinder haben mit Gesang und Tanz eine unvergessliche Show auf die Bühne gezaubert. Für den perfekten Klang sorgte das Allen & Heath DLive S-7000 Mischpult mit erstklassigen Funkstrecken. Das Lichtdesign, gesteuert über Wolfmix, war ebenso magisch wie die Darbietungen auf der Bühne.',
@@ -776,7 +782,7 @@
                 title: 'Lichterfest Böbingen 2024',
                 meta: ['Böbingen an der Rems', '3. & 4. Mai 2024'],
                 hero: 'images/referenzen/scraped/lichterfest-boebingen-2024.webp',
-                desc: 'Beleuchtungs- und Beschallungstechnik für die Open-Air-Bühne beim Lichterfest Böbingen. Zwei Abende mit PlanD, Golden Island, Ziachn Power und Mountain Crew – Live-Musik für die ganze Region, bei jedem Wetter.',
+                desc: 'Beleuchtungs- und Beschallungstechnik für die Open-Air-Bühne beim Lichterfest Böbingen. Zwei Abende mit PlanD, Golden Island, Ziachn Power und Mountain Crew. Live-Musik für die ganze Region, bei jedem Wetter.',
                 tech: ['Allen & Heath D-Live S7000', 'GrandMA 2 (on PC)', 'Lightcraft AT10 Outled', 'Cameo Hydrabeam 400 RGBW'],
                 gallery: []
             },
@@ -798,10 +804,10 @@
             },
             fasnet2023: {
                 cat: 'Show',
-                title: 'MGV Fasnet 2023 – „Der Berg ruft"',
+                title: 'MGV Fasnet 2023: „Der Berg ruft"',
                 meta: ['MGV Neuhausen 1851', '20. Februar 2023'],
                 hero: 'images/referenzen/scraped/mgv-fasnet-2023.jpg',
-                desc: 'Filder-Fasnets-Show des MGV Neuhausen 1851 unter dem Motto „Der Berg ruft – Das ist der Gipfel". Licht und Ton für eine Bühnenshow mit Publikumsmagnet.',
+                desc: 'Filder-Fasnets-Show des MGV Neuhausen 1851 unter dem Motto „Der Berg ruft, das ist der Gipfel". Licht und Ton für eine Bühnenshow mit Publikumsmagnet.',
                 tech: [], gallery: []
             },
             robbiewilliams: {
@@ -815,7 +821,7 @@
             britpop: {
                 cat: 'Konzert',
                 title: 'Best of BritPop-Konzert',
-                meta: ['MGV Neuhausen', '30.09.–02.10.2022'],
+                meta: ['MGV Neuhausen', '30.09. bis 02.10.2022'],
                 hero: 'images/referenzen/scraped/britpop-2022.jpg',
                 desc: 'Drei Abende mit den größten BritPop-Hits der 90er, live präsentiert vom MGV Neuhausen. Bühnenbeleuchtung und Tontechnik für Chor und Band.',
                 tech: [], gallery: []
@@ -838,7 +844,7 @@
             },
             fasching2022: {
                 cat: 'Show',
-                title: 'MGV Fasching 2022 – „Filder-Fasnets-Zoo"',
+                title: 'MGV Fasching 2022: „Filder-Fasnets-Zoo"',
                 meta: ['MGV Neuhausen', 'Mai 2022'],
                 hero: 'images/referenzen/scraped/mgv-fasching-2022.png',
                 desc: 'Der große Filder-Fasnets-Zoo: Bunte Show mit viel Helau, verlegt in den schönen Mai beim MGV.',
@@ -846,7 +852,7 @@
             },
             oldjohnnys2022: {
                 cat: 'Live-Musik',
-                title: 'Old Johnny\'s Crew – Welzheim',
+                title: 'Old Johnny\'s Crew in Welzheim',
                 meta: ['Billard-Café Mocca, Welzheim', '23. April 2022'],
                 hero: 'images/referenzen/scraped/old-johnnys-welzheim-2022.png',
                 desc: 'Country Folk Rock im Billard-Café Mocca in Welzheim. Tontechnik für ein Lokal, bei dem der Sound genau sitzen muss.',
@@ -854,7 +860,7 @@
             },
             enslaveCD: {
                 cat: 'CD-Release',
-                title: 'Enslave the Chain – CD Release',
+                title: 'Enslave the Chain, CD Release',
                 meta: ['Neresheim', '2. April 2022'],
                 hero: 'images/referenzen/scraped/enslave-cd-release-2022.png',
                 desc: 'CD-Release-Show mit voller Licht- und Tontechnik. Heavier Sound, volle Dynamik, und das Publikum hinter der Band.',
@@ -862,7 +868,7 @@
             },
             lesliesjazz: {
                 cat: 'Jazz',
-                title: 'Leslie\'s Bar Jazz – Jubiläum',
+                title: 'Leslie\'s Bar Jazz zum Jubiläum',
                 meta: ['Schwäbisch Gmünd', '17. September 2021'],
                 hero: 'images/referenzen/scraped/leslies-bar-jazz-2021.jpg',
                 desc: 'Jubiläumsfeier des Senioren-Netzwerks Schwäbisch Gmünd mit Leslie\'s Bar Jazz. Tontechnik für einen Jazz-Abend, bei dem jede Stimme und jedes Instrument seinen Platz fand.',
@@ -878,7 +884,7 @@
             },
             oldjohnnys2020: {
                 cat: 'Live-Musik',
-                title: 'Old Johnny\'s Crew – Meran',
+                title: 'Old Johnny\'s Crew in Meran',
                 meta: ['Cafe am Tore, Meran', '3. März 2020'],
                 hero: 'images/referenzen/scraped/old-johnnys-meran-2020.jpg',
                 desc: 'Old Johnny\'s Crew bringt das Cafe am Tore zum Beben. CD-Präsentation mit intensivem Live-Sound für ein enges, volles Publikum.',
@@ -942,7 +948,7 @@
             },
             theater2019: {
                 cat: 'Theater',
-                title: 'Ein Sommernachtstraum – Open Air',
+                title: 'Ein Sommernachtstraum als Open Air',
                 meta: ['Bühne am alten Bahndamm, Böbingen', '6. Juli 2019'],
                 hero: 'images/referenzen/scraped/open-air-theater-2019.jpg',
                 desc: 'Open-Air-Theater auf der Bühne am alten Bahndamm. Wir waren für Licht und Ton verantwortlich und haben die Akteure über den ganzen Abend getragen.',
@@ -961,7 +967,7 @@
                 title: 'Hochzeit in Pfersbach',
                 meta: ['Dorfhaus Pfersbach'],
                 hero: 'images/referenzen/hochzeit.webp',
-                desc: 'Ambientebeleuchtung, DJ und Partylicht für eine Hochzeit im Dorfhaus. Warmes Licht zum Dinner, volle Tanzfläche ab Mitternacht – ein Abend, der bis zuletzt getragen hat.',
+                desc: 'Ambientebeleuchtung, DJ und Partylicht für eine Hochzeit im Dorfhaus. Warmes Licht zum Dinner, volle Tanzfläche ab Mitternacht. Ein Abend, der bis zuletzt getragen hat.',
                 tech: [],
                 gallery: []
             }

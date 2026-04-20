@@ -85,10 +85,10 @@
         @font-face { font-family: 'DM Sans'; font-style: italic; font-weight: 400; font-display: swap; src: url('fonts/dm-sans-400-italic.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
         @font-face { font-family: 'Playfair Display'; font-style: italic; font-weight: 400 500; font-display: swap; src: url('fonts/playfair-display-400-italic-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
         @font-face { font-family: 'Playfair Display'; font-style: italic; font-weight: 400 500; font-display: swap; src: url('fonts/playfair-display-400-italic.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
-        @font-face { font-family: 'Space Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/space-mono-400-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
-        @font-face { font-family: 'Space Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/space-mono-400.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
-        @font-face { font-family: 'Space Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/space-mono-700-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
-        @font-face { font-family: 'Space Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/space-mono-700.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+        @font-face { font-family: 'Space Mono'; font-style: normal; font-weight: 400; font-display: block; src: url('fonts/space-mono-400-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+        @font-face { font-family: 'Space Mono'; font-style: normal; font-weight: 400; font-display: block; src: url('fonts/space-mono-400.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+        @font-face { font-family: 'Space Mono'; font-style: normal; font-weight: 700; font-display: block; src: url('fonts/space-mono-700-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+        @font-face { font-family: 'Space Mono'; font-style: normal; font-weight: 700; font-display: block; src: url('fonts/space-mono-700.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
         :root {
             --bg: #050509;
             --bg2: #070710;
@@ -266,10 +266,10 @@
         }
         .hero-tagline .tagline-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 6px rgba(0,229,200,.6), 0 0 12px rgba(0,229,200,.3); animation: dotPulse 2.5s ease-in-out infinite; }
         @keyframes dotPulse { 0%, 100% { opacity: .5; box-shadow: 0 0 6px rgba(0,229,200,.4), 0 0 12px rgba(0,229,200,.2); } 50% { opacity: 1; box-shadow: 0 0 8px rgba(0,229,200,.8), 0 0 20px rgba(0,229,200,.4); } }
-        .hero-h1 { font-family: var(--font-h); font-size: clamp(1.6rem,3.8vw,3.8rem); font-weight: 900; line-height: 1.05; letter-spacing: -.04em; text-transform: uppercase; margin-bottom: 1rem; text-align: center; }
+        .hero-h1 { font-family: var(--font-h); font-size: clamp(2.1rem,4.5vw,4rem); font-weight: 900; line-height: 1.05; letter-spacing: -.04em; text-transform: uppercase; margin-bottom: 1rem; text-align: center; }
 
         .h1-line { display: block; white-space: nowrap; padding: 0; margin: 0; text-align: center; }
-        .hero-h1 .accent { color: var(--text); text-shadow: none; animation: glowIn 1.2s cubic-bezier(.25,.1,.25,1) 2s forwards; }
+        .hero-h1 .accent { color: var(--text); text-shadow: none; animation: glowIn .9s cubic-bezier(.25,.1,.25,1) .5s forwards; }
         .hero-sub { font-family: var(--font-b); font-size: clamp(.95rem,1.5vw,1.28rem); font-weight: 400; line-height: 1.45; color: rgba(240,240,245,.65); max-width: 750px; margin: 0 auto 2rem; }
         .hero-sub .desktop-break { display: inline; }
         @media (max-width: 768px) { .hero-sub .desktop-break { display: none; } }
@@ -1112,7 +1112,7 @@
         <div class="hero-content">
             <div class="hero-tagline"><span class="tagline-dot"></span> Veranstaltungstechnik aus Böbingen</div>
             <div class="hero-text-wrap">
-                <h1 class="hero-h1"><span class="h1-line">Wir machen dein Event</span><span class="h1-line">zum <span class="accent">Gesprächsthema Nummer 1</span></span></h1>
+                <h1 class="hero-h1"><span class="h1-line">Dein kreativer Partner</span><span class="h1-line">für Events mit <span class="accent">Wow-Effekt</span></span></h1>
                 <p class="hero-sub">Von der ersten Idee bis zum letzten Kabel sind wir an deiner Seite.<br class="desktop-break">Für Gänsehautmomente, über die deine Gäste noch lange reden werden.</p>
             </div>
             <div class="hero-actions">
@@ -1216,7 +1216,7 @@
                         <p>Ob deine Rede bei 300 Leuten ankommen soll oder der Bass um Mitternacht den Raum zum Beben bringt. Wir liefern ein Setup, bei dem die Soundkulisse stimmt.</p>
                     </div>
                 </div>
-                <div class="glass-card-img"><img src="images/tontechnik.webp" alt="Professionelles Tontechnik Setup für Veranstaltungen" loading="lazy"></div>
+                <div class="glass-card-img"><img src="images/tontechnik.webp" alt="Professionelles Tontechnik Setup für Veranstaltungen"></div>
             </div>
             <div class="glass-card reveal d2">
                 <div class="glass-card-text">
@@ -1227,7 +1227,7 @@
                         <p>Die meisten Leute können gar nicht sagen, warum sich ein Abend besonders angefühlt hat. Meistens liegt es am Licht. Wir gestalten das so, dass dein Event seine volle Wirkung entfaltet.</p>
                     </div>
                 </div>
-                <div class="glass-card-img"><img src="images/lichttechnik-neu.webp" alt="Professionelle Lichttechnik und Bühnenbeleuchtung" loading="lazy"></div>
+                <div class="glass-card-img"><img src="images/lichttechnik-neu.webp" alt="Professionelle Lichttechnik und Bühnenbeleuchtung"></div>
             </div>
             <div class="glass-card reveal d1">
                 <div class="glass-card-text">
@@ -1239,7 +1239,7 @@
                         <a href="mietpakete.html" class="glass-card-link">Zu unseren Mietpaketen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
                     </div>
                 </div>
-                <div class="glass-card-img"><img src="images/eq-verleih.webp" alt="Veranstaltungstechnik Equipment zum Verleih" loading="lazy"></div>
+                <div class="glass-card-img"><img src="images/eq-verleih.webp" alt="Veranstaltungstechnik Equipment zum Verleih"></div>
             </div>
             <div class="glass-card reveal d2">
                 <div class="glass-card-text">
@@ -1250,7 +1250,7 @@
                         <p>Wir sind selbst Musiker und kennen die Szene. Ob DJ oder Live-Band, wir vermitteln dir Künstler, von denen wir persönlich überzeugt sind.</p>
                     </div>
                 </div>
-                <div class="glass-card-img"><img src="images/kuenstlerservice.webp" alt="DJ-Service und Künstlervermittlung für Events" loading="lazy"></div>
+                <div class="glass-card-img"><img src="images/kuenstlerservice.webp" alt="DJ-Service und Künstlervermittlung für Events"></div>
             </div>
             <div class="glass-card full-width reveal d1">
                 <div class="glass-card-text">
@@ -1261,7 +1261,7 @@
                         <p>Von der Vorbesprechung über den Location-Check bis zur Konzeption aller Gewerke. Wir koordinieren Licht, Ton und Bühne aus einer Hand, betreuen dein Event live vor Ort und bauen danach alles wieder ab. Du genießt den Abend, wir kümmern uns um den Rest.</p>
                     </div>
                 </div>
-                <div class="glass-card-img"><img src="images/fullservice-neu.webp" alt="Full-Service Eventproduktion und Veranstaltungsplanung" loading="lazy"></div>
+                <div class="glass-card-img"><img src="images/fullservice-neu.webp" alt="Full-Service Eventproduktion und Veranstaltungsplanung"></div>
             </div>
         </div>
     </div></section>

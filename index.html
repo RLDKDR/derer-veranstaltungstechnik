@@ -242,7 +242,7 @@
 
         .hero-logo-backdrop { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(1400px, 92vw); aspect-ratio: 1920 / 1080; pointer-events: none; z-index: 3; user-select: none; }
         .hero-logo-backdrop img { width: 100%; height: 100%; display: block; opacity: .1; mix-blend-mode: screen; }
-        .hero-logo-backdrop::after { content: ''; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 44%, rgba(255,255,255,.55) 50%, transparent 56%); background-size: 260% 100%; background-repeat: no-repeat; -webkit-mask: url('images/backdrop-logo-1.webp') center/contain no-repeat; mask: url('images/backdrop-logo-1.webp') center/contain no-repeat; mix-blend-mode: screen; opacity: .28; animation: logoShine 11s ease-in-out -1s infinite; pointer-events: none; }
+        .hero-logo-backdrop::after { content: ''; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 44%, rgba(255,255,255,.55) 50%, transparent 56%); background-size: 260% 100%; background-repeat: no-repeat; -webkit-mask: url('images/backdrop-logo-1.webp') center/contain no-repeat; mask: url('images/backdrop-logo-1.webp') center/contain no-repeat; mix-blend-mode: screen; opacity: .28; animation: logoShine 6s ease-in-out -1s infinite; pointer-events: none; }
         @keyframes logoShine { 0% { background-position: 160% 0; } 55% { background-position: -60% 0; } 100% { background-position: -60% 0; } }
         @media (max-width: 900px) { .hero-logo-backdrop { width: 130vw; max-width: none; } .hero-logo-backdrop img { opacity: .09; } .hero-logo-backdrop::after { opacity: .22; } }
 

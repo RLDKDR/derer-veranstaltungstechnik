@@ -308,7 +308,7 @@
             pointer-events: auto;
         }
         .tape-track { display: flex; animation: tape-scroll 40s linear infinite; will-change: transform; }
-        @keyframes tape-scroll { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(-50%,0,0); } }
+        @keyframes tape-scroll { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(-33.3333%,0,0); } }
         .tape-item {
             font-family: var(--font-h); font-size: .88rem; font-weight: 900;
             letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7);
@@ -509,8 +509,8 @@
         .projects-cta { text-align: center; margin-top: clamp(2.5rem,4vh,3.5rem); }
         .projects-title { font-family: var(--font-h); font-size: clamp(2.5rem,4.5vw,4rem); font-weight: 900; line-height: 1.02; letter-spacing: -.035em; text-transform: uppercase; }
         .projects-sub { font-size: 1.15rem; color: var(--text2); line-height: 1.7; margin-top: 1rem; }
-        .gallery-grid { display: grid; grid-template-columns: 1.4fr .8fr .8fr; grid-template-rows: 260px 260px; gap: .7rem; }
-        .gallery-item { border-radius: 10px; overflow: hidden; position: relative; cursor: pointer; min-height: 260px; transition: transform .5s var(--ease); }
+        .gallery-grid { display: grid; grid-template-columns: 1.4fr .8fr .8fr; grid-template-rows: 260px 260px; gap: 12px; }
+        .gallery-item { border-radius: 10px; overflow: hidden; position: relative; cursor: pointer; min-height: 260px; transition: transform .5s var(--ease); background: #050509; }
         .gallery-item.reveal { transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.9s cubic-bezier(0.16,1,0.3,1); }
         .gallery-item.reveal.visible { transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.9s cubic-bezier(0.16,1,0.3,1); }
         .gallery-item:hover { transform: scale(1.02); }
@@ -601,8 +601,10 @@
         .inquiry-form { display: flex; flex-direction: column; gap: 1rem; position: relative; z-index: 2; }
         .inq-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         .inquiry-form .form-field { width: 100%; }
-        .inquiry-form input, .inquiry-form select, .inquiry-form textarea { width: 100%; font-family: var(--font-b); font-size: .9rem; padding: .85rem 1rem; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; color: var(--text); outline: none; transition: border-color .3s var(--ease), box-shadow .3s var(--ease); -webkit-appearance: none; appearance: none; }
-        .inquiry-form input:focus, .inquiry-form select:focus, .inquiry-form textarea:focus { border-color: rgba(0,229,200,.4); box-shadow: 0 0 0 3px rgba(0,229,200,.08); }
+        .inquiry-form input:not([type="checkbox"]), .inquiry-form select, .inquiry-form textarea { width: 100%; font-family: var(--font-b); font-size: .9rem; padding: .85rem 1rem; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; color: var(--text); outline: none; transition: border-color .3s var(--ease), box-shadow .3s var(--ease); -webkit-appearance: none; appearance: none; }
+        .inquiry-form input:not([type="checkbox"]):focus, .inquiry-form select:focus, .inquiry-form textarea:focus { border-color: rgba(0,229,200,.4); box-shadow: 0 0 0 3px rgba(0,229,200,.08); }
+        .inquiry-form select option { color: #111; background: #fff; }
+        .inquiry-form select option[disabled] { color: #888; }
         .inquiry-form input::placeholder, .inquiry-form textarea::placeholder { color: var(--text3); }
         .inquiry-form select { color: var(--text3); cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2300e5c8' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 14px; padding-right: 2.5rem; }
         .inquiry-form select:has(option:checked:not([disabled])) { color: var(--text); }
@@ -886,12 +888,14 @@
         }
         @media (max-width: 768px) {
             .nav { top: .5rem; width: calc(100% - 1rem); }
-            .nav-links { display: flex; position: absolute; top: calc(100% + .5rem); left: 0; right: 0; background: rgba(5,5,9,.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); flex-direction: column; padding: 1.5rem; gap: 1.2rem; border-radius: 12px; border: 1px solid var(--border); opacity: 0; pointer-events: none; transition: opacity .2s ease; animation: none; }
+            .nav-links { display: flex; position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: rgba(5,5,9,.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); flex-direction: column; padding: 1.5rem; gap: 1.2rem; border-radius: 12px; border: 1px solid var(--border); opacity: 0; pointer-events: none; transition: opacity .2s ease; animation: none; }
             .nav-links.open { opacity: 1; pointer-events: auto; }
             .nav-cta-desktop { display: none; }
             .nav-toggle { display: flex; }
-            .nav-dropdown-menu { position: static; opacity: 1; pointer-events: auto; transform: none; background: none; border: none; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 0 0 0 1rem; min-width: auto; }
-            .nav-dropdown > a svg { display: none; }
+            .nav-dropdown-menu { position: static; opacity: 1; pointer-events: auto; transform: none; background: none; border: none; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 0; min-width: auto; display: flex; flex-direction: column; gap: 1.2rem; }
+            .nav-dropdown-menu a { padding: 0; font-size: .7rem; }
+            .nav-dropdown-menu a::before { display: none; }
+            .nav-dropdown > a { display: none; }
             .hero-social { display: none; }
             .hero-glow-blue { top: -200px; left: auto; right: -200px; width: 500px; height: 500px; }
             .hero { padding-top: 120px; padding-bottom: 180px; align-items: flex-start; min-height: auto; }
@@ -1204,7 +1208,7 @@
         <div class="services-header reveal">
             <span class="section-label">Unsere Leistungen</span>
             <h2 class="services-title"><span class="h1-line">Was wir für dich <span class="accent">tun.</span></span></h2>
-            <p class="services-desc">Du sagst uns was du brauchst, wir kümmern uns um den Rest.</p>
+            <p class="services-desc">Du sagst uns was du brauchst, wir machen es möglich.</p>
         </div>
         <div class="glass-grid">
             <div class="glass-card reveal d1">
@@ -1247,7 +1251,7 @@
                         <h3>DJ- und Künstlerservice</h3>
                     </div>
                     <div>
-                        <p>Wir sind selbst Musiker und kennen die Szene. Ob DJ oder Live-Band, wir vermitteln dir Künstler, von denen wir persönlich überzeugt sind.</p>
+                        <p>Über die Jahre haben wir uns ein starkes Netzwerk an Künstlern aufgebaut. Wir vermitteln dir nur die, von denen wir persönlich überzeugt sind.</p>
                     </div>
                 </div>
                 <div class="glass-card-img"><img src="images/kuenstlerservice.webp" alt="DJ-Service und Künstlervermittlung für Events"></div>
@@ -1258,7 +1262,7 @@
                         <h3>360° Eventproduktion</h3>
                     </div>
                     <div>
-                        <p>Von der Vorbesprechung über den Location-Check bis zur Konzeption aller Gewerke. Wir koordinieren Licht, Ton und Bühne aus einer Hand, betreuen dein Event live vor Ort und bauen danach alles wieder ab. Du genießt den Abend, wir kümmern uns um den Rest.</p>
+                        <p>Du willst dich an deinem eigenen Event entspannt zurücklehnen? Dafür sind wir da. Wir übernehmen alles, was dazugehört. Licht, Ton, Bühne, das passende Personal und auch der komplette Auf- und Abbau liegen in unseren Händen. Das Ergebnis für dich: ein entspannter Abend ganz ohne Koordinationsaufwand.</p>
                     </div>
                 </div>
                 <div class="glass-card-img"><img src="images/fullservice-neu.webp" alt="Full-Service Eventproduktion und Veranstaltungsplanung"></div>
@@ -1332,7 +1336,7 @@
     </div>
 
     <section class="projects" id="projects"><div class="container">
-        <div class="projects-header reveal"><span class="section-label">Referenzen</span><h2 class="projects-title"><span style="color:var(--accent)">Highlights</span> aus den letzten Jahren.</h2><p class="projects-sub">Jedes Event ist anders, aber eines hatten alle gemeinsam: Am Ende des Abends hat einfach alles gestimmt. Hier sind ein paar Beispiele.</p></div>
+        <div class="projects-header reveal"><span class="section-label">Referenzen</span><h2 class="projects-title"><span style="color:var(--accent)">Highlights</span> aus den letzten Jahren.</h2><p class="projects-sub">Jedes Event war anders, die Anforderungen auch. Unser Ziel war immer dasselbe: Dass die Gäste begeistert nach Hause gehen. Hier ein paar Beispiele.</p></div>
         <div class="gallery-grid">
             <div class="gallery-item large reveal" onclick="openProject(0)"><div class="gallery-ph g1"></div><img class="gallery-img" src="images/referenzen/soundofmovies.webp" alt="Bühnenbeleuchtung Sound of Movies Musical Filharmonie Filderstadt 2024" loading="lazy"><div class="gallery-overlay"><h3>Sound of Movies</h3><p>Musical-Großproduktion, 300+ Akteure, Filharmonie Filderstadt</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
             <div class="gallery-item reveal" onclick="openProject(1)"><div class="gallery-ph g2"></div><img class="gallery-img" src="images/referenzen/lichterfest-boebingen.webp" alt="Lichterfest Böbingen an der Rems Open-Air Bühne 2024" loading="lazy"><div class="gallery-overlay"><h3>Lichterfest Böbingen</h3><p>Open-Air mit Live-Bands, zwei Abende</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
@@ -1729,8 +1733,8 @@
                 website:hp?hp.value:''
             };
             fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
-            .then(function(r){return r.json();})
-            .then(function(){
+            .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+            .then(function(j){if(j&&j.error)throw new Error(j.error);
                 form.style.display='none';
                 document.getElementById('inqSuccess').style.display='block';
             })

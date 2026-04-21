@@ -221,8 +221,8 @@
         .pkg-inline-form .pkg-if-close { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); color: var(--text2); font-size: .85rem; width: 26px; height: 26px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; line-height: 1; transition: all .3s var(--ease); }
         .pkg-inline-form .pkg-if-close:hover { background: rgba(255,255,255,.1); color: var(--text); border-color: rgba(255,255,255,.15); }
         .pkg-inline-form .pkg-if-title { font-family: var(--font-h); font-size: .85rem; font-weight: 700; color: var(--accent); }
-        .pkg-inline-form input, .pkg-inline-form textarea { width: 100%; font-family: var(--font-m); font-size: .82rem; padding: .6rem .8rem; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 8px; color: var(--text); outline: none; transition: border-color .3s; }
-        .pkg-inline-form input:focus, .pkg-inline-form textarea:focus { border-color: rgba(0,229,200,.4); }
+        .pkg-inline-form input:not([type="checkbox"]), .pkg-inline-form textarea { width: 100%; font-family: var(--font-m); font-size: .82rem; padding: .6rem .8rem; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 8px; color: var(--text); outline: none; transition: border-color .3s; }
+        .pkg-inline-form input:not([type="checkbox"]):focus, .pkg-inline-form textarea:focus { border-color: rgba(0,229,200,.4); }
         .pkg-inline-form input::placeholder, .pkg-inline-form textarea::placeholder { color: var(--text3); }
         .pkg-inline-form textarea { resize: vertical; min-height: 50px; }
         .pkg-inline-form .pkg-if-submit { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; font-family: var(--font-h); font-size: .75rem; font-weight: 700; padding: .65rem 1.2rem; background: var(--accent); border: none; color: var(--bg); border-radius: 8px; cursor: pointer; transition: all .3s var(--ease); width: 100%; }
@@ -300,12 +300,14 @@
         }
         @media (max-width: 768px) {
             .nav { top: .5rem; width: calc(100% - 1rem); }
-            .nav-links { display: flex; position: absolute; top: calc(100% + .5rem); left: 0; right: 0; background: rgba(5,5,9,.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); flex-direction: column; padding: 1.5rem; gap: 1.2rem; border-radius: 12px; border: 1px solid var(--border); opacity: 0; pointer-events: none; transition: opacity .2s ease; animation: none; }
+            .nav-links { display: flex; position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: rgba(5,5,9,.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); flex-direction: column; padding: 1.5rem; gap: 1.2rem; border-radius: 12px; border: 1px solid var(--border); opacity: 0; pointer-events: none; transition: opacity .2s ease; animation: none; }
             .nav-links.open { opacity: 1; pointer-events: auto; }
             .nav-cta-desktop { display: none; }
             .nav-toggle { display: flex; }
-            .nav-dropdown-menu { position: static; opacity: 1; pointer-events: auto; transform: none; background: none; border: none; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 0 0 0 1rem; min-width: auto; }
-            .nav-dropdown > a svg { display: none; }
+            .nav-dropdown-menu { position: static; opacity: 1; pointer-events: auto; transform: none; background: none; border: none; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 0; min-width: auto; display: flex; flex-direction: column; gap: 1.2rem; }
+            .nav-dropdown-menu a { padding: 0; font-size: .7rem; }
+            .nav-dropdown-menu a::before { display: none; }
+            .nav-dropdown > a { display: none; }
             .mini-hero { padding-top: 120px; padding-bottom: 60px; }
             .pkg-grid > .pkg-card { width: 100%; }
             .pkg-tabs { gap: .35rem; }
@@ -331,7 +333,7 @@
                 <div class="mini-hero-content">
                     <span class="breadcrumb"><a href="index.html">Start</a><span class="sep">›</span> Mietpakete</span>
                     <h1 class="reveal">Miet dir, was du <span class="accent">brauchst.</span></h1>
-                    <p class="mini-hero-sub reveal d1">Fertige Pakete für jeden Anlass. Abholung oder Lieferung, Einweisung auf Wunsch.</p>
+                    <p class="mini-hero-sub reveal d1">Egal ob kleine Gartenfeier oder Firmenjubiläum mit 200 Gästen. Wir haben fertige Mietpakete für jeden Anlass. Abholung oder Lieferung inkl. Einweisung auf Wunsch.</p>
                 </div>
             </div>
         </section>
@@ -626,8 +628,8 @@
             });
             btn.disabled=true;btn.textContent='Wird gesendet...';
             fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({formType:'paket',paketName:paketName,name:nameVal,kontakt:kontaktVal,nachricht:nachrichtVal,website:hp?hp.value:''})})
-            .then(function(r){return r.json();})
-            .then(function(){
+            .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+            .then(function(j){if(j&&j.error)throw new Error(j.error);
                 var fields=form.querySelectorAll('input,textarea,button.pkg-if-submit,.pkg-if-title,.pkg-if-header,.dsgvo-check,.ohnehonig');
                 fields.forEach(function(el){el.style.display='none';});
                 form.querySelector('.pkg-if-ok').classList.add('show');

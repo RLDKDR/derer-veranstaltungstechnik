@@ -12,6 +12,11 @@
     <link rel="preload" href="fonts/space-mono-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/epilogue-300.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/dm-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="images/tontechnik.webp" as="image">
+    <link rel="preload" href="images/lichttechnik-neu.webp" as="image">
+    <link rel="preload" href="images/eq-verleih.webp" as="image">
+    <link rel="preload" href="images/kuenstlerservice.webp" as="image">
+    <link rel="preload" href="images/fullservice-neu.webp" as="image">
     <!-- Open Graph -->
     <meta property="og:title" content="Veranstaltungstechnik Böbingen | Derer Veranstaltungstechnik">
     <meta property="og:description" content="Licht, Ton, DJs und Full-Service Eventproduktion aus Böbingen an der Rems. Persönlich betreut von einem Team aus Musikern.">
@@ -77,10 +82,10 @@
     </script>
     <style>
         /* Local Fonts — DSGVO-konform, keine externen Requests */
-        @font-face { font-family: 'Epilogue'; font-style: normal; font-weight: 300 900; font-display: swap; src: url('fonts/epilogue-300-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
-        @font-face { font-family: 'Epilogue'; font-style: normal; font-weight: 300 900; font-display: swap; src: url('fonts/epilogue-300.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
-        @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400 500; font-display: swap; src: url('fonts/dm-sans-400-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
-        @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400 500; font-display: swap; src: url('fonts/dm-sans-400.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+        @font-face { font-family: 'Epilogue'; font-style: normal; font-weight: 300 900; font-display: block; src: url('fonts/epilogue-300-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+        @font-face { font-family: 'Epilogue'; font-style: normal; font-weight: 300 900; font-display: block; src: url('fonts/epilogue-300.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+        @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400 500; font-display: block; src: url('fonts/dm-sans-400-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+        @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400 500; font-display: block; src: url('fonts/dm-sans-400.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
         @font-face { font-family: 'DM Sans'; font-style: italic; font-weight: 400; font-display: swap; src: url('fonts/dm-sans-400-italic-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
         @font-face { font-family: 'DM Sans'; font-style: italic; font-weight: 400; font-display: swap; src: url('fonts/dm-sans-400-italic.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
         @font-face { font-family: 'Playfair Display'; font-style: italic; font-weight: 400 500; font-display: swap; src: url('fonts/playfair-display-400-italic-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
@@ -237,7 +242,7 @@
 
         .hero-logo-backdrop { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(1400px, 92vw); aspect-ratio: 1920 / 1080; pointer-events: none; z-index: 3; user-select: none; }
         .hero-logo-backdrop img { width: 100%; height: 100%; display: block; opacity: .1; mix-blend-mode: screen; }
-        .hero-logo-backdrop::after { content: ''; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 44%, rgba(255,255,255,.55) 50%, transparent 56%); background-size: 260% 100%; background-repeat: no-repeat; -webkit-mask: url('images/backdrop-logo-1.webp') center/contain no-repeat; mask: url('images/backdrop-logo-1.webp') center/contain no-repeat; mix-blend-mode: screen; opacity: .28; animation: logoShine 11s ease-in-out infinite; pointer-events: none; }
+        .hero-logo-backdrop::after { content: ''; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 44%, rgba(255,255,255,.55) 50%, transparent 56%); background-size: 260% 100%; background-repeat: no-repeat; -webkit-mask: url('images/backdrop-logo-1.webp') center/contain no-repeat; mask: url('images/backdrop-logo-1.webp') center/contain no-repeat; mix-blend-mode: screen; opacity: .28; animation: logoShine 11s ease-in-out -1s infinite; pointer-events: none; }
         @keyframes logoShine { 0% { background-position: 160% 0; } 55% { background-position: -60% 0; } 100% { background-position: -60% 0; } }
         @media (max-width: 900px) { .hero-logo-backdrop { width: 130vw; max-width: none; } .hero-logo-backdrop img { opacity: .09; } .hero-logo-backdrop::after { opacity: .22; } }
 
@@ -481,7 +486,7 @@
 
         /* ===================== STATEMENT ===================== */
         .testimonial { padding: clamp(4.5rem,9vh,7rem) 0; background: var(--bg2); text-align: center; position: relative; overflow: hidden; }
-        .testimonial-bg { position: absolute; inset: 0; background: url('images/testi-backdrop.webp') center/cover no-repeat; opacity: .15; pointer-events: none; z-index: 0; }
+        .testimonial-bg { position: absolute; inset: 0; background: url('images/testi-backdrop.webp') center/cover no-repeat; opacity: .10; pointer-events: none; z-index: 0; }
         .testimonial::before, .testimonial::after {
             content: ''; position: absolute; left: 50%; transform: translateX(-50%);
             width: 90%; max-width: 1400px; height: 1px;
@@ -1091,7 +1096,7 @@
 
     <nav class="nav" id="nav"><div class="nav-bar">
         <a href="#" class="nav-logo"><img src="images/derer-logo.webp" alt="Derer Veranstaltungstechnik Logo" style="height:32px;width:auto;display:block;"></a>
-        <ul class="nav-links" id="navLinks"><li><a href="#about">Über uns</a></li><li><a href="#why">Warum DERER?</a></li><li><a href="#services">Leistungen</a></li><li><a href="#projects">Highlights</a></li><li><a href="#contact">Kontakt</a></li><li class="nav-dropdown"><a>Weiteres <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></a><div class="nav-dropdown-menu"><a href="projekte.html">Referenzen</a><a href="mietpakete.html">Mietpark</a></div></li></ul>
+        <ul class="nav-links" id="navLinks"><li><a href="#about">Über uns</a></li><li><a href="#why">Warum DERER?</a></li><li><a href="#services">Leistungen</a></li><li><a href="#projects">Highlights</a></li><li><a href="#contact">Kontakt</a></li><li class="nav-dropdown"><a>Weiteres <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></a><div class="nav-dropdown-menu"><a href="/projekte">Referenzen</a><a href="/mietpakete">Mietpark</a></div></li></ul>
         <a href="#inquiry" class="nav-cta nav-cta-desktop">Jetzt anfragen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
         <button class="nav-toggle" id="navToggle" aria-label="Menü"><span></span><span></span><span></span></button>
     </div></nav>
@@ -1240,7 +1245,7 @@
                     </div>
                     <div>
                         <p>Manchmal reicht ein Lautsprecher und ein Mikro. Bei uns kannst du Einzelgeräte mieten, ohne gleich ein Komplettpaket buchen zu müssen.</p>
-                        <a href="mietpakete.html" class="glass-card-link">Zu unseren Mietpaketen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+                        <a href="/mietpakete" class="glass-card-link">Zu unseren Mietpaketen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
                     </div>
                 </div>
                 <div class="glass-card-img"><img src="images/eq-verleih.webp" alt="Veranstaltungstechnik Equipment zum Verleih"></div>
@@ -1344,7 +1349,7 @@
             <div class="gallery-item reveal" onclick="openProject(3)"><div class="gallery-ph g4"></div><img class="gallery-img" src="images/referenzen/hochzeit.webp" alt="Hochzeit Ambientebeleuchtung und DJ im Dorfhaus Pfersbach" loading="lazy"><div class="gallery-overlay"><h3>Hochzeit in Pfersbach</h3><p>Ambiente, DJ und Partylicht im Dorfhaus</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
             <div class="gallery-item reveal" onclick="openProject(4)"><div class="gallery-ph g5"></div><img class="gallery-img" src="images/referenzen/parkfullofsound.webp" alt="Park Full of Sound Mehrbühnen-Festival Böbingen an der Rems" loading="lazy"><div class="gallery-overlay"><h3>Park Full of Sound</h3><p>Mehrbühnen-Festival, Recording, Böbingen</p><span class="gallery-more">Details ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span></div></div>
         </div>
-        <div class="projects-cta reveal"><a href="projekte.html" class="btn-p">Alle Referenzen ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a></div>
+        <div class="projects-cta reveal"><a href="/projekte" class="btn-p">Alle Referenzen ansehen <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a></div>
     </div></section>
 
     <section class="inquiry" id="inquiry">
@@ -1400,7 +1405,7 @@
                     <div class="ohnehonig"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
                     <div class="dsgvo-check">
                         <input type="checkbox" id="dsgvoMain" required>
-                        <label for="dsgvoMain">Ich stimme zu, dass meine Angaben zur Bearbeitung meiner Anfrage verarbeitet werden. Weitere Infos in der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.</label>
+                        <label for="dsgvoMain">Ich stimme zu, dass meine Angaben zur Bearbeitung meiner Anfrage verarbeitet werden. Weitere Infos in der <a href="/datenschutz" target="_blank">Datenschutzerklärung</a>.</label>
                     </div>
                     <button class="btn-p inq-submit" id="inqSubmit" onclick="submitInquiry()">Anfrage absenden <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>
                 </div>
@@ -1526,8 +1531,8 @@
                 <a href="#why" class="footer-nav-link">Warum DERER?</a>
                 <a href="#services" class="footer-nav-link">Leistungen</a>
                 <a href="#projects" class="footer-nav-link">Highlights</a>
-                <a href="projekte.html" class="footer-nav-link">Referenzen</a>
-                <a href="mietpakete.html" class="footer-nav-link">Mietpark</a>
+                <a href="/projekte" class="footer-nav-link">Referenzen</a>
+                <a href="/mietpakete" class="footer-nav-link">Mietpark</a>
                 <a href="#inquiry" class="footer-nav-link">Individuelle Anfrage</a>
             </div>
             <div>
@@ -1542,7 +1547,7 @@
         </div>
         <div class="footer-bottom">
             <span class="footer-copy">&copy; 2026 Derer Veranstaltungstechnik</span>
-            <div class="footer-legal"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="agb.html">AGB</a></div>
+            <div class="footer-legal"><a href="/impressum">Impressum</a><a href="/datenschutz">Datenschutz</a><a href="/agb">AGB</a></div>
         </div>
     </div></footer>
 
@@ -1843,7 +1848,7 @@
                 +'<input type="text" placeholder="E-Mail oder Telefonnummer" required>'
                 +'<textarea placeholder="Nachricht (optional)"></textarea>'
                 +'<div class="ohnehonig"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>'
-                +'<div class="dsgvo-check"><input type="checkbox" id="dsgvo_'+Date.now()+'" required><label>Ich stimme zu, dass meine Angaben zur Bearbeitung meiner Anfrage verarbeitet werden. <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a></label></div>'
+                +'<div class="dsgvo-check"><input type="checkbox" id="dsgvo_'+Date.now()+'" required><label>Ich stimme zu, dass meine Angaben zur Bearbeitung meiner Anfrage verarbeitet werden. <a href="/datenschutz" target="_blank">Datenschutzerklärung</a></label></div>'
                 +'<button class="pkg-if-submit" onclick="submitInlineForm(this)">Anfrage absenden <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></button>'
                 +'<div class="pkg-if-ok"><div class="success-check success-check-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div><div style="font-size:.85rem;font-weight:700;margin-bottom:.25rem;">Anfrage abgeschickt!</div><div style="font-size:.78rem;color:var(--text2);line-height:1.5;">Wir melden uns innerhalb von 48 Stunden bei dir.</div></div>';
             card.appendChild(form);

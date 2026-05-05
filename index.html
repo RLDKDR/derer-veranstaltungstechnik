@@ -276,23 +276,6 @@
 
         .h1-line { display: block; white-space: nowrap; padding: 0; margin: 0; text-align: center; }
         .hero-h1 .accent { color: var(--text); text-shadow: none; animation: glowIn .9s cubic-bezier(.25,.1,.25,1) .5s forwards; }
-
-        /* === GOLD PREVIEW: Hero + USP === */
-        .hero-h1 .accent,
-        .why-title .accent {
-            background: linear-gradient(110deg, #BF953F 0%, #FCF6BA 20%, #B38728 40%, #FBF5B7 60%, #AA771C 80%, #BF953F 100%);
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-            text-shadow: none;
-            animation: goldShimmer 5s linear infinite;
-        }
-        @keyframes goldShimmer {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
         .hero-sub { font-family: var(--font-b); font-size: clamp(.95rem,1.5vw,1.28rem); font-weight: 400; line-height: 1.45; color: rgba(240,240,245,.65); max-width: 750px; margin: 0 auto 2rem; }
         .hero-sub .desktop-break { display: inline; }
         @media (max-width: 768px) { .hero-sub .desktop-break { display: none; } }

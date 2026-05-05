@@ -293,41 +293,6 @@
             0% { background-position: 0% 50%; }
             100% { background-position: 200% 50%; }
         }
-        /* === HERO GOLD: Buttons, Stars, Score, Dot, Orbs, Tape === */
-        .hero .tagline-dot {
-            background: linear-gradient(110deg, #BF953F 0%, #FCF6BA 50%, #AA771C 100%) !important;
-            box-shadow: 0 0 6px rgba(252, 246, 186, .55), 0 0 12px rgba(191, 149, 63, .35) !important;
-        }
-        .hero .hero-orb-1 {
-            background: radial-gradient(circle, rgba(191, 149, 63, .22) 0%, rgba(252, 246, 186, .07) 40%, transparent 70%) !important;
-        }
-        .hero .hero-orb-2 {
-            background: radial-gradient(circle, rgba(191, 149, 63, .16) 0%, rgba(252, 246, 186, .05) 40%, transparent 70%) !important;
-        }
-        .hero .review-stars svg { fill: #BF953F !important; }
-        .hero .review-score {
-            background: linear-gradient(110deg, #BF953F 0%, #FCF6BA 20%, #B38728 40%, #FBF5B7 60%, #AA771C 80%, #BF953F 100%);
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-            animation: goldShimmer 5s linear infinite;
-        }
-        .hero .btn-p {
-            background: linear-gradient(110deg, #BF953F 0%, #FCF6BA 20%, #B38728 40%, #FBF5B7 60%, #AA771C 80%, #BF953F 100%);
-            background-size: 200% 100%;
-            animation: goldShimmer 5s linear infinite;
-            color: #1a1208;
-        }
-        .hero .btn-p:hover {
-            box-shadow: 0 0 14px rgba(191, 149, 63, .4), 0 0 40px rgba(252, 246, 186, .18), 0 0 80px rgba(191, 149, 63, .08);
-        }
-        .hero .btn-o:hover {
-            border-color: rgba(191, 149, 63, .55);
-            background: rgba(191, 149, 63, .12);
-        }
-        .hero .tape-item .tape-star { color: #BF953F !important; }
         .hero-sub { font-family: var(--font-b); font-size: clamp(.95rem,1.5vw,1.28rem); font-weight: 400; line-height: 1.45; color: rgba(240,240,245,.65); max-width: 750px; margin: 0 auto 2rem; }
         .hero-sub .desktop-break { display: inline; }
         @media (max-width: 768px) { .hero-sub .desktop-break { display: none; } }

@@ -18,7 +18,7 @@
         @font-face { font-family: 'Space Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/space-mono-700.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
         :root {
             --bg: #050509; --bg2: #070710; --bg3: #0a0a14;
-            --accent: #00e5c8; --accent-glow: rgba(0,229,200,0.12);
+            --accent: #BF953F; --accent-glow: rgba(191, 149, 63,0.12);
             --text: #f0f0f5; --text2: rgba(240,240,245,0.48); --text3: rgba(240,240,245,0.25);
             --border: rgba(240,240,245,0.06);
             --font-h: 'Epilogue', sans-serif; --font-b: 'DM Sans', sans-serif;
@@ -41,7 +41,7 @@
         .legal-nav .container { display: flex; justify-content: space-between; align-items: center; }
         .legal-logo { display: flex; align-items: center; }
         .legal-logo img { height: 32px; width: auto; display: block; }
-        .legal-back { font-family: var(--font-m); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text2); transition: color .3s var(--ease); display: flex; align-items: center; gap: .5rem; }
+        .legal-back { font-family: var(--font-m); font-size: .82rem; letter-spacing: .07em; text-transform: uppercase; color: var(--text2); transition: color .3s var(--ease); display: flex; align-items: center; gap: .55rem; }
         .legal-back:hover { color: var(--accent); }
         .legal-back svg { width: 14px; height: 14px; }
 
@@ -56,9 +56,9 @@
 
         /* Content */
         .legal-content { padding-bottom: clamp(4rem,8vh,6rem); flex: 1; }
-        .legal-content h2 { font-family: var(--font-h); font-size: 1.15rem; font-weight: 700; margin: 2.5rem 0 1rem; text-transform: uppercase; letter-spacing: -.01em; }
+        .legal-content h2 { font-family: var(--font-h); font-size: 1.3rem; font-weight: 700; margin: 2.5rem 0 1rem; text-transform: uppercase; letter-spacing: -.01em; }
         .legal-content h2:first-child { margin-top: 0; }
-        .legal-content p { color: var(--text2); font-size: .88rem; line-height: 1.75; margin-bottom: 1rem; }
+        .legal-content p { color: var(--text2); font-size: 1.05rem; line-height: 1.75; margin-bottom: 1rem; }
         .legal-content strong { color: var(--text); font-weight: 500; }
         .legal-content a.inline-link { color: var(--accent); transition: opacity .3s var(--ease); }
         .legal-content a.inline-link:hover { opacity: .7; }
@@ -69,14 +69,21 @@
         /* Footer */
         .legal-footer { border-top: 1px solid var(--border); padding: 1.5rem 0; margin-top: auto; }
         .legal-footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-        .legal-footer-copy { font-size: .68rem; color: var(--text3); }
+        .legal-footer-copy { font-size: .85rem; color: var(--text2); }
         .legal-footer-links { display: flex; gap: 1.5rem; }
-        .legal-footer-links a { font-size: .68rem; color: var(--text3); transition: color .3s var(--ease); }
-        .legal-footer-links a:hover { color: var(--text); }
+        .legal-footer-links a { font-size: .85rem; color: var(--text2); transition: color .3s var(--ease); }
+        .legal-footer-links a:hover { color: var(--accent); }
         .legal-footer-links a.active { color: var(--accent); }
 
         @media (max-width: 600px) {
             .legal-footer .container { flex-direction: column; text-align: center; }
+        }
+        /* Headline auf Mobile homogen mit Startseite */
+        @media (max-width: 768px) {
+            .legal-hero h1 {
+                font-size: clamp(1.5rem, 7.5vw, 2.5rem) !important;
+                line-height: 1.2 !important;
+            }
         }
     </style>
 </head>
@@ -95,7 +102,7 @@
     <main class="container">
         <div class="legal-hero">
             <span class="section-label">Rechtliches</span>
-            <h1>Impressum<span class="accent">.</span></h1>
+            <h1>Impressum</h1>
         </div>
 
         <div class="legal-content">

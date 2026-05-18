@@ -191,7 +191,8 @@
         .nav-cta:hover { transform: scale(1.04); box-shadow: 0 0 12px rgba(191, 149, 63,.3), 0 0 35px rgba(191, 149, 63,.15), 0 0 70px rgba(191, 149, 63,.05); }
         .nav-cta svg { width: 14px; height: 14px; }
         .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
-        .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text); transition: transform .3s var(--ease), opacity .3s var(--ease); }
+        .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text); transition: transform .3s var(--ease), opacity .3s var(--ease), background .3s var(--ease); }
+        .nav-toggle.active span { background: var(--accent); }
         .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
         .nav-toggle.active span:nth-child(2) { opacity: 0; }
         .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
@@ -899,9 +900,11 @@
             .nav-links.open { opacity: 1; pointer-events: auto; }
             .nav-cta-desktop { display: none; }
             .nav-toggle { display: flex; }
-            .nav-dropdown-menu { position: static; opacity: 1; pointer-events: auto; transform: none; background: none; border: none; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 0; min-width: auto; display: flex; flex-direction: column; gap: 1.2rem; }
-            .nav-dropdown-menu a { padding: 0; font-size: .7rem; }
+            .nav-dropdown-menu { position: static; opacity: 1; pointer-events: auto; transform: none; background: none; border: none; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 0; min-width: auto; display: flex; flex-direction: column; gap: 1.2rem; align-self: stretch; }
+            .nav-dropdown-menu a { padding: 0; font-size: .7rem; justify-content: center; }
             .nav-dropdown-menu a::before { display: none; }
+            /* Hero-Decos / Orbs / Glow auf Mobile ausblenden (leuchtende Punkte stören) */
+            .hero-orb, .hero-glow-blue, .hero-deco, .hero-deco-3, .hero-deco-4 { display: none !important; }
             .nav-dropdown > a { display: none; }
             .hero-social { display: none; }
             .hero-glow-blue { top: -200px; left: auto; right: -200px; width: 500px; height: 500px; }
@@ -1379,6 +1382,9 @@
 
             /* Inquiry-Alt-Link auf Mobile etwas kleiner */
             .inquiry-alt { font-size: .98rem; }
+
+            /* Hero-Sub auf Mobile kompakter: muss auf iPhone 15 Pro (393px) auf 3 Zeilen passen */
+            .hero-sub { font-size: .88rem !important; line-height: 1.5 !important; margin-bottom: 1.25rem !important; max-width: 100% !important; padding: 0 .25rem; }
 
             /* Testimonial-Slider braucht mehr Höhe auf Mobile (Text wrappt mehr) */
             .testimonial-slides { min-height: 440px; }

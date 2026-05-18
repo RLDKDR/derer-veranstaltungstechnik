@@ -1355,8 +1355,9 @@
             .hero { flex-direction: column; }
             .hero-content { order: 1; width: 100%; }
 
-            /* Hero-Social auf Mobile sichtbar als horizontale Zeile NACH dem Content */
-            .hero-social {
+            /* Hero-Social auf Mobile komplett ausblenden */
+            .hero-social { display: none !important; }
+            .hero-social-disabled {
                 display: flex !important;
                 position: static !important;
                 transform: none !important;
@@ -1387,8 +1388,8 @@
             /* Inquiry-Alt-Link auf Mobile etwas kleiner */
             .inquiry-alt { font-size: .98rem; }
 
-            /* Hero-Sub auf Mobile kompakter: muss auf iPhone 15 Pro (393px) auf 3 Zeilen passen */
-            .hero-sub { font-size: .94rem !important; line-height: 1.5 !important; margin-bottom: 1.25rem !important; max-width: 100% !important; padding: 0 .25rem; }
+            /* Hero-Sub auf Mobile kompakter: muss auf iPhone 15 Pro (393px) auf 3 Zeilen passen + besser lesbar */
+            .hero-sub { font-size: .94rem !important; line-height: 1.5 !important; margin-bottom: 1.25rem !important; max-width: 100% !important; padding: 0 .25rem; color: rgba(245,245,250,.92) !important; }
             /* Derer-Logo-Backdrop NUR auf Desktop sichtbar */
             .hero-logo-backdrop { display: none !important; }
 
@@ -1925,6 +1926,19 @@
         window.scrollTo(0,0);
         const nav=document.getElementById('nav');
         const nt=document.getElementById('navToggle'),nl=document.getElementById('navLinks');
+        /* Mobile-Menü flach machen: Dropdown-Items (Referenzen, Mietpark) als Direkt-LI-Geschwister einfügen,
+           damit ALLE Menüpunkte denselben Gap haben. Nur auf Mobile-Viewports. */
+        if(window.matchMedia('(max-width: 768px)').matches){
+            const dd=nl.querySelector('.nav-dropdown');
+            if(dd){
+                dd.querySelectorAll('.nav-dropdown-menu a').forEach(a=>{
+                    const li=document.createElement('li');
+                    li.appendChild(a.cloneNode(true));
+                    nl.insertBefore(li,dd);
+                });
+                dd.remove();
+            }
+        }
         nt.addEventListener('click',()=>{nt.classList.toggle('active');nl.classList.toggle('open');});
         nl.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>{nt.classList.remove('active');nl.classList.remove('open');}));
 

@@ -59,6 +59,9 @@
         .legal-content strong { color: var(--text); font-weight: 500; }
         .legal-content a.inline-link { color: var(--accent); transition: opacity .3s var(--ease); }
         .legal-content a.inline-link:hover { opacity: .7; }
+        .legal-content .info-block { background: rgba(255,255,255,.02); border: 1px solid var(--border); border-radius: 14px; padding: 1.75rem; margin: 1.5rem 0; }
+        .legal-content .info-block p { margin-bottom: .5rem; }
+        .legal-content .info-block p:last-child { margin-bottom: 0; }
 
         .legal-footer { border-top: 1px solid var(--border); padding: 1.5rem 0; margin-top: auto; }
         .legal-footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
@@ -99,33 +102,85 @@
         </div>
 
         <div class="legal-content">
-            <h2>Allgemeines</h2>
-            <p>Wir, der Betreiber dieser Seiten, nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
-            <p>Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder E-Mail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.</p>
-            <p>Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.</p>
+            <h2>1. Verantwortlicher</h2>
+            <p>Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) und anderer nationaler Datenschutzgesetze sowie sonstiger datenschutzrechtlicher Bestimmungen ist:</p>
+            <div class="info-block">
+                <p><strong>Derer Veranstaltungstechnik</strong></p>
+                <p>Inhaber: Daniel Derer M.Eng. MBA</p>
+                <p>Dr.-Schneider-Str. 3<br>73560 Böbingen an der Rems</p>
+                <p>Telefon: <a href="tel:+4917621810688" class="inline-link">0176 / 218 10 688</a></p>
+                <p>E-Mail: <a href="mailto:info@derer-veranstaltungstechnik.de" class="inline-link">info@derer-veranstaltungstechnik.de</a></p>
+            </div>
+            <p>Ein Datenschutzbeauftragter ist gesetzlich nicht zu bestellen. Bei Fragen zum Datenschutz wenden Sie sich bitte direkt an die oben genannten Kontaktdaten.</p>
 
-            <h2>Cookies</h2>
-            <p>Die Internetseiten verwenden teilweise sogenannte Cookies. Cookies richten auf Ihrem Rechner keinen Schaden an und enthalten keine Viren. Cookies dienen dazu, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen. Cookies sind kleine Textdateien, die auf Ihrem Rechner abgelegt werden und die Ihr Browser speichert.</p>
-            <p>Die meisten der von uns verwendeten Cookies sind sogenannte „Session-Cookies". Sie werden nach Ende Ihres Besuchs automatisch gelöscht. Andere Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese löschen. Diese Cookies ermöglichen es uns, Ihren Browser beim nächsten Besuch wiederzuerkennen.</p>
-            <p>Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browsers aktivieren. Bei der Deaktivierung von Cookies kann die Funktionalität dieser Website eingeschränkt sein.</p>
+            <h2>2. Allgemeine Hinweise</h2>
+            <p>Wir nehmen den Schutz Ihrer personenbezogenen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung. Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder E-Mail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis.</p>
+            <p>Wir weisen darauf hin, dass die Datenübertragung im Internet (z. B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.</p>
 
-            <h2>Server-Log-Files</h2>
-            <p>Der Provider der Seiten erhebt und speichert automatisch Informationen in sogenannten Server-Log-Files, die Ihr Browser automatisch an uns übermittelt. Dies sind:</p>
-            <p>Browsertyp und Browserversion, verwendetes Betriebssystem, Referrer URL, Hostname des zugreifenden Rechners sowie die Uhrzeit der Serveranfrage.</p>
-            <p>Diese Daten sind nicht bestimmten Personen zuordenbar. Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Wir behalten uns vor, diese Daten nachträglich zu prüfen, wenn uns konkrete Anhaltspunkte für eine rechtswidrige Nutzung bekannt werden.</p>
+            <h2>3. SSL-/TLS-Verschlüsselung</h2>
+            <p>Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt und am Schloss-Symbol in Ihrer Browserzeile.</p>
 
-            <h2>Hosting</h2>
-            <p>Diese Website wird bei Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA gehostet. Beim Besuch unserer Website erfasst Vercel automatisch technische Zugriffsdaten (IP-Adresse, Zeitpunkt des Zugriffs, Browsertyp). Die Verarbeitung erfolgt auf Grundlage unseres berechtigten Interesses an einer sicheren und effizienten Bereitstellung unserer Website (Art. 6 Abs. 1 lit. f DSGVO). Vercel verarbeitet Daten unter anderem in den USA. Die Datenübermittlung in die USA erfolgt auf Grundlage der EU-Standardvertragsklauseln.</p>
+            <h2>4. Hosting (Vercel Inc., USA)</h2>
+            <p>Diese Website wird gehostet bei der Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA. Beim Aufruf unserer Website erfasst Vercel automatisch technische Zugriffsdaten in Server-Log-Files: IP-Adresse, Zeitpunkt des Zugriffs, abgerufene URL/Datei, übertragene Datenmenge, Browsertyp und -version, Betriebssystem, Referrer-URL.</p>
+            <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren, stabilen und effizienten Bereitstellung unserer Website sowie an der Abwehr von Angriffen).</p>
+            <p><strong>Speicherdauer:</strong> Maximal 30 Tage, danach automatische Löschung – soweit nicht aufgrund konkreter Sicherheitsvorfälle eine längere Speicherung erforderlich ist.</p>
+            <p><strong>Drittlandtransfer:</strong> Vercel verarbeitet Daten unter anderem in den USA. Mit Vercel besteht ein Auftragsverarbeitungsvertrag (Data Processing Addendum) gemäß Art. 28 DSGVO. Die Datenübermittlung in die USA erfolgt zusätzlich auf Grundlage der EU-Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO) sowie – sofern einschlägig – des EU-US Data Privacy Frameworks. Hinweise zum Datenschutz bei Vercel: <a href="https://vercel.com/legal/privacy-policy" class="inline-link" target="_blank" rel="noopener">vercel.com/legal/privacy-policy</a>.</p>
 
-            <h2>Kontaktformular und E-Mail-Versand</h2>
-            <p>Wenn Sie unser Kontaktformular nutzen, werden Ihre Angaben (Name, E-Mail, Telefonnummer, Nachricht) zur Bearbeitung Ihrer Anfrage verarbeitet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Beantwortung von Anfragen).</p>
-            <p>Für den Versand der Kontaktformular-Daten per E-Mail nutzen wir den Dienst Resend (Resend Inc., USA). Resend verarbeitet die von Ihnen eingegebenen Daten ausschließlich zum Zweck der E-Mail-Zustellung. Die Datenübermittlung in die USA erfolgt auf Grundlage der EU-Standardvertragsklauseln.</p>
+            <h2>5. Kontaktformular und E-Mail-Versand (Resend, USA)</h2>
+            <p>Wenn Sie unser Kontaktformular nutzen, verarbeiten wir die von Ihnen eingegebenen Daten (z. B. Name, E-Mail-Adresse, Telefonnummer, Art des Events, Nachricht, ggf. ausgewähltes Mietpaket) ausschließlich zum Zweck der Bearbeitung Ihrer Anfrage und der ggf. folgenden Anbahnung eines Vertrages.</p>
+            <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (Durchführung vorvertraglicher Maßnahmen auf Anfrage der betroffenen Person) sowie Art. 6 Abs. 1 lit. a DSGVO (Ihre durch Anklicken der Datenschutz-Checkbox erteilte Einwilligung).</p>
+            <p><strong>Empfänger:</strong> Zur Übermittlung der Formulardaten per E-Mail setzen wir den Dienst <strong>Resend</strong> der Resend, Inc., 2261 Market Street #5039, San Francisco, CA 94114, USA ein. Resend verarbeitet die Daten ausschließlich zum Zweck der zuverlässigen E-Mail-Zustellung als unser Auftragsverarbeiter (Art. 28 DSGVO).</p>
+            <p><strong>Drittlandtransfer:</strong> Die Übermittlung in die USA erfolgt auf Grundlage der EU-Standardvertragsklauseln sowie ggf. des EU-US Data Privacy Frameworks. Datenschutz-Informationen von Resend: <a href="https://resend.com/legal/privacy-policy" class="inline-link" target="_blank" rel="noopener">resend.com/legal/privacy-policy</a>.</p>
+            <p><strong>Speicherdauer:</strong> Anfragen werden gelöscht, sobald sie nicht mehr erforderlich sind – spätestens jedoch nach Ablauf der gesetzlichen Aufbewahrungsfristen (i. d. R. 6 bzw. 10 Jahre nach § 257 HGB, § 147 AO), sofern eine geschäftliche Beziehung entstanden ist. Wenn kein Vertrag zustande kommt, löschen wir die Daten in der Regel spätestens nach 12 Monaten.</p>
+            <p><strong>Widerruf:</strong> Die erteilte Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt davon unberührt.</p>
 
-            <h2>SSL-Verschlüsselung</h2>
-            <p>Diese Seite nutzt aus Gründen der Sicherheit und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel der Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.</p>
+            <h2>6. Spamschutz / Missbrauchsschutz</h2>
+            <p>Zum Schutz unseres Kontaktformulars vor automatisierten Anfragen (Bots) setzen wir technische Maßnahmen ein: ein verstecktes „Honeypot"-Feld, eine serverseitige Begrenzung der Anfragen pro IP-Adresse (Rate-Limiting) sowie eine Herkunftsprüfung (Origin-Check). Hierbei wird Ihre IP-Adresse kurzzeitig im Arbeitsspeicher unseres Servers verarbeitet. <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am Schutz vor Spam und Missbrauch). Diese Daten werden nicht dauerhaft gespeichert und nicht mit anderen Datenquellen zusammengeführt.</p>
 
-            <h2>Auskunft, Löschung, Sperrung</h2>
-            <p>Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung sowie ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten. Hierzu sowie zu weiteren Fragen zum Thema personenbezogene Daten können Sie sich jederzeit unter der im <a href="/impressum" class="inline-link">Impressum</a> angegebenen Adresse an uns wenden.</p>
+            <h2>7. Cookies und ähnliche Technologien</h2>
+            <p>Unsere Website setzt grundsätzlich <strong>keine Tracking- oder Marketing-Cookies</strong> ein. Es findet kein Tracking durch Dritte statt (kein Google Analytics, kein Facebook Pixel, keine eingebetteten Werbedienste). Lediglich technisch notwendige Daten (z. B. Sitzungs-Token oder Browser-eigene Mechanismen wie Local Storage zur Speicherung kleiner Funktionseinstellungen) können verwendet werden. <strong>Rechtsgrundlage:</strong> § 25 Abs. 2 Nr. 2 TDDDG i. V. m. Art. 6 Abs. 1 lit. f DSGVO.</p>
+            <p>Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies generell ablehnen oder beim Schließen des Browsers automatisch löschen lassen. Bei der Deaktivierung kann die Funktionalität dieser Website eingeschränkt sein.</p>
+
+            <h2>8. Schriftarten (lokal eingebunden)</h2>
+            <p>Diese Website nutzt zur einheitlichen Darstellung von Schriften ausschließlich <strong>lokal auf unserem Server gehostete Webfonts</strong> (im WOFF2-Format). Es findet <strong>keine Verbindung zu Google Fonts oder anderen externen Schriftarten-Anbietern</strong> statt. Beim Aufruf einer Seite werden keine Daten an Dritte übermittelt.</p>
+
+            <h2>9. Verlinkungen auf soziale Netzwerke</h2>
+            <p>Auf unserer Website finden Sie Verlinkungen (reine Hyperlinks, keine eingebetteten Inhalte oder Social-Plugins) zu unseren Profilen bei Instagram, Facebook, LinkedIn und TikTok. Erst beim Klick auf einen dieser Links verlassen Sie unsere Website und werden zur jeweiligen Plattform weitergeleitet. Wir haben keinen Einfluss auf die dort erhobenen Daten und Datenverarbeitungsvorgänge. Die jeweiligen Anbieter:</p>
+            <p><strong>Instagram, Facebook:</strong> Meta Platforms Ireland Ltd., Merrion Road, Dublin 4, Irland – <a href="https://www.facebook.com/policy.php" class="inline-link" target="_blank" rel="noopener">Datenschutzerklärung Meta</a>.<br>
+            <strong>LinkedIn:</strong> LinkedIn Ireland Unlimited Company, Wilton Place, Dublin 2, Irland – <a href="https://www.linkedin.com/legal/privacy-policy" class="inline-link" target="_blank" rel="noopener">Datenschutzerklärung LinkedIn</a>.<br>
+            <strong>TikTok:</strong> TikTok Technology Limited, 10 Earlsfort Terrace, Dublin 2, Irland – <a href="https://www.tiktok.com/legal/privacy-policy-eea" class="inline-link" target="_blank" rel="noopener">Datenschutzerklärung TikTok</a>.</p>
+            <p>Bei den Anbietern Meta und TikTok kann eine Datenübermittlung in die USA bzw. in andere Drittländer erfolgen. Bitte informieren Sie sich vor einer Interaktion mit den verlinkten Profilen über die Datenschutzhinweise des jeweiligen Anbieters.</p>
+
+            <h2>10. Empfänger der Daten</h2>
+            <p>Eine Weitergabe Ihrer personenbezogenen Daten an Dritte erfolgt ausschließlich, wenn dies zur Vertragserfüllung, aufgrund gesetzlicher Pflichten oder mit Ihrer ausdrücklichen Einwilligung erforderlich ist. Auftragsverarbeiter im Sinne des Art. 28 DSGVO sind insbesondere: Vercel Inc. (Hosting), Resend Inc. (E-Mail-Versand). Daneben können Steuerberater, Rechtsberater oder Behörden Empfänger sein, soweit eine gesetzliche Pflicht zur Übermittlung besteht.</p>
+
+            <h2>11. Ihre Rechte als betroffene Person</h2>
+            <p>Sie haben uns gegenüber folgende Rechte hinsichtlich der Sie betreffenden personenbezogenen Daten:</p>
+            <p><strong>a) Recht auf Auskunft</strong> (Art. 15 DSGVO) – Sie können Auskunft darüber verlangen, welche Daten wir über Sie verarbeiten.<br>
+            <strong>b) Recht auf Berichtigung</strong> (Art. 16 DSGVO) – Sie können die Berichtigung unrichtiger oder Ergänzung unvollständiger Daten verlangen.<br>
+            <strong>c) Recht auf Löschung</strong> (Art. 17 DSGVO) – Sie können die Löschung Ihrer Daten verlangen, soweit keine gesetzlichen Aufbewahrungspflichten entgegenstehen.<br>
+            <strong>d) Recht auf Einschränkung der Verarbeitung</strong> (Art. 18 DSGVO).<br>
+            <strong>e) Recht auf Datenübertragbarkeit</strong> (Art. 20 DSGVO) – Sie können verlangen, dass wir Ihnen Ihre Daten in einem strukturierten, gängigen und maschinenlesbaren Format zur Verfügung stellen.<br>
+            <strong>f) Widerspruchsrecht</strong> (Art. 21 DSGVO) – Soweit wir Daten auf Grundlage eines berechtigten Interesses verarbeiten (Art. 6 Abs. 1 lit. f DSGVO), können Sie der Verarbeitung jederzeit aus Gründen, die sich aus Ihrer besonderen Situation ergeben, widersprechen.<br>
+            <strong>g) Widerrufsrecht bei Einwilligung</strong> (Art. 7 Abs. 3 DSGVO) – Sie können eine erteilte Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt davon unberührt.</p>
+            <p>Zur Ausübung dieser Rechte genügt eine formlose Mitteilung an die im Abschnitt „Verantwortlicher" angegebenen Kontaktdaten.</p>
+
+            <h2>12. Beschwerderecht bei der Aufsichtsbehörde</h2>
+            <p>Unbeschadet eines anderweitigen verwaltungsrechtlichen oder gerichtlichen Rechtsbehelfs steht Ihnen das Recht auf Beschwerde bei einer Datenschutzaufsichtsbehörde zu (Art. 77 DSGVO). Zuständig ist insbesondere die Aufsichtsbehörde am Ort unseres Sitzes:</p>
+            <div class="info-block">
+                <p><strong>Der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Baden-Württemberg</strong></p>
+                <p>Lautenschlagerstraße 20<br>70173 Stuttgart</p>
+                <p>Telefon: 0711 / 615541-0<br>E-Mail: poststelle@lfdi.bwl.de<br>Web: <a href="https://www.baden-wuerttemberg.datenschutz.de" class="inline-link" target="_blank" rel="noopener">www.baden-wuerttemberg.datenschutz.de</a></p>
+            </div>
+
+            <h2>13. Pflicht zur Bereitstellung der Daten</h2>
+            <p>Die Bereitstellung der von Ihnen eingegebenen Daten ist weder gesetzlich noch vertraglich vorgeschrieben. Ohne die als Pflichtfeld gekennzeichneten Angaben (z. B. Name, E-Mail bzw. Telefonnummer) ist es uns jedoch nicht möglich, Ihre Anfrage zu bearbeiten bzw. ein Angebot zu erstellen.</p>
+
+            <h2>14. Keine automatisierte Entscheidungsfindung</h2>
+            <p>Eine automatisierte Entscheidungsfindung einschließlich Profiling gemäß Art. 22 DSGVO findet nicht statt.</p>
+
+            <h2>15. Aktualität und Änderung dieser Datenschutzerklärung</h2>
+            <p>Diese Datenschutzerklärung hat den Stand <strong>27. Mai 2026</strong>. Durch die Weiterentwicklung unserer Website oder aufgrund geänderter gesetzlicher bzw. behördlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung zu ändern. Die jeweils aktuelle Datenschutzerklärung kann jederzeit auf dieser Seite abgerufen werden.</p>
         </div>
     </main>
 

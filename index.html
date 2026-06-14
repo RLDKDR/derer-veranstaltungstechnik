@@ -6,41 +6,61 @@
     <title>Veranstaltungstechnik Böbingen | Derer Veranstaltungstechnik</title>
     <meta name="description" content="Licht, Ton, DJs und Full-Service Eventproduktion aus Böbingen an der Rems. Persönlich betreut von einem Team aus Musikern. Jetzt kostenlos anfragen.">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://derer-veranstaltungstechnik.vercel.app/">
+    <link rel="canonical" href="https://derer-veranstaltungstechnik.de/">
+    <meta name="theme-color" content="#050509">
+    <meta name="geo.region" content="DE-BW">
+    <meta name="geo.placename" content="Böbingen an der Rems, Ostalbkreis">
+    <meta name="geo.position" content="48.8225;9.9264">
+    <meta name="ICBM" content="48.8225, 9.9264">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
     <link rel="preload" href="fonts/space-mono-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/epilogue-300.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/dm-sans-400.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="images/tontechnik.webp" as="image">
-    <link rel="preload" href="images/lichttechnik-neu.webp" as="image">
-    <link rel="preload" href="images/eq-verleih.webp" as="image">
-    <link rel="preload" href="images/kuenstlerservice.webp" as="image">
-    <link rel="preload" href="images/fullservice-neu.webp" as="image">
+    <!-- LCP-Optimierung: nur das Hero-Poster wird vorgeladen; Service-Bilder laden lazy -->
     <link rel="preload" href="images/hero-poster.jpg" as="image" fetchpriority="high">
     <!-- Open Graph -->
     <meta property="og:title" content="Veranstaltungstechnik Böbingen | Derer Veranstaltungstechnik">
     <meta property="og:description" content="Licht, Ton, DJs und Full-Service Eventproduktion aus Böbingen an der Rems. Persönlich betreut von einem Team aus Musikern.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://derer-veranstaltungstechnik.vercel.app/">
-    <meta property="og:image" content="https://derer-veranstaltungstechnik.vercel.app/images/og-image.jpg">
+    <meta property="og:site_name" content="Derer Veranstaltungstechnik">
+    <meta property="og:url" content="https://derer-veranstaltungstechnik.de/">
+    <meta property="og:image" content="https://derer-veranstaltungstechnik.de/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Derer Veranstaltungstechnik – Licht, Ton & Full-Service Eventproduktion aus Böbingen an der Rems">
     <meta property="og:locale" content="de_DE">
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Veranstaltungstechnik Böbingen | Derer Veranstaltungstechnik">
     <meta name="twitter:description" content="Licht, Ton, DJs und Full-Service Eventproduktion aus Böbingen an der Rems. Persönlich betreut von einem Team aus Musikern.">
-    <meta name="twitter:image" content="https://derer-veranstaltungstechnik.vercel.app/images/og-image.jpg">
+    <meta name="twitter:image" content="https://derer-veranstaltungstechnik.de/images/og-image.jpg">
+    <meta name="twitter:image:alt" content="Derer Veranstaltungstechnik – Licht, Ton & Full-Service Eventproduktion aus Böbingen an der Rems">
     <!-- Schema.org LocalBusiness -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "additionalType": "https://schema.org/EventPlanner",
+        "@id": "https://derer-veranstaltungstechnik.de/#business",
         "name": "Derer Veranstaltungstechnik",
         "description": "Professionelle Veranstaltungstechnik aus Böbingen an der Rems. Licht, Ton, Equipment-Verleih, DJ-Service, Künstlervermittlung und Full-Service Eventproduktion.",
-        "url": "https://derer-veranstaltungstechnik.vercel.app/",
+        "url": "https://derer-veranstaltungstechnik.de/",
         "telephone": "+4917621810688",
         "email": "info@derer-veranstaltungstechnik.de",
+        "logo": "https://derer-veranstaltungstechnik.de/images/derer-logo.webp",
+        "image": "https://derer-veranstaltungstechnik.de/images/og-image.jpg",
+        "founder": {"@type": "Person", "name": "Daniel Derer"},
+        "sameAs": [
+            "https://www.instagram.com/derer_veranstaltungstechnik",
+            "https://www.facebook.com/profile.php?id=100063519612309",
+            "https://www.tiktok.com/@derer.event"
+        ],
+        "openingHoursSpecification": [
+            {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "08:00", "closes": "22:00"},
+            {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "08:00", "closes": "23:59"},
+            {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday"], "opens": "00:00", "closes": "23:59"}
+        ],
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "Dr. Schneider Str. 3",

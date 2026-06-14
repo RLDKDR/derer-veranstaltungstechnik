@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/0.9">
     <url>
-        <loc>https://derer-veranstaltungstechnik.vercel.app/</loc>
-        <lastmod>2026-04-21</lastmod>
+        <loc>https://derer-veranstaltungstechnik.de/</loc>
+        <lastmod>2026-06-14</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
         <image:image>
-            <image:loc>https://derer-veranstaltungstechnik.vercel.app/images/derer-logo.webp</image:loc>
+            <image:loc>https://derer-veranstaltungstechnik.de/images/derer-logo.webp</image:loc>
             <image:title>Derer Veranstaltungstechnik Böbingen an der Rems</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://derer-veranstaltungstechnik.vercel.app/images/referenzen/soundofmovies.webp</image:loc>
+            <image:loc>https://derer-veranstaltungstechnik.de/images/referenzen/soundofmovies.webp</image:loc>
             <image:title>Sound of Movies Musical Filharmonie Filderstadt</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://derer-veranstaltungstechnik.vercel.app/images/referenzen/lichterfest-boebingen.webp</image:loc>
+            <image:loc>https://derer-veranstaltungstechnik.de/images/referenzen/lichterfest-boebingen.webp</image:loc>
             <image:title>Lichterfest Böbingen 2024 Open-Air Bühnenbeleuchtung</image:title>
         </image:image>
     </url>
     <url>
-        <loc>https://derer-veranstaltungstechnik.vercel.app/mietpakete</loc>
-        <lastmod>2026-04-21</lastmod>
+        <loc>https://derer-veranstaltungstechnik.de/mietpakete</loc>
+        <lastmod>2026-06-14</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://derer-veranstaltungstechnik.vercel.app/projekte</loc>
-        <lastmod>2026-04-21</lastmod>
+        <loc>https://derer-veranstaltungstechnik.de/projekte</loc>
+        <lastmod>2026-06-14</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://derer-veranstaltungstechnik.vercel.app/impressum</loc>
-        <lastmod>2026-04-21</lastmod>
+        <loc>https://derer-veranstaltungstechnik.de/impressum</loc>
+        <lastmod>2026-06-14</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
     <url>
-        <loc>https://derer-veranstaltungstechnik.vercel.app/datenschutz</loc>
-        <lastmod>2026-04-21</lastmod>
+        <loc>https://derer-veranstaltungstechnik.de/datenschutz</loc>
+        <lastmod>2026-06-14</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
     <url>
-        <loc>https://derer-veranstaltungstechnik.vercel.app/agb</loc>
-        <lastmod>2026-04-21</lastmod>
+        <loc>https://derer-veranstaltungstechnik.de/agb</loc>
+        <lastmod>2026-06-14</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>

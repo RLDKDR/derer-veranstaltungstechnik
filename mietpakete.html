@@ -749,7 +749,7 @@
                 else if(!kontaktVal)kontaktVal=inp.value.trim();
             });
             btn.disabled=true;btn.textContent='Wird gesendet...';
-            fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({formType:'paket',paketName:paketName,name:nameVal,kontakt:kontaktVal,nachricht:nachrichtVal,website:hp?hp.value:''})})
+            fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({formType:'paket',seite:location.pathname,paketName:paketName,name:nameVal,kontakt:kontaktVal,nachricht:nachrichtVal,website:hp?hp.value:''})})
             .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
             .then(function(j){if(j&&j.error)throw new Error(j.error);
                 var fields=form.querySelectorAll('input,textarea,button.pkg-if-submit,.pkg-if-title,.pkg-if-header,.dsgvo-check,.ohnehonig');

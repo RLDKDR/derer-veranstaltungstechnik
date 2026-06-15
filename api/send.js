@@ -66,6 +66,17 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'formType fehlt' });
     }
 
+    // Quelle/Seite ermitteln, damit in der Mail klar ist, über welche Seite angefragt wurde
+    const seitenMap = { '/': 'Startseite', '/mietpakete': 'Mietpakete-Seite', '/projekte': 'Projekte-Seite' };
+    let quelle;
+    if (body.seite) {
+        const p = clean(body.seite, 100).replace(/\/$/, '') || '/';
+        quelle = seitenMap[p] || p;
+    } else {
+        try { const u = new URL(req.headers.referer || ''); const p = u.pathname.replace(/\/$/, '') || '/'; quelle = seitenMap[p] || (u.host + u.pathname); }
+        catch (e) { quelle = 'unbekannt'; }
+    }
+
     let subject = '';
     let htmlBody = '';
 
@@ -79,7 +90,7 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: 'Pflichtfelder fehlen' });
         }
 
-        subject = cleanSubject(`Neue Anfrage: ${paketName}`);
+        subject = cleanSubject(`Neue Paketanfrage: ${paketName} — ${quelle}`);
 
         htmlBody = `
             <h2 style="margin:0 0 16px;">Paketanfrage: ${esc(paketName)}</h2>
@@ -95,18 +106,14 @@ export default async function handler(req, res) {
         const email = clean(body.email, 254);
         const telefon = clean(body.telefon, 30);
         const eventTyp = clean(body.eventTyp, 100);
-        const gaeste = clean(body.gaeste, 50);
-        const equipment = Array.isArray(body.equipment)
-            ? body.equipment.slice(0, 10).map(e => clean(String(e), 100)).filter(Boolean)
-            : [];
+        const datum = clean(body.datum, 100);
+        const nachricht = clean(body.nachricht, 2000);
 
-        if (!name || !email || !telefon) {
+        if (!name || !email) {
             return res.status(400).json({ error: 'Pflichtfelder fehlen' });
         }
 
-        subject = 'Neue individuelle Anfrage';
-
-        const equipmentStr = equipment.length > 0 ? equipment.join(', ') : '–';
+        subject = cleanSubject('Neue individuelle Anfrage — ' + quelle);
 
         htmlBody = `
             <h2 style="margin:0 0 16px;">Individuelle Anfrage</h2>
@@ -115,8 +122,8 @@ export default async function handler(req, res) {
                 ${row('E-Mail', email)}
                 ${row('Telefon', telefon)}
                 ${row('Art des Events', eventTyp || '–')}
-                ${row('Gästeanzahl', gaeste || '–')}
-                ${row('Gewünschte Leistungen', equipmentStr)}
+                ${row('Wunschtermin', datum || '–')}
+                ${row('Nachricht', nachricht || '–')}
             </table>
         `;
     } else {
@@ -127,7 +134,7 @@ export default async function handler(req, res) {
         <div style="font-family:Arial,sans-serif;color:#222;max-width:600px;">
             ${htmlBody}
             <hr style="margin:24px 0;border:none;border-top:1px solid #ddd;">
-            <p style="font-size:12px;color:#888;">Diese Nachricht wurde über das Kontaktformular auf derer-veranstaltungstechnik.de gesendet.</p>
+            <p style="font-size:12px;color:#888;">Gesendet über das Kontaktformular &middot; Quelle-Seite: <strong>${esc(quelle)}</strong> &middot; derer-veranstaltungstechnik.de</p>
         </div>
     `;
 

@@ -335,7 +335,7 @@
             box-shadow: 0 4px 30px rgba(0,0,0,.2);
             pointer-events: auto;
         }
-        .tape-track { display: flex; animation: tape-scroll 40s linear infinite; will-change: transform; }
+        .tape-track { display: flex; animation: tape-scroll 40s linear infinite; will-change: transform; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
         @keyframes tape-scroll { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(-33.3333%,0,0); } }
         .tape-item {
             font-family: var(--font-h); font-size: .88rem; font-weight: 900;
@@ -343,6 +343,8 @@
             display: flex; align-items: center; gap: 1.8rem; padding-right: 1.8rem; flex-shrink: 0;
         }
         .tape-item .tape-star { font-size: .6rem; line-height: 1; color: var(--accent); opacity: .5; }
+        /* Mobile: teures backdrop-filter weg (Flicker-Fix), bg dafür etwas opaker — sieht quasi identisch aus */
+        @media (max-width: 768px) { .tape-band { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(10,10,18,.94); } }
 
         /* ===================== SERVICES — LIQUID GLASS CARDS ===================== */
         /* ===================== WHY DERER ===================== */
@@ -856,12 +858,12 @@
         .partners-label { text-align: center; margin-bottom: 1.25rem; }
         .partners-label span { font-family: var(--font-m); font-size: .8rem; letter-spacing: .15em; text-transform: uppercase; color: var(--text3); }
         .partner-marquee { display: flex; overflow: hidden; }
-        .partner-track { display: flex; align-items: center; flex-shrink: 0; animation: mq 18s linear infinite; will-change: transform; }
+        .partner-track { display: flex; align-items: center; flex-shrink: 0; animation: mq 18s linear infinite; will-change: transform; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
         .partner-item {
             display: flex; align-items: center; padding: 0 1.75rem; flex-shrink: 0; opacity: .35;
             transition: opacity .4s var(--ease);
         }
-        .partner-item img { height: 65px; width: auto; display: block; }
+        .partner-item img { height: 65px; width: auto; display: block; -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0); }
         .partner-marquee:hover .partner-item { opacity: .55; }
         @media (max-width: 768px) {
             .partner-track { animation-duration: 22s; }

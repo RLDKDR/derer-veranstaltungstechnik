@@ -2,7 +2,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/:path*", "has": [{ "type": "host", "value": "derer-veranstaltungstechnik.vercel.app" }], "destination": "https://derer-veranstaltungstechnik.de/:path*", "permanent": true },
+    { "source": "/", "has": [{ "type": "host", "value": "derer-veranstaltungstechnik.vercel.app" }], "destination": "https://derer-veranstaltungstechnik.de/", "permanent": true },
+    { "source": "/:path+", "has": [{ "type": "host", "value": "derer-veranstaltungstechnik.vercel.app" }], "destination": "https://derer-veranstaltungstechnik.de/:path+", "permanent": true },
     { "source": "/about", "destination": "/", "permanent": true },
     { "source": "/services", "destination": "/", "permanent": true },
     { "source": "/service", "destination": "/", "permanent": true },

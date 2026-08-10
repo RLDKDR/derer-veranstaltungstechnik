@@ -79,6 +79,7 @@ export default async function handler(req, res) {
 
     let subject = '';
     let htmlBody = '';
+    let replyTo = '';
 
     if (formType === 'paket') {
         const paketName = clean(body.paketName, 100);
@@ -91,6 +92,7 @@ export default async function handler(req, res) {
         }
 
         subject = cleanSubject(`Neue Paketanfrage: ${paketName} — ${quelle}`);
+        if (kontakt.includes('@')) replyTo = kontakt;
 
         htmlBody = `
             <h2 style="margin:0 0 16px;">Paketanfrage: ${esc(paketName)}</h2>
@@ -114,6 +116,7 @@ export default async function handler(req, res) {
         }
 
         subject = cleanSubject('Neue individuelle Anfrage — ' + quelle);
+        if (email.includes('@')) replyTo = email;
 
         htmlBody = `
             <h2 style="margin:0 0 16px;">Individuelle Anfrage</h2>
@@ -146,8 +149,10 @@ export default async function handler(req, res) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                from: 'Neue Anfrage <anfrage@anfrageseite.io>',
-                to: ['roland@anfrageseite.io', 'info@derer-veranstaltungstechnik.de'],
+                from: 'DERER Veranstaltungstechnik <anfrage@anfrageseite.io>',
+                to: ['info@derer-veranstaltungstechnik.de'],
+                bcc: ['roland@anfrageseite.io'],
+                ...(replyTo ? { reply_to: replyTo } : {}),
                 subject,
                 html,
             }),
